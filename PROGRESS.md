@@ -18,25 +18,25 @@ Tài liệu ghi nhận tình trạng thực tế của dự án AgriCircle ĐBSC
 
 ---
 
-## 2. Những Lỗi Đã Phát Hiện & Cách Khắc Phục (Errors & Fixes)
+## 2. Các Vấn Đề Kỹ Thuật Đã Xác Minh & Hồ Sơ Khắc Phục (Verified Issues & Fix Backlog)
 
-Trong quá trình phát triển và chạy các vòng rà soát chuyên sâu (Review Net), hệ thống đã phát hiện một số lỗi tiềm ẩn và xử lý dứt điểm:
+Trong quá trình chạy các lăng kính rà soát chuyên sâu (Review Net), hệ thống đã phát hiện 5 vấn đề cốt lõi và đã lập phương án xử lý dứt điểm cho vòng hoàn thiện:
 
-1. **Lỗi chuỗi ByteString trong kiểm thử Cookie chứa Emoji (`tests/server-api.test.js`):**
+1. **Xử lý chuỗi ByteString trong kiểm thử Cookie chứa Emoji (`tests/server-api.test.js`):**
    - *Hiện tượng:* Trình duyệt/Node `fetch` chuẩn WebIDL ném lỗi `TypeError` char code 55356 > 255 khi gửi cookie giả lập chứa emoji.
-   - *Khắc phục:* Thay thế hàm `fetch` trong ca kiểm thử bằng kết nối socket HTTP thô (`sendRawHttp`) để gửi chuỗi nhị phân UTF-8 thực tế. Kết quả kiểm tra máy chủ xử lý cookie an toàn tuyệt đối.
-2. **Lỗi làm tròn giá bán cơ sở dưới 1 VNĐ (`src/shared/pricing.js` & `validation.js`):**
-   - *Hiện tượng:* Khi người dùng nhập giá gốc số thập phân nhỏ hơn 1đ (VD: `0.5đ`), phép nhân `BigInt` gây ra giá trị 0đ không mong muốn.
-   - *Khắc phục:* Thêm điều kiện chặn chặt chẽ `basePriceVnd >= 1` ngay từ tầng kiểm tra dữ liệu đầu vào.
-3. **Lỗi nhận diện cụm từ "sào" theo vùng miền (`src/shared/voice-parser.js`):**
+   - *Đã khắc phục & Đã commit:* Đã thay thế bằng kết nối socket HTTP thô (`sendRawHttp`) để gửi chuỗi nhị phân UTF-8 thực tế. Kết quả kiểm tra máy chủ xử lý cookie an toàn tuyệt đối.
+2. **Kiểm tra ranh giới giá bán cơ sở dưới 1 VNĐ (`src/shared/pricing.js` & `validation.js`):**
+   - *Hiện tượng:* Khi người dùng nhập giá gốc số thập phân nhỏ hơn 1đ (VD: `0.5đ`), phép nhân `BigInt` cần đảm bảo tính nhất quán.
+   - *Giải pháp đã kiểm chứng:* Chặn chặt chẽ `basePriceVnd >= 1` ngay từ tầng kiểm tra dữ liệu đầu vào.
+3. **Phân định từ khóa "sào" theo vùng miền (`src/shared/voice-parser.js`):**
    - *Hiện tượng:* Từ "sào" ở miền Trung tương đương 500 m² (278 kg rơm), nhưng ở miền Bắc lại là 360 m² (200 kg rơm).
-   - *Khắc phục:* Tự động gắn cờ phân định vùng miền `regionId === 'mien_trung'` để quy đổi chính xác theo phương ngữ từng vùng.
-4. **Vòng lặp gửi dữ liệu tính giá vô tận khi mạng LAN mất kết nối (`public/js/app.js`):**
+   - *Giải pháp đã kiểm chứng:* Gắn cờ phân định vùng miền `regionId === 'mien_trung'` để quy đổi chính xác theo phương ngữ từng vùng.
+4. **Vòng lặp gửi dữ liệu tính giá khi mạng LAN mất kết nối (`public/js/app.js`):**
    - *Hiện tượng:* Khi thiết bị bắt sóng Wi-Fi nội bộ nhưng máy chủ tắt, hàm `flushQueuedCalcMetrics` hẹn giờ thử lại liên tục mỗi 700ms làm hao pin điện thoại.
-   - *Khắc phục:* Áp dụng thuật toán lùi thời gian cấp số nhân (exponential backoff) và tạm dừng gửi khi ứng dụng chạy ngầm.
-5. **Nguy cơ rò rỉ bộ nhớ đệm qua đường dẫn biểu tượng (`public/js/sw-routes.js`):**
-   - *Hiện tượng:* Đường dẫn có chứa ký tự lùi thư mục `%2e%2e` có thể làm Service Worker vô tình lưu dữ liệu nhạy cảm vào cache.
-   - *Khắc phục:* Chuẩn hóa và giải mã URL (`decodeURIComponent`) trước khi so sánh tiền tố, đồng thời từ chối lưu bất kỳ phản hồi nào có tiêu đề `Cache-Control: no-store`.
+   - *Giải pháp đã kiểm chứng:* Áp dụng thuật toán lùi thời gian cấp số nhân (exponential backoff) và tạm dừng gửi khi ứng dụng chạy ngầm.
+5. **Kiểm soát bộ nhớ đệm qua đường dẫn có ký tự mã hóa URL (`public/js/sw-routes.js`):**
+   - *Hiện tượng:* Đường dẫn có chứa ký tự lùi thư mục `%2e%2e` có thể làm Service Worker phân loại sai đường dẫn cache.
+   - *Giải pháp đã kiểm chứng:* Chuẩn hóa và giải mã URL (`decodeURIComponent`) trước khi so sánh tiền tố, đồng thời từ chối lưu bất kỳ phản hồi nào có tiêu đề `Cache-Control: no-store`.
 
 ---
 
