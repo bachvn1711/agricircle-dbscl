@@ -701,11 +701,11 @@ test('R6 R10 POST /api/listings/:id/report checks 404/409 before 1/(ip,id)/15m, 
     feed = extractListings((await httpJson(`${ctx.baseUrl}/api/listings`)).json);
     assert.equal(feed.some((item) => item.id === l4.id), false);
 
-    const forgedFallback = await httpJson(`${ctx.baseUrl}/api/listings/${l3.id}/report`, {
-      method: 'POST',
-      headers: { cookie: 'khkt_voter=bad.🎉' },
-      body: {}
-    });
+    const forgedFallback = await sendRawHttp(
+      ctx.port,
+      `POST /api/listings/${l3.id}/report HTTP/1.1\r\nHost: 127.0.0.1:${ctx.port}\r\nCookie: khkt_voter=bad.🎉\r\nContent-Type: application/json\r\nContent-Length: 2\r\nConnection: close\r\n\r\n`,
+      '{}'
+    );
     assert.equal(forgedFallback.status, 200);
   } finally {
     await ctx.cleanup(false);
