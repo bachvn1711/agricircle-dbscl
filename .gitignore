@@ -1,10 +1,17 @@
 node_modules/
+data/
 data/*.db
 data/*.db-wal
 data/*.db-shm
+*.sqlite
+*.sqlite-*
+.env
+.env.*
+!.env.example
 .DS_Store
 Thumbs.db
 *.log
 .cache/
 dist/
 coverage/
+
