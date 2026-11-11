@@ -1,0 +1,33 @@
+{
+  "name": "Nông sản Tuần hoàn ĐBSCL",
+  "short_name": "Nông sản TH",
+  "description": "Sàn kết nối phụ phẩm nông nghiệp và công cụ định giá nông sản theo độ tươi",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F7F5EE",
+  "theme_color": "#146C38",
+  "lang": "vi",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/icon-512.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

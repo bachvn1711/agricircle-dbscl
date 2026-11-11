@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#146C38">
+  <meta name="color-scheme" content="light">
+  <title>Nông sản Tuần hoàn</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="/icons/icon-192.svg">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/styles/app.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <button type="button" class="brand-btn" id="brand-home-btn">
+        <img src="/icons/icon-192.svg" alt="" width="24" height="24" class="brand-icon">
+        <span class="brand-title">Nông sản Tuần hoàn</span>
+      </button>
+      <nav class="desktop-nav" aria-label="Điều hướng chính">
+        <button type="button" class="nav-btn is-active" data-tab="map" aria-current="page">Bản đồ</button>
+        <button type="button" class="nav-btn" data-tab="post">Đăng tin</button>
+        <button type="button" class="nav-btn" data-tab="calc">Tính giá</button>
+        <button type="button" class="nav-btn" data-tab="impact">Tác động</button>
+      </nav>
+      <div class="header-actions">
+        <label class="sr-only" for="region-select">Chọn khu vực</label>
+        <select id="region-select" class="region-select" aria-label="Chọn khu vực"></select>
+        <button type="button" class="nav-btn admin-nav-btn" id="header-admin-btn" data-tab="admin">Quản trị</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="global-status-strip" class="status-strip" hidden role="status" aria-live="polite"></div>
+
+  <main id="app-main" class="app-main">
+    <section id="view-map" class="view-panel" aria-labelledby="heading-map"></section>
+    <section id="view-post" class="view-panel" aria-labelledby="heading-post" hidden></section>
+    <section id="view-calc" class="view-panel" aria-labelledby="heading-calc" hidden></section>
+    <section id="view-impact" class="view-panel" aria-labelledby="heading-impact" hidden></section>
+    <section id="view-admin" class="view-panel" aria-labelledby="heading-admin" hidden></section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Thanh chuyển màn hình nhanh">
+    <button type="button" class="bottom-nav-btn is-active" data-tab="map" aria-current="page">
+      <span class="bottom-nav-icon" aria-hidden="true">🗺️</span>
+      <span class="bottom-nav-label">Bản đồ</span>
+    </button>
+    <button type="button" class="bottom-nav-btn" data-tab="post">
+      <span class="bottom-nav-icon" aria-hidden="true">🎙️</span>
+      <span class="bottom-nav-label">Đăng tin</span>
+    </button>
+    <button type="button" class="bottom-nav-btn" data-tab="calc">
+      <span class="bottom-nav-icon" aria-hidden="true">🧮</span>
+      <span class="bottom-nav-label">Tính giá</span>
+    </button>
+    <button type="button" class="bottom-nav-btn" data-tab="impact">
+      <span class="bottom-nav-icon" aria-hidden="true">📊</span>
+      <span class="bottom-nav-label">Tác động</span>
+    </button>
+  </nav>
+
+  <script src="/vendor/leaflet/leaflet.js"></script>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
