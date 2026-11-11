@@ -65,3 +65,4 @@
 ### 4.5. Bảng điều khiển quản trị viên địa phương (Admin Local Portal)
 - Đăng nhập bằng mã PIN bảo mật chống tấn công timing (`crypto.timingSafeEqual`).
 - Cập nhật hệ số giá thị trường theo mùa, ẩn tin vi phạm, xuất dữ liệu báo cáo dạng CSV cho cán bộ nông nghiệp xã.
+

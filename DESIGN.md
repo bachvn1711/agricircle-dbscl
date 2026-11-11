@@ -67,3 +67,4 @@ Hệ thống AgriCircle được tối ưu hóa cho điều kiện thực tế c
 ### 4.4. Nút Thu Âm Giọng Nói Khổng Lồ (Voice Recording Button)
 - Nút tròn đường kính `64px`, màu xanh lá nổi bật kèm biểu tượng micro 🎙️.
 - Khi đang thu âm, nút chuyển sang màu đỏ và có hiệu ứng vòng tròn tỏa sóng âm nhấp nháy (`pulse animation`) giúp nông dân nhận biết máy đang lắng nghe.
+

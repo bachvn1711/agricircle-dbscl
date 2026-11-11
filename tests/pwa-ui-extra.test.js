@@ -472,6 +472,9 @@ describe('pwa-ui extra edge cases and security helpers', () => {
     assert.equal(CACHE_NAME, 'khkt-pwa-v2');
     assert.equal(classifyCacheRoute('/api/admin/listings?limit=50', 'GET'), 'network-only');
     assert.equal(classifyCacheRoute('/js/../api/admin/listings', 'GET'), 'network-only');
+    assert.equal(classifyCacheRoute('/icons/%2e%2e%2fapi%2flistings', 'GET'), 'network-only');
+    assert.equal(classifyCacheRoute('/icons/%2E%2E%2Fapi%2Fadmin%2Flistings', 'GET'), 'network-only');
+    assert.equal(classifyCacheRoute('/styles/..\\app.css', 'GET'), 'network-only');
     assert.equal(classifyCacheRoute('/api/crops?t=123', 'GET'), 'network-first');
     assert.equal(PRECACHE_URLS.includes('/api/crops'), true);
     assert.equal(PRECACHE_URLS.includes('/js/sw-routes.js'), true);

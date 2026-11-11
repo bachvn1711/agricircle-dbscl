@@ -120,3 +120,4 @@ Người mua mở Bản đồ (map-view.js) -> Xem ghim Leaflet phụ phẩm qua
                                                         - Đổi trạng thái tin: 'collected'
                                                         - Cộng dồn kg & CO2 vào Bảng Tác Động
 ```
+

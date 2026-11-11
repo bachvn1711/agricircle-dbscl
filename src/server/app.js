@@ -67,6 +67,18 @@ function sendError(res, status, message, extraHeaders = {}) {
 
 function readJsonBody(req, { allowEmpty = false } = {}) {
   return new Promise((resolve) => {
+    const rawContentType = req.headers['content-type'];
+    if (typeof rawContentType === 'string') {
+      const mime = rawContentType.split(';')[0].trim().toLowerCase();
+      if (mime !== 'application/json') {
+        resolve({ ok: false, status: 415, error: 'Định dạng dữ liệu yêu cầu phải là application/json' });
+        return;
+      }
+    } else if (!allowEmpty) {
+      resolve({ ok: false, status: 415, error: 'Định dạng dữ liệu yêu cầu phải là application/json' });
+      return;
+    }
+
     const contentLengthHeader = req.headers['content-length'];
     if (typeof contentLengthHeader === 'string' && /^\d+$/.test(contentLengthHeader.trim())) {
       const declared = Number(contentLengthHeader.trim());
@@ -617,14 +629,6 @@ export async function createApp({
           }
 
           const reportKey = `report_key:${JSON.stringify([clientIp, idNum])}`;
-          const preCheck = rateLimiter.check(reportKey, 1, FIFTEEN_MINUTES_MS);
-          if (!preCheck.allowed) {
-            sendError(res, 429, 'Bạn vừa báo cáo tin này, vui lòng thử lại sau 15 phút', {
-              'Retry-After': String(preCheck.retryAfterSeconds)
-            });
-            return;
-          }
-
           const cookies = parseCookies(req.headers.cookie);
           const voterToken = verifyVoterCookieValue(cookies.get(VOTER_COOKIE_NAME), cookieHmacSecret);
           const voterHash = hashVoterIdentity({ voterToken, clientIp });
@@ -633,10 +637,12 @@ export async function createApp({
             idNum,
             voterHash,
             currentNow: now(),
+            checkRateSlot: () => rateLimiter.check(reportKey, 1, FIFTEEN_MINUTES_MS),
             recordRateSlot: () => rateLimiter.record(reportKey, FIFTEEN_MINUTES_MS)
           });
           if (!result.ok) {
-            sendError(res, result.status, result.error);
+            const extraHeaders = result.retryAfterSeconds ? { 'Retry-After': String(result.retryAfterSeconds) } : undefined;
+            sendError(res, result.status, result.error, extraHeaders);
             return;
           }
           sendJson(res, 200, { listing: result.listing });

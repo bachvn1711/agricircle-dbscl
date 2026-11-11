@@ -471,3 +471,60 @@ test('Server CLI entrypoint validates PORT and boots cleanly on PORT=0', { timeo
     fs.rmSync(tempDir, { recursive: true, force: true });
   }
 });
+
+test('POST /api/listings rejects non-application/json with 415 and reportListing checks 404/409 before rate limits', async () => {
+  const ctx = await startExtraApp();
+  try {
+    const textRes = await fetch(`${ctx.baseUrl}/api/listings`, {
+      method: 'POST',
+      headers: { 'content-type': 'text/plain' },
+      body: JSON.stringify({ category: 'rom-ra', offerType: 'sell', rawQuantity: 1, rawUnit: 'kg', priceVnd: 5000, commune: 'Cẩm Đường' })
+    });
+    assert.equal(textRes.status, 415);
+    const textJson = await textRes.json();
+    assert.match(textJson.error, /application\/json/);
+
+    const report404 = await fetch(`${ctx.baseUrl}/api/listings/999999/report`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: '{}'
+    });
+    assert.equal(report404.status, 404);
+
+    const createRes = await fetch(`${ctx.baseUrl}/api/listings`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        category: 'rom-ra',
+        offerType: 'free',
+        rawQuantity: 10,
+        rawUnit: 'kg',
+        lat: 10.0452,
+        lng: 105.7469,
+        contactName: 'Chu Tu',
+        contactPhone: '0912345678',
+        expiryDays: 3,
+        clientRequestId: 'test_req_create_123'
+      })
+    });
+    assert.equal(createRes.status, 201);
+    const created = await createRes.json();
+    const listingId = created.listing.id;
+
+    const collectRes = await fetch(`${ctx.baseUrl}/api/listings/${listingId}/collect`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ shortCode: created.shortCode, actualKgCollected: 10 })
+    });
+    assert.equal(collectRes.status, 200);
+
+    const report409 = await fetch(`${ctx.baseUrl}/api/listings/${listingId}/report`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: '{}'
+    });
+    assert.equal(report409.status, 409);
+  } finally {
+    await ctx.cleanup();
+  }
+});

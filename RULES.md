@@ -44,3 +44,4 @@ Mọi mã nguồn trong dự án AgriCircle phải tuân thủ nghiêm ngặt 6 
 3. **KHÔNG dùng `eval()` hoặc chèn chuỗi HTML nguy hiểm:** Không gán dữ liệu người dùng trực tiếp vào `innerHTML` mà phải dùng `textContent` hoặc hàm `createEl()` đã được khử trùng.
 4. **KHÔNG phụ thuộc vào dịch vụ đám mây trả phí:** Không đề xuất tích hợp Firebase, Google Cloud API trả phí, Supabase hay AWS làm phát sinh chi phí hàng tháng cho nhà trường và học sinh.
 5. **KHÔNG bịa đặt dữ liệu khoa học:** Số liệu khảo sát, kết quả đo lường độ trễ mạng, dung lượng gói tin và tỷ lệ chính xác của giọng nói phải phản ánh trung thực từ các bài thực nghiệm thực tế tại địa phương.
+

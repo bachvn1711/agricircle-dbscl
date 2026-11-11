@@ -24,6 +24,7 @@ let selectedRegionId = readSelectedRegionId(storage, isValidRegionId, DEFAULT_RE
 let cropsCache = DEFAULT_CROPS.map((c) => ({ ...c }));
 let isFlushingMetrics = false;
 let flushTimerId = null;
+let flushFailureCount = 0;
 
 const regionSelect = document.getElementById('region-select');
 const statusStrip = document.getElementById('global-status-strip');
@@ -100,6 +101,7 @@ async function flushQueuedCalcMetrics() {
   try {
     const sealed = sealCalcBatches(storage, () => generateClientRequestId('calc'));
     if (sealed.sealedBatches.length === 0) {
+      flushFailureCount = 0;
       return;
     }
     for (const batch of sealed.sealedBatches) {
@@ -112,33 +114,36 @@ async function flushQueuedCalcMetrics() {
       });
       ackCalcBatch(storage, batch.batchId);
     }
+    flushFailureCount = 0;
     calcView.onMetricsFlushed();
     renderStatusStrip();
     if (activeTab === 'impact') {
       impactView.refresh();
     }
   } catch {
+    flushFailureCount += 1;
     calcView.onMetricsFlushed();
     renderStatusStrip();
   } finally {
     isFlushingMetrics = false;
-    if (getPendingCalcCount(storage) > 0 && globalThis.navigator?.onLine !== false) {
+    if (getPendingCalcCount(storage) > 0 && globalThis.navigator?.onLine !== false && !globalThis.document?.hidden) {
       scheduleFlushCalcMetrics();
     }
   }
 }
 
 function scheduleFlushCalcMetrics() {
-  if (globalThis.navigator?.onLine === false) {
+  if (globalThis.navigator?.onLine === false || globalThis.document?.hidden) {
     return;
   }
   if (flushTimerId !== null) {
     clearTimeout(flushTimerId);
   }
+  const delayMs = Math.min(30000, 700 * Math.pow(2, Math.min(flushFailureCount, 5)));
   flushTimerId = setTimeout(() => {
     flushTimerId = null;
     flushQueuedCalcMetrics();
-  }, 700);
+  }, delayMs);
 }
 
 async function loadRemoteCrops() {
@@ -264,6 +269,12 @@ globalThis.addEventListener('offline', () => {
   renderStatusStrip();
   postView.onConnectivityChanged();
   adminView.onConnectivityChanged(false);
+});
+
+globalThis.document?.addEventListener?.('visibilitychange', () => {
+  if (!globalThis.document.hidden && globalThis.navigator?.onLine !== false) {
+    scheduleFlushCalcMetrics();
+  }
 });
 
 if (globalThis.navigator?.serviceWorker) {

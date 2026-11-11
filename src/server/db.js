@@ -458,7 +458,7 @@ export function collectListing(db, { idNum, rawBody, currentNow, isBlocked }) {
   });
 }
 
-export function reportListing(db, { idNum, voterHash, currentNow, recordRateSlot }) {
+export function reportListing(db, { idNum, voterHash, currentNow, recordRateSlot, checkRateSlot }) {
   return runInTransaction(db, () => {
     const row = db
       .prepare('SELECT id, status, expires_at FROM listings WHERE id = ?')
@@ -469,6 +469,18 @@ export function reportListing(db, { idNum, voterHash, currentNow, recordRateSlot
 
     if (row.status !== 'active' || row.expires_at <= currentNow) {
       return { ok: false, status: 409, error: 'Chỉ có thể báo cáo tin đăng đang mở và còn hạn' };
+    }
+
+    if (typeof checkRateSlot === 'function') {
+      const rateCheck = checkRateSlot();
+      if (!rateCheck.allowed) {
+        return {
+          ok: false,
+          status: 429,
+          error: 'Bạn vừa báo cáo tin này, vui lòng thử lại sau 15 phút',
+          retryAfterSeconds: rateCheck.retryAfterSeconds
+        };
+      }
     }
 
     db.prepare('INSERT OR IGNORE INTO listing_reports (listing_id, voter_hash, created_at) VALUES (?, ?, ?)').run(

@@ -28,12 +28,12 @@ function parseHost(rawHost) {
 
 function parseDbPath(rawDbPath) {
   if (rawDbPath === undefined || rawDbPath === '') {
-    return 'data/agricircle.db';
+    return path.resolve(import.meta.dirname, '../../data/agricircle.db');
   }
   if (rawDbPath.trim() === '' || /\u0000/.test(rawDbPath)) {
     throw new Error('Invalid DB_PATH');
   }
-  return rawDbPath;
+  return path.isAbsolute(rawDbPath) ? rawDbPath : path.resolve(rawDbPath);
 }
 
 const port = parsePort(process.env.PORT);
@@ -44,9 +44,9 @@ const adminPin = process.env.ADMIN_PIN;
 const app = await createApp({
   dbPath,
   adminPin,
-  staticDir: path.resolve('public'),
-  sharedDir: path.resolve('src/shared'),
-  leafletDistDir: path.resolve('node_modules/leaflet/dist')
+  staticDir: path.resolve(import.meta.dirname, '../../public'),
+  sharedDir: path.resolve(import.meta.dirname, '../shared'),
+  leafletDistDir: path.resolve(import.meta.dirname, '../../node_modules/leaflet/dist')
 });
 
 function shutdown() {

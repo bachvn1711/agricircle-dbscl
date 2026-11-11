@@ -30,7 +30,10 @@ async function handleNetworkFirst(request, pathname) {
   try {
     const response = await fetchWithTimeout(request);
     if (response && response.ok) {
-      await cache.put(request, response.clone());
+      const cc = response.headers.get('cache-control') || '';
+      if (!cc.includes('no-store')) {
+        await cache.put(request, response.clone());
+      }
     }
     return response;
   } catch {
@@ -38,8 +41,8 @@ async function handleNetworkFirst(request, pathname) {
     if (cached) {
       return cached;
     }
-    if (pathname === '/' && request.mode === 'navigate') {
-      const rootCached = await cache.match('/');
+    if ((pathname === '/' || pathname === '/index.html') && request.mode === 'navigate') {
+      const rootCached = (await cache.match('/')) || (await cache.match('/index.html'));
       if (rootCached) {
         return rootCached;
       }
@@ -57,7 +60,10 @@ async function handleCacheFirst(request) {
   try {
     const response = await fetch(request);
     if (response && response.ok) {
-      await cache.put(request, response.clone());
+      const cc = response.headers.get('cache-control') || '';
+      if (!cc.includes('no-store')) {
+        await cache.put(request, response.clone());
+      }
     }
     return response;
   } catch {

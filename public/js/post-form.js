@@ -58,6 +58,7 @@ export function createPostFormView({
   let gpsSeq = 0;
   let gpsAutoRequested = false;
   let isSubmitting = false;
+  let latestVoiceTranscript = '';
   let recognition = null;
   let recognitionTimer = null;
   let isListening = false;
@@ -558,6 +559,7 @@ export function createPostFormView({
       clearTimeout(recognitionTimer);
       recognitionTimer = null;
     }
+    const captured = latestVoiceTranscript || voiceTextarea.value.trim();
     const prev = recognition;
     recognition = null;
     if (prev) {
@@ -572,6 +574,9 @@ export function createPostFormView({
     isListening = false;
     btnVoice.classList.remove('is-listening');
     btnVoice.textContent = '🎙️ Bấm để nói tiếng Việt';
+    if (captured) {
+      applyParsedVoice(captured);
+    }
   }
 
   function startVoiceListening() {
@@ -618,6 +623,7 @@ export function createPostFormView({
           }
         }
         latestTranscript = combined.trim();
+        latestVoiceTranscript = latestTranscript;
         if (latestTranscript) {
           voiceTextarea.value = latestTranscript;
           state.rawVoiceText = latestTranscript;
@@ -908,6 +914,7 @@ export function createPostFormView({
       renderVault();
     },
     onRegionChanged() {
+      gpsSeq += 1;
       const region = getRegion();
       syncCommuneOptions();
       if (!unitTouchedByUser) {

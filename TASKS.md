@@ -51,16 +51,18 @@ Bản kế hoạch hành động chia nhỏ theo từng bước (Atomic Tasks) t
 
 ---
 
-## Giai Đoạn 6: Tối Ưu Hóa & Khắc Phục Lỗi (Đang hoàn thiện)
+## Giai Đoạn 6: Tối Ưu Hóa & Khắc Phục Lỗi (Hoàn thành 100%)
 - [x] **Task 6.1:** Khắc phục lỗi kiểm tra định dạng dữ liệu đầu vào `Content-Type: application/json` tại máy chủ.
-- [x] **Task 6.2:** Tinh chỉnh xử lý hàng đợi tính giá offline trong `public/js/app.js` tránh gọi lại vô tận khi mất mạng LAN.
-- [x] **Task 6.3:** Chuẩn hóa đường dẫn tương đối trong `src/server/index.js` giúp máy chủ khởi động an toàn từ bất kỳ thư mục nào.
+- [x] **Task 6.2:** Tinh chỉnh xử lý hàng đợi tính giá offline trong `public/js/app.js` với thuật toán lùi thời gian cấp số nhân (*exponential backoff*) và sự kiện `visibilitychange`.
+- [x] **Task 6.3:** Chuẩn hóa đường dẫn tương đối trong `src/server/index.js` theo `import.meta.dirname` giúp máy chủ khởi động an toàn từ bất kỳ thư mục nào.
 - [x] **Task 6.4:** Cập nhật 6 file tài liệu quy chuẩn quản lý dự án (`PRD.md`, `ARCHITECTURE.md`, `DESIGN.md`, `RULES.md`, `TASKS.md`, `PROGRESS.md`).
+- [x] **Task 6.5:** Bổ sung các ca kiểm thử bảo vệ hồi quy (*Regression Tests*) trong `tests/server-api-extra.test.js` và `tests/pwa-ui-extra.test.js` nâng tổng số bài kiểm thử lên 55/55 ca đạt chuẩn.
 
 ---
 
 ## Giai Đoạn 7: Hoàn Thiện Hồ Sơ KHKT Chính Thức & Thử Nghiệm Thực Tế (Bước tiếp theo)
 - [x] **Task 7.1:** Thiết lập Subagent chuyên trách `khkt-monitor` theo dõi dự án và cập nhật báo cáo.
 - [x] **Task 7.2:** Hoàn thiện hồ sơ Kế hoạch nghiên cứu KHKT chính thức 2 phần trong `docs/04-ke-hoach-nghien-cuu-khkt.md` (Học sinh Hồ Ngọc Quỳnh Như, GVHD Hoàng Thành Đạt; chuẩn 15 phần Khoa học + 11 phần Kỹ thuật).
-- [ ] **Task 7.3:** Triển khai thử nghiệm mô hình thực địa tại Phân hiệu 2 – Trường THCS Cẩm Đường với sự tham gia của 20 hộ nông dân địa phương.
-- [ ] **Task 7.4:** Thiết kế Poster dự thi, chuẩn bị bài thuyết trình PowerPoint và tập luyện trả lời câu hỏi phản biện của Ban Giám khảo.
+- [x] **Task 7.3:** Soạn thảo mẫu phiếu điều tra khảo sát thực tế cho 30 hộ nông dân địa phương trong `docs/05-mau-khao-sat-nong-dan.md`.
+- [ ] **Task 7.4:** Triển khai thử nghiệm mô hình thực địa tại Phân hiệu 2 – Trường THCS Cẩm Đường với sự tham gia của 20 hộ nông dân địa phương.
+- [ ] **Task 7.5:** Thiết kế Poster dự thi khổ A0, chuẩn bị bài thuyết trình PowerPoint và tập luyện trả lời câu hỏi phản biện của Ban Giám khảo.

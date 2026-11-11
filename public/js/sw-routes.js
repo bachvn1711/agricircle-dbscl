@@ -42,8 +42,14 @@ export function classifyCacheRoute(pathname, method = 'GET') {
   if (typeof pathname !== 'string' || !pathname.startsWith('/')) {
     return 'network-only';
   }
-  const cleanPath = pathname.split('?')[0].split('#')[0];
-  if (cleanPath.includes('..')) {
+  let decoded = pathname;
+  try {
+    decoded = decodeURIComponent(pathname);
+  } catch {
+    return 'network-only';
+  }
+  const cleanPath = decoded.split('?')[0].split('#')[0];
+  if (cleanPath.includes('..') || cleanPath.includes('\\')) {
     return 'network-only';
   }
   if (cleanPath === '/sw.js') {
