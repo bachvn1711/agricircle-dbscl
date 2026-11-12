@@ -1,114 +1,93 @@
-# BỘ CÂU HỎI PHẢN BIỆN KHKT & HƯỚNG DẪN TRẢ LỜI (Q&A DEFENSE GUIDE)
-**Dành cho Cuộc thi Khoa học Kỹ thuật dành cho học sinh Trung học**  
+# BỘ CÂU HỎI PHẢN BIỆN KHKT & HƯỚNG DẪN TRẢ LỜI CHO HỌC SINH THCS
 **Đề tài:** Nền tảng kết nối trao đổi phụ phẩm nông nghiệp & Hỗ trợ định giá nông sản theo độ tươi (AgriCircle)  
-**Tác giả:** Hồ Ngọc Quỳnh Như (Lớp 9/C3, Trường THCS Cẩm Đường) — **GVHD:** Hoàng Thành Đạt  
+**Tác giả:** Học sinh **Hồ Ngọc Quỳnh Như** (Lớp 9/C3, Trường THCS Cẩm Đường, Long Thành, Đồng Nai)  
+**Giáo viên hướng dẫn:** Thầy **Hoàng Thành Đạt** (Tổ KHTN – Công nghệ)  
 
 ---
 
-> [!TIP]
-> **Chiến thuật trả lời Ban Giám khảo (BGK) dành cho học sinh THCS:**
-> 1. Luôn cảm ơn trước khi trả lời: *"Dạ em xin cảm ơn câu hỏi rất hay của Thầy/Cô ạ..."*
-> 2. Trả lời đi thẳng vào trọng tâm: Nêu rõ **Con số thực tế** $\rightarrow$ **Cơ sở khoa học** $\rightarrow$ **Cách em đã làm trong phần mềm**.
-> 3. Phong thái tự tin, trung thực: Những gì em tự lập trình thì giải thích rõ ràng; những gì thầy giáo định hướng thì thành thật chia sẻ sự hỗ trợ của thầy.
+> [!IMPORTANT]
+> **BÍ QUYẾT PHẢN BIỆN ĐẠT ĐIỂM XUẤT SẮC CỦA HỌC SINH CẤP 2:**
+> 1. **Thật thà, khiêm tốn và tự tin:** Không khoe khoang thuật ngữ máy tính khó hiểu. Nói bằng câu chuyện em đi khảo sát và mang điện thoại ra đồng cho các bác nông dân dùng thử.
+> 2. **Lấy thực tế làm bằng chứng:** Mỗi câu trả lời đều dẫn chứng từ lời nói, thói quen và cái khó có thật của bà con nông dân xã Cẩm Đường.
+> 3. **Minh bạch vai trò tác giả:** Nêu rõ: Ý tưởng, đi khảo sát, vẽ giao diện nút to, ghi nhận góp ý của nông dân là của em; thầy hướng dẫn định hướng phương pháp nghiên cứu và giúp em ráp nối các mẫu mã nguồn web cơ bản.
 
 ---
 
-## NHÓM 1: VỀ TÍNH MỚI & SỰ CẦN THIẾT CỦA ĐỀ TÀI
+## PHẦN 1: TÍNH TRUNG THỰC & VAI TRÒ CỦA HỌC SINH (GIÁM KHẢO HAY HỎI NHẤT)
 
-### Câu 1: Hiện nay người dân đã có Zalo, Facebook để đăng bán đồ, tại sao em phải mất công làm ứng dụng này?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô, Zalo và Facebook là mạng xã hội nói chung, không được thiết kế cho việc trao đổi phụ phẩm và định giá nông sản vì 3 hạn chế lớn:
-  1. **Bài đăng bị trôi rất nhanh:** Sau vài giờ là tin bị trôi mất, người cần mua không thể tìm kiếm theo vị trí địa lý hay bán kính quanh mình (ví dụ bán kính 3 km, 5 km).
-  2. **Không có công cụ tính giá theo ngày sau thu hoạch:** Nông dân chỉ đăng giá đại khái, không biết cách định giá hợp lý theo độ hao hụt sinh học của nông sản.
-  3. **Không chạy được khi mất mạng:** Khi ra ruộng, sóng 4G thường rất yếu hoặc mất hẳn. Ứng dụng của em là PWA chạy ngoại tuyến (Offline-First), không có mạng vẫn mở lên tính giá và lưu tin đăng bình thường."*
-
-### Câu 2: Đề tài này có gì khác biệt so với các sàn thương mại điện tử lớn như Shopee hay Sendo Farm?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô, các sàn TMĐT lớn tập trung vào việc bán hàng tiêu dùng đóng gói, vận chuyển liên tỉnh và thu phí giao dịch từ 5% đến 15%.
-  - Đối tượng của em là **phụ phẩm cồng kềnh, giá trị thấp hoặc 0 đồng** (như rơm rạ, thân ngô) mà các sàn lớn không nhận giao dịch.
-  - Phụ phẩm nông nghiệp chỉ có thể vận chuyển kinh tế trong **bán kính cục bộ dưới 10 - 20 km** bằng xe ba gác, máy cày giữa các ấp, xã lân cận.
-  - Ứng dụng của em kết nối trực tiếp P2P không qua trung gian, hoàn toàn miễn phí, không thu một đồng hoa hồng nào của người nông dân."*
+### Câu 1: "Đề tài này nhìn rất hoàn chỉnh, có phải do thầy cô hay người lớn làm hộ cho em không?"
+- **Cách trả lời chân thành, thuyết phục:**
+  > *"Dạ thưa Ban Giám khảo, em xin khẳng định ý tưởng và toàn bộ quá trình nghiên cứu thực tế là do chính em thực hiện dưới sự định hướng của thầy Hoàng Thành Đạt ạ.  
+  > Cụ thể, phần việc của em là:  
+  > 1. Trực tiếp soạn phiếu khảo sát và đạp xe đến 30 hộ nông dân trong xã Cẩm Đường để phỏng vấn bà con.  
+  > 2. Tự tay phác thảo trên giấy các màn hình với tiêu chí: nút bấm phải to đùng, có nút micro để nói tiếng Việt, và có nút chọn nhanh 1 công, 2 công rơm.  
+  > 3. Mang điện thoại ra ruộng cho bác Ba, cô Tư bấm thử và ghi chép lại những điểm các bác chê để sửa đổi.  
+  > Thầy Đạt là người hướng dẫn em cách đặt vấn đề khoa học, giải thích cho em cơ chế hô hấp của quả sau thu hoạch, và giúp em tìm kiếm các thư viện web mã nguồn mở có sẵn như bản đồ Leaflet để ráp vào hệ thống. Em hiểu rõ từng chức năng của ứng dụng vì chính em đã cùng bà con thử nghiệm ngoài đồng ruộng ạ."*
 
 ---
 
-## NHÓM 2: VỀ CƠ SỞ KHOA HỌC & TOÁN HỌC
+## PHẦN 2: TÍNH THIẾT THỰC & SO SÁNH VỚI THỰC TẾ
 
-### Câu 3: Cơ sở khoa học nào để em đưa ra công thức định giá nông sản theo số ngày sau thu hoạch?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô, công thức của em dựa trên môn Sinh học và tài liệu Sinh lý thực vật sau thu hoạch của trường Đại học Nông Lâm:
-  - Khi quả tách khỏi cành, quá trình hô hấp tế bào vẫn diễn ra, tiêu hao lượng đường dự trữ và nước qua biểu bì làm sụt giảm khối lượng và độ tươi.
-  - Mỗi loại quả có hệ số suy giảm sinh học $r$ khác nhau: Cà chua vỏ mỏng hao hụt khoảng $5\%/\text{ngày}$; Dưa hấu vỏ dày hao hụt chậm hơn chỉ $3.3\%/\text{ngày}$; Xoài chín nhanh hao hụt $7\%/\text{ngày}$.
-  - Điều kiện bảo quản đóng vai trò rất lớn: nhiệt độ cao ngoài trời nắng ($k=1.4$) làm enzym hoạt động mạnh gấp gần 3 lần so với giữ trong kho mát ($k=0.5$).
-  - Em đã tổng hợp thành công thức: $V = \max(0,\; 1 - r \cdot k \cdot d)$ để suy ra giá bán khuyến nghị, bảo đảm có căn cứ khoa học chứ không hề cảm tính."*
+### Câu 2: "Hiện nay bà con đã có Zalo, Facebook và gọi điện thoại, tại sao em phải mất công làm ứng dụng này?"
+- **Cách trả lời sắc bén, thực tế:**
+  > *"Dạ thưa Thầy/Cô, Zalo và Facebook rất phổ biến nhưng khi dùng cho việc trao đổi rơm rạ ở nông thôn thì gặp 3 bất cập rất lớn:  
+  > 1. **Bài đăng bị trôi mất tích:** Sau vài tiếng đồng hồ là tin nhắn bị trôi, người cần gom rơm ở xã bên không tài nào tìm lại được. Ứng dụng của em ghim thẳng lên bản đồ quanh bán kính 5 đến 15km, mở ra là thấy ngay đống rơm gần nhà mình nhất.  
+  > 2. **Không nói rõ đường xe vào:** Trên Zalo người ta chỉ nhắn chung chung. Trong ứng dụng của em có 3 nút bấm bắt buộc: Xe tải vào được, hay phải đi xe ba gác, hay phải đi ghe xuồng; rơm khô hay rơm ướt. Thương lái nhìn vào là biết mang xe gì đi chở, không bị tình trạng chạy xe đến nơi rồi bỏ về.  
+  > 3. **Bị gọi điện quấy rối:** Trên Zalo đăng số điện thoại lên là cả tuần sau khi ruộng đã dọn sạch vẫn bị người ta gọi hỏi rơm. Ứng dụng của em có tính năng khi gom xong, bấm xác nhận là lập tức khóa gọi và ẩn tin, trả lại sự yên tĩnh cho bác nông dân ạ."*
 
-### Câu 4: Tại sao em phải dùng `BigInt` (số nguyên lớn) để tính tiền mà không dùng phép nhân số thập phân thông thường?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô, đây là một điểm kỹ thuật rất quan trọng trong môn Tin học:
-  - Trong máy tính, các số thực có dấu phẩy động (chuẩn IEEE-754) luôn có sai số nhị phân nhỏ (ví dụ $0.1 + 0.2 = 0.30000000000000004$). Khi tính toán giá tiền nhân với phần trăm suy giảm, sai số này sẽ làm tiền bán bị lệch vài đồng hoặc làm nhảy nhầm ranh giới chất lượng giữa loại 1 và loại 2 (mốc $75\%$ và $40\%$).
-  - Để bảo đảm quyền lợi tài chính chính xác tuyệt đối cho bà con nông dân, em đã nhân tỷ lệ với số nguyên lớn $10.000.000$ đơn vị bằng kiểu `BigInt` trong JavaScript, sau đó làm tròn nửa lên (`half-up`) đến hàng trăm đồng gần nhất. Nhờ đó, phép tính đạt độ chuẩn xác 100% trên mọi dòng điện thoại."*
-
-### Câu 5: Con số 1.46 tấn $CO_2$ giảm phát thải cho mỗi tấn rơm rạ không bị đốt từ đâu mà ra?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô, con số $1.46\text{ tấn } CO_2e/\text{tấn rơm}$ được em trích dẫn từ Báo cáo kiểm kê khí nhà kính nông nghiệp của Viện Lúa Đồng bằng sông Cửu Long và hướng dẫn của Ban liên chính phủ về biến đổi khí hậu (IPCC):
-  - Khi đốt hở 1 tấn rơm khô ngoài trời, ngoài khí carbonic ($CO_2$), quá trình cháy không hoàn toàn còn sinh ra khí methane ($CH_4$) và dinitrogen monoxide ($N_2O$) — hai loại khí có tiềm năng làm nóng toàn cầu cao gấp 28 và 265 lần so với $CO_2$.
-  - Khi quy đổi tương đương về tiềm năng nóng lên toàn cầu 100 năm ($GWP_{100}$), cứ ngăn chặn đốt được 1 tấn rơm sẽ giảm được khoảng $1.46\text{ tấn } CO_2$ tương đương thải vào bầu khí quyển."*
+### Câu 3: "Sao không đưa nông sản lên bán trên Shopee, TikTok Shop hay Chợ Tốt cho rộng rãi?"
+- **Cách trả lời đúng bản chất nông thôn:**
+  > *"Dạ thưa Thầy/Cô, phụ phẩm nông nghiệp như rơm rạ, bã mía, thân bắp là những thứ **rất cồng kềnh nhưng giá trị kinh tế thấp hoặc cho không**.  
+  > - Các sàn như Shopee hay TikTok chỉ bán hàng đóng hộp, đóng gói đi liên tỉnh và thu phí hoa hồng rất cao. Không ai đóng gói 1 bao rơm 20 ngàn để gửi bưu điện đi Hà Nội hay TP.HCM cả.  
+  > - Phụ phẩm nông nghiệp bắt buộc phải giao dịch **tại chỗ, trong bán kính vài cây số** giữa người trồng trọt và trại nấm, trại bò gần đó để chở bằng xe máy kéo hay ba gác. Ứng dụng của em phục vụ đúng nhu cầu làng xã, hoàn toàn miễn phí, không thu một đồng tiền nào của bà con ạ."*
 
 ---
 
-## NHÓM 3: VỀ CÔNG NGHỆ, BẢO MẬT & CHI PHÍ 0 ĐỒNG
+## PHẦN 3: THIẾT KẾ DÀNH CHO NGƯỜI NÔNG DÂN LỚN TUỔI
 
-### Câu 6: Làm sao ứng dụng có thể hoạt động được khi điện thoại nông dân bị mất sóng ngoài đồng?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô, em ứng dụng công nghệ Web tiến bộ (Progressive Web App - PWA) kết hợp với Service Worker:
-  - Khi mở ứng dụng lần đầu có mạng, toàn bộ giao diện, hình ảnh và mã logic tính giá (khoảng 400 KB) sẽ được Service Worker lưu tự động vào bộ nhớ đệm (Cache Storage) của trình duyệt.
-  - Khi bà con mang điện thoại ra đồng mất sóng, Service Worker sẽ chặn các yêu cầu và nạp trực tiếp tài nguyên từ bộ nhớ máy tính mà không cần gửi lên Internet.
-  - Các lượt tính giá ngoài đồng được lưu tạm vào hàng đợi LocalStorage; khi nào điện thoại bắt lại sóng Wi-Fi hoặc 4G, phần mềm sẽ tự động gửi số liệu đồng bộ về máy chủ."*
+### Câu 4: "Người nông dân ở quê lớn tuổi, mắt mờ, tay run, ngại công nghệ thì làm sao dùng được ứng dụng của em?"
+- **Cách trả lời dẫn chứng thực tế:**
+  > *"Dạ thưa Thầy/Cô, đây chính là điều em trăn trở nhất khi làm đề tài. Em đã thiết kế 3 chi tiết đặc biệt dành riêng cho các bác lớn tuổi:  
+  > 1. **Nút Micro bấm nói một chạm:** Bác nông dân không cần gõ bàn phím. Chỉ cần chạm vào nút micro tròn to đùng màu xanh và nói: 'Tôi có hai công rơm ở suối Cả'. Ứng dụng tự hiểu các từ địa phương Nam Bộ như 'công', 'sào', 'giạ' và điền vào ô.  
+  > 2. **Hàng nút chọn nhanh khối lượng:** Dưới ô số lượng có sẵn 4 nút bấm to nổi: '1 Công', '2 Công', '5 Công', '1 Tấn'. Bác chỉ cần lấy ngón tay chạm một cái là xong.  
+  > 3. **Thẻ đọc lại thông tin trước khi đăng:** Trước khi gửi, màn hình hiện một tấm thẻ to rõ: 'Bác chuẩn bị đăng 2 công rơm rạ, xe tải vào được, cho miễn phí'. Bác đọc thấy đúng ý mình thì mới bấm nút xác nhận.  
+  > Khi em mang ra ruộng cho bác Ba Cảnh 62 tuổi ở ấp Suối Cả bấm thử, bác nói: 'Dễ ợt hà, bấm vầy thì người già như tao xài ngon lành'."*
 
-### Câu 7: Cơ chế mã nhận tin 4 số (`shortCode`) bảo mật như thế nào và tại sao lại dùng Crockford Base32?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô, cơ chế này giúp xác thực giao dịch thu gom thực tế mà không cần tài khoản mật khẩu rườm rà:
-  - Khi một tin được đăng, máy chủ sinh ra một mã bí mật 4 ký tự chỉ người bán nhìn thấy (ví dụ: `8K4M`).
-  - Em sử dụng bảng mã Crockford Base32 (32 ký tự), loại bỏ hoàn toàn các chữ cái dễ nhầm lẫn như chữ `I`, chữ `L`, chữ `O` và chữ `U` để người nông dân đọc qua miệng không bị nghe nhầm.
-  - Khi người mua tới ruộng bốc hàng xong, người bán mới đọc 4 ký tự này. Người mua nhập vào máy, máy chủ kiểm tra đúng mã thì tin mới chuyển sang 'Đã thu gom'. Điều này ngăn chặn kẻ xấu bấm phá hoại tin đăng của người khác."*
-
-### Câu 8: Em nói chi phí máy chủ là 0 đồng, vậy hệ thống chạy ở đâu và duy trì lâu dài bằng cách nào?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô:
-  - Hệ thống sử dụng Node.js bản địa và thư viện cơ sở dữ liệu `node:sqlite` tích hợp sẵn, lưu trữ toàn bộ dữ liệu trong 1 file SQLite ở chế độ ghi nhật ký WAL.
-  - Máy chủ cực kỳ nhẹ, chỉ chiếm chưa đến 30 MB RAM, có thể chạy trực tiếp trên một chiếc máy tính bàn cũ tại phòng Tin học của trường hoặc phòng làm việc của Hợp tác xã xã Cẩm Đường.
-  - Em không thuê máy chủ đám mây đắt tiền của nước ngoài, không dùng API bản quyền tính phí của Google Maps mà dùng thư viện bản đồ nguồn mở Leaflet và OpenStreetMap. Vì vậy, nhà trường và xã hoàn toàn có thể duy trì vận hành quanh năm với chi phí tiền điện máy tính thông thường."*
+### Câu 5: "Nếu nông dân ra giữa đồng ruộng bị mất sóng 4G hoặc hết tiền điện thoại thì ứng dụng có xài được không?"
+- **Cách trả lời am hiểu giải pháp:**
+  > *"Dạ thưa Thầy/Cô, ngoài đồng ruộng xã em có nhiều chỗ sóng chập chờn hoặc mất hẳn.  
+  > - Ứng dụng của em được thiết kế theo dạng lưu sẵn dữ liệu trên máy điện thoại. Dù tắt Wifi và 4G (chế độ Máy bay), bà con vẫn mở ứng dụng lên bình thường để tra cứu bảng độ tươi và ghi lại tin đăng nháp.  
+  > - Tin đăng nháp sẽ được giữ an toàn trong máy. Khi bác nông dân dắt xe về tới nhà, điện thoại bắt được sóng là ứng dụng tự động đồng bộ gửi tin lên bản đồ mà bác không cần phải thao tác lại ạ."*
 
 ---
 
-## NHÓM 4: VỀ TÍNH ỨNG DỤNG & ĐỐI TƯỢNG NÔNG DÂN
+## PHẦN 4: CƠ SỞ KHOA HỌC VỀ ĐỘ TƯƠI VÀ BẢO VỆ MÔI TRƯỜNG
 
-### Câu 9: Nông dân lớn tuổi, mắt kém, tay hay dính bùn đất thì sử dụng phần mềm này như thế nào?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô, em đã khảo sát và thiết kế riêng cho bà con theo 3 tiêu chuẩn:
-  1. **Nút bấm siêu to:** Mọi nút bấm và ô chọn đều có kích thước tối thiểu $48\text{px} \times 48\text{px}$, nút thu âm micro to đến $64\text{px}$, ngón tay to dính đất chạm vẫn rất dễ trúng.
-  2. **Độ tương phản cực cao (chuẩn WCAG AAA):** Chữ đen đậm trên nền sáng ngà, màu xanh đậm, giúp nhìn ngoài nắng chói $35^\circ\text{C}$ không bị lóa mắt.
-  3. **Không cần gõ phím:** Chỉ cần bấm 1 chạm vào micro và nói giọng tự nhiên, hệ thống tự điền thông tin vào 6 ô."*
+### Câu 6: "Dựa vào đâu mà em lập ra bảng gợi ý độ tươi và khuyên bà con bán trong 24 giờ?"
+- **Cách trả lời mộc mạc, khoa học:**
+  > *"Dạ thưa Thầy/Cô, kiến thức này em học từ môn Khoa học Tự nhiên và đọc thêm sách Hướng dẫn bảo quản nông sản sau thu hoạch:  
+  > - Trái cây sau khi hái xuống cành vẫn là một cơ thể sống, nó vẫn 'thở' (hô hấp tế bào) và bốc hơi nước qua vỏ.  
+  > - Nếu để ngoài trời nắng gắt 35 độ C, quả mất nước nhanh gấp đôi so với để trong bóng râm thoáng mát. Ví dụ sầu riêng hay cà chua sau 2 ngày nắng là vỏ bắt đầu nhăn, cơm quả mềm đi, thương lái sẽ lấy cớ đó để ép giá từ loại 1 xuống loại 2.  
+  > - Em lập bảng quy đổi đơn giản với 3 vạch màu: Xanh (Mới hái - giữ giá tốt) $\rightarrow$ Vàng (Đã 1-2 ngày - Bán gấp trong 24h) $\rightarrow$ Đỏ (Mềm quả - nên bán thanh lý làm mứt hoặc giảm giá). Mục đích của em là giúp bác nông dân có lời nhắc nhở khoa học để quyết định bán sớm, không để quả héo rồi phải bán đổ bán tháo ạ."*
 
-### Câu 10: Nhận diện giọng nói có hiểu được giọng của bà con vùng nông thôn ĐBSCL không?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô:
-  - Em sử dụng bộ nhận diện Web Speech API tiếng Việt kết hợp với bộ phân tích từ vựng (Regex Parser) do em tự xây dựng dựa trên các từ ngữ địa phương quen thuộc: ví dụ bà con hay nói 'công rơm', 'sào bắp', 'chục quả', 'trăm ký', 'dọn ruộng'.
-  - Bộ bóc tách của em nhận diện được các từ khóa đó và tự động quy đổi: ví dụ nói '2 công rơm' thì hệ thống tự hiểu 1 công Nam Bộ là $1.000\text{ m}^2$ tương đương khoảng $1.111\text{ kg}$ rơm rạ khô.
-  - Qua thử nghiệm thực tế với 20 người dùng tại Cẩm Đường, tỷ lệ phần mềm hiểu đúng ý câu nói đạt gần 89%."*
+### Câu 7: "Ứng dụng này giúp ích gì cho môi trường địa phương em?"
+- **Cách trả lời gắn liền với quê hương:**
+  > *"Dạ thưa Ban Giám khảo, quê hương Cẩm Đường của em sắp tới có dự án sân bay quốc tế Long Thành, việc giữ cho bầu không khí trong lành, không bị khói bụi rơm rạ là điều rất cấp thiết.  
+  > - Khi kết nối được 1 chuyến xe rơm rạ cho trại nấm hay hộ nuôi bò, nghĩa là có hàng tấn rơm không bị quẹt diêm đốt bỏ ngoài đồng.  
+  > - Bớt đốt rơm là bớt khói cay mắt cho người đi đường, bớt bụi mịn cho các em nhỏ và người già đỡ bệnh đường hô hấp, đồng thời hạn chế nguy cơ tàn lửa bay gây cháy nhà, cháy vườn vào mùa khô ạ."*
 
 ---
 
-## NHÓM 5: VỀ VAI TRÒ & SỰ THAM GIA CỦA HỌC SINH
+## PHẦN 5: BÀI HỌC VÀ HƯỚNG ĐI TIẾP THEO
 
-### Câu 11: Một học sinh lớp 9 làm sao có thể tự làm được cả hệ thống phần mềm phức tạp như thế này? Em làm phần nào và thầy giáo làm phần nào?
-- **Gợi ý trả lời trung thực & thuyết phục nhất:**
-  *"Dạ thưa Thầy/Cô, em xin thành thật báo cáo sự phân công như sau:
-  - **Phần em trực tiếp thực hiện:** Em là người trực tiếp đi khảo sát thực tế tại các ấp ở Cẩm Đường, thu thập số liệu hao hụt 10 loại quả; em thiết kế giao diện HTML/CSS, vẽ các biểu tượng, bố cục nút bấm to cho bà con; em viết các hàm tính toán công thức theo độ tươi và cùng thầy viết các bài kiểm thử tự động.
-  - **Phần Thầy hướng dẫn:** Thầy Hoàng Thành Đạt là người định hướng cho em về mô hình kiến trúc Isomorphic, tư vấn em dùng kiểu dữ liệu `BigInt` để triệt tiêu sai số làm tròn, hướng dẫn em cấu hình máy chủ Node.js và giám sát an toàn thông tin để đảm bảo không vi phạm an ninh dữ liệu.
-  - Toàn bộ quá trình từ tuần 1 đến tuần 12 em đều trực tiếp ngồi máy thực hiện, viết nhật ký nghiên cứu và kiểm thử từng dòng lệnh nên em hoàn toàn hiểu rõ từng chức năng của hệ thống ạ."*
+### Câu 8: "Sau quá trình làm đề tài này, em đã học được những điều gì bổ ích nhất?"
+- **Cách trả lời trưởng thành, chạm cảm xúc:**
+  > *"Dạ thưa Thầy/Cô, điều quý giá nhất em học được không phải là viết được vài dòng mã máy tính, mà là **bài học về sự lắng nghe và thấu hiểu người nông dân**.  
+  > Ban đầu, em ngồi trong lớp tự nghĩ ra giao diện theo ý mình, em tưởng là hay. Nhưng khi cầm điện thoại ra ruộng cho các bác dùng thử, các bác chê ngay: chữ nhỏ quá, không biết gõ bàn phím, xe tải không vô được... Nhờ những lời góp ý thật lòng của bà con, em đã học được cách đặt mình vào vị trí của người khác để sửa đổi cho sản phẩm thực sự hữu ích. Em cảm thấy rất vui vì bằng kiến thức nhỏ bé của một học sinh lớp 9, em đã làm được một việc có ý nghĩa cho quê hương của mình ạ."*
 
-### Câu 12: Hướng phát triển tiếp theo của đề tài sau cuộc thi này là gì?
-- **Gợi ý trả lời xuất sắc:**
-  *"Dạ thưa Thầy/Cô, sau cuộc thi em có 2 định hướng phát triển cụ thể:
-  1. Về phần cứng: Em muốn kết hợp thêm cảm biến đo độ ngọt (Brix) giá rẻ kết nối qua Bluetooth để khi nông dân thử nước quả, máy sẽ tự nhảy hệ số độ tươi mà không cần đoán ngày.
-  2. Về thực tế địa phương: Em sẽ xin phép Ban Giám hiệu và UBND xã Cẩm Đường được bàn giao ứng dụng cho Hợp tác xã Nông nghiệp xã để chính thức thí điểm kết nối các đội xe ba gác, máy cày tự quản thu gom rơm cho các hộ trồng nấm rơm trong vụ mùa tới."*
+### Câu 9: "Nếu được giải hoặc tiếp tục phát triển đề tài, em sẽ làm gì tiếp theo?"
+- **Cách trả lời thực tế, vừa sức:**
+  > *"Dạ thưa Ban Giám khảo, kế hoạch sắp tới của em rất giản dị:  
+  > 1. Em sẽ xin phép Ban Giám hiệu nhà trường và liên hệ với các anh chị Đoàn Thanh niên xã Cẩm Đường để cùng đến các buổi sinh hoạt ấp, hướng dẫn cho nhiều cô chú nông dân cùng biết cách mở ứng dụng lên xem.  
+  > 2. Em sẽ xin thêm ý kiến của các chú ở Hợp tác xã Nông nghiệp để cập nhật thêm các loại cây trồng quen thuộc của huyện Long Thành như bưởi da xanh hay sầu riêng Cẩm Đường.  
+  > Em hy vọng mô hình này sẽ được nhân rộng sang các xã lân cận để quê em không còn những mùa gặt khói mù mịt nữa ạ."*

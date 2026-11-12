@@ -198,7 +198,7 @@
 | STT | Công việc | Thời gian | Kết quả cần đạt |
 | :---: | :--- | :---: | :--- |
 | **1** | Lựa chọn ý tưởng, xác định vấn đề phụ phẩm và hao hụt nông sản | Tuần 1 | Tên đề tài, câu hỏi nghiên cứu, mục tiêu |
-| **2** | Tìm hiểu tài liệu sinh lý thực vật, thuật toán BigInt, lập đề cương | Tuần 2 | Đề cương nghiên cứu chi tiết |
+| **2** | Tìm hiểu tài liệu sinh lý thực vật, công thức tính độ tươi, lập đề cương | Tuần 2 | Đề cương nghiên cứu chi tiết |
 | **3** | Khảo sát thực trạng tại 30 hộ dân Cẩm Đường, thu thập dữ liệu | Tuần 3–4 | Bảng dữ liệu khảo sát ban đầu |
 | **4** | Thiết kế kiến trúc phần mềm, xây dựng thuật toán và mô hình giao diện | Tuần 5–6 | Bản thiết kế `PRD.md`, `ARCHITECTURE.md` |
 | **5** | Lập trình ứng dụng AgriCircle, viết 54 ca kiểm thử tự động | Tuần 7–8 | Mã nguồn hoàn chỉnh, 54/54 test pass |
@@ -431,7 +431,7 @@
 | **1** | Khảo sát vấn đề thực tiễn tại Cẩm Đường, tìm hiểu tài liệu | Tuần 1 | Báo cáo khảo sát, danh mục phụ phẩm |
 | **2** | Xác định yêu cầu kỹ thuật và các tiêu chí đo lường | Tuần 2 | Tài liệu `PRD.md`, `RULES.md` |
 | **3** | Thiết kế kiến trúc hệ thống, sơ đồ dữ liệu và giao diện | Tuần 3–4 | Tài liệu `ARCHITECTURE.md`, `DESIGN.md` |
-| **4** | Lập trình nguyên mẫu Slice 1 (Thuật toán BigInt & Voice Parser) | Tuần 5–6 | Nguyên mẫu lần 1, 16 test pass |
+| **4** | Lập trình nguyên mẫu Slice 1 (Công thức tính giá & Đăng tin giọng nói) | Tuần 5–6 | Nguyên mẫu lần 1, 16 test pass |
 | **5** | Lập trình nguyên mẫu Slice 2 & 3 (Máy chủ SQLite & Giao diện PWA) | Tuần 7–8 | Nguyên mẫu lần 2, 48 test pass |
 | **6** | Thử nghiệm ngoại tuyến, tối ưu hóa kích thước bundle | Tuần 9–10 | Bảng số liệu kiểm thử, bundle 400 KB |
 | **7** | Đánh giá thực nghiệm với 20 nông dân tại Cẩm Đường | Tuần 11 | Sản phẩm hoàn chỉnh, 54/54 test pass |

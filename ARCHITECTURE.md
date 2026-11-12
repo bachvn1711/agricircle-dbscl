@@ -1,123 +1,140 @@
-# ARCHITECTURE.md — Kiến Trúc Hệ Thống AgriCircle ĐBSCL
-
-## 1. Ngăn Xếp Công Nghệ (Technology Stack)
-
-Hệ sinh thái AgriCircle được thiết kế với triết lý: **Zero Cloud Cost, Zero Build Step, 100% Rural Usability, Isomorphic Reliability**.
-
-| Tầng hệ thống | Công nghệ lựa chọn | Lý do lựa chọn cho đề tài THCS |
-| :--- | :--- | :--- |
-| **Backend Runtime** | Node.js v22+ Native ESM | Hỗ trợ chuẩn module ES6 hiện đại, không cần cấu hình Babel hay Webpack. |
-| **Cơ sở dữ liệu** | `node:sqlite` (Native module tích hợp sẵn) | Không cần cài đặt máy chủ MySQL/PostgreSQL phức tạp; lưu trữ 1 file SQLite gọn nhẹ, chế độ WAL (Write-Ahead Logging) cho tốc độ đọc ghi tức thì. |
-| **Web Server / Routing** | Native `node:http` (Zero Frameworks) | Không phụ thuộc Express/Fastify; router tự viết bằng Regex với cơ chế phòng thủ chặt chẽ (chống path-traversal, chống null-byte injection, giới hạn payload 32KB). |
-| **Frontend Runtime** | Vanilla ES6 JavaScript (No Build Step) | Trình duyệt nạp trực tiếp các file `.js` module thông qua thẻ `<script type="module">`. Học sinh THCS dễ dàng sửa và kiểm tra ngay lập tức bằng phím F5. |
-| **Giao diện & Bản đồ** | Vanilla CSS3 + Leaflet v1.9.4 | Tự viết CSS biến (variables), Flexbox/Grid responsive; Leaflet offline-fallback hiển thị tọa độ và bản đồ vệ tinh không tốn phí bản quyền Google Maps. |
-| **Offline Engine** | PWA Service Worker (Cache-First + Network-First) | Cài đặt được lên màn hình chính điện thoại như một ứng dụng Android/iOS độc lập; mở công cụ Tính giá ngay cả khi mất sóng Internet. |
-| **Thuật toán cốt lõi** | `BigInt` Fixed-point Arithmetic | Nhân tỷ lệ $10.000.000$ đơn vị để tính tiền tệ chính xác tuyệt đối, loại bỏ sai số dấu phẩy động IEEE-754. |
+# ARCHITECTURE.md — Kiến Trúc Hệ Thống AgriCircle
+*Tài liệu kỹ thuật giải thích cách hệ thống hoạt động dành cho nhóm nghiên cứu THCS*
 
 ---
 
-## 2. Cấu Trúc Thư Mục Dự Án (Directory Layout)
+## 1. Công Nghệ Sử Dụng & Lý Do Lựa Chọn (Technology Stack)
+
+Hệ thống AgriCircle được xây dựng với nguyên tắc: **Đơn giản, tiết kiệm tối đa, dễ hiểu và hoạt động tốt ở nông thôn**.
+
+| Thành phần | Công nghệ sử dụng | Vì sao phù hợp với học sinh THCS & nông thôn? |
+| :--- | :--- | :--- |
+| **Giao diện người dùng (Frontend)** | HTML5, CSS3, JavaScript thuần (Vanilla JS) | Không dùng framework phức tạp (React, Vue) để học sinh dễ hiểu, dễ sửa và mở trực tiếp trên trình duyệt điện thoại mà không cần cài đặt rườm rà. |
+| **Bản đồ định vị** | Thư viện Leaflet (v1.9.4) | Bản đồ mã nguồn mở miễn phí, nhẹ nhàng, tự động chuyển sang chế độ dự phòng khi mạng chập chờn, không tốn phí bản quyền Google Maps. |
+| **Hoạt động ngoại tuyến** | PWA Service Worker | Giúp lưu sẵn mã nguồn vào bộ nhớ đệm của điện thoại; khi ra giữa ruộng không có mạng 4G vẫn mở được ứng dụng và dùng máy tính tính giá. |
+| **Nhập liệu giọng nói** | Web Speech API (vi-VN) | Tận dụng sẵn tính năng nhận diện giọng nói tiếng Việt có sẵn trên trình duyệt Chrome/Android, không tốn tiền mua dịch vụ AI bên ngoài. |
+| **Máy chủ xử lý (Backend)** | Node.js (phiên bản v22+) | Chạy trực tiếp trên máy tính cá nhân hoặc máy tính trường học, cú pháp đồng nhất với JavaScript phía giao diện. |
+| **Cơ sở dữ liệu** | SQLite (`node:sqlite`) | Lưu toàn bộ dữ liệu vào một tệp tin duy nhất (`agricircle.db`). Không cần cài đặt máy chủ cơ sở dữ liệu cồng kềnh, dễ dàng sao chép để nộp bài dự thi. |
+
+---
+
+## 2. Cấu Trúc Thư Mục Dự Án (Folder Structure)
 
 ```
 d:\Work\CODE\khkt\
-├── .github/
-│   └── workflows/ci.yml       # Tự động chạy kiểm thử trên GitHub Actions khi đẩy code
-├── docs/                      # Hồ sơ nghiên cứu KHKT và tài liệu hướng dẫn kỹ thuật
-│   ├── 01-survey-summary.md   # Số liệu khảo sát thực tế nông dân và vựa thu gom ĐBSCL
-│   ├── 02-requirements.md     # Đặc tả chi tiết các yêu cầu chức năng (FR) và phi chức năng (NFR)
-│   ├── 03-thcs-technical-guide.md # Sách hướng dẫn kỹ thuật tự học dành cho học sinh THCS
-│   └── 04-ke-hoach-nghien-cuu-khkt.md # Kế hoạch nghiên cứu 12 tuần theo mẫu chính thức
-├── public/                    # Mã nguồn giao diện Web PWA (Frontend)
-│   ├── index.html             # Khung sườn HTML chuẩn ngữ nghĩa (5 tab giao diện)
-│   ├── manifest.json          # Cấu hình PWA cài đặt App lên điện thoại di động
-│   ├── sw.js                  # Service Worker quản lý bộ nhớ đệm và chạy offline
-│   ├── css/
-│   │   └── app.css            # Toàn bộ quy tắc giao diện, màu sắc, tương phản cao
-│   ├── js/
-│   │   ├── app.js             # Bộ điều phối trung tâm, chuyển tab và xử lý offline queue
-│   │   ├── state.js           # Quản lý trạng thái ứng dụng và LocalStorage an toàn
-│   │   ├── api.js             # Giao tiếp HTTP với máy chủ (fetch wrapper có timeout)
-│   │   ├── sw-routes.js       # Phân loại luồng lưu trữ bộ nhớ đệm cho Service Worker
-│   │   ├── map-view.js        # Giao diện bản đồ nông thôn và bộ lọc phụ phẩm
-│   │   ├── calculator-view.js # Giao diện máy tính định giá độ tươi nông sản
-│   │   ├── post-form.js       # Giao diện đăng tin kết hợp nhận diện giọng nói tiếng Việt
-│   │   ├── impact-view.js     # Giao diện bảng thành tích giải cứu phụ phẩm & giảm CO2
-│   │   └── admin-view.js      # Giao diện quản trị viên xã, duyệt tin và xuất báo cáo CSV
-│   └── icons/                 # Bộ biểu tượng ứng dụng và huy hiệu nông sản
+├── docs/                      # Hồ sơ nghiên cứu và tài liệu KHKT
+│   ├── 01-goals.md            # Mục tiêu ban đầu
+│   ├── 02-requirements.md     # Yêu cầu chức năng và giao diện
+│   ├── 03-thcs-technical-guide.md # Sách hướng dẫn kỹ thuật cho học sinh
+│   ├── 04-ke-hoach-nghien-cuu-khkt.md # Bản kế hoạch nghiên cứu chính thức
+│   ├── 05-mau-khao-sat-nong-dan.md # Phiếu khảo sát 30 hộ nông dân thực tế
+│   ├── 06-dan-y-thuyet-trinh-powerpoint.md # Dàn ý 12 slide thuyết trình KHKT
+│   ├── 07-bo-cau-hoi-phan-bien-khkt.md # Bộ câu hỏi phản biện Ban Giám khảo
+│   └── 08-kich-ban-video-demo.md # Kịch bản video minh họa thực tế
+├── public/                    # Mã nguồn giao diện người dùng (chạy trên điện thoại/web)
+│   ├── index.html             # Trang giao diện chính (5 màn hình chuyển đổi)
+│   ├── manifest.json          # Tệp cấu hình để cài ứng dụng lên màn hình điện thoại
+│   ├── sw.js                  # Bộ nhớ đệm giúp mở ứng dụng khi mất mạng (Service Worker)
+│   ├── styles/
+│   │   └── app.css            # Toàn bộ màu sắc, kích thước nút bấm to, kiểu dáng 3D
+│   └── js/
+│       ├── app.js             # Bộ điều khiển chính, chuyển đổi các tab màn hình
+│       ├── state.js           # Lưu tạm dữ liệu trên máy người dùng (LocalStorage)
+│       ├── api.js             # Gửi và nhận dữ liệu với máy chủ
+│       ├── map-view.js        # Hiển thị bản đồ Leaflet, lọc tin và huy hiệu đường đi/độ ẩm
+│       ├── calculator-view.js # Màn hình máy tính định giá độ tươi nông sản
+│       ├── post-form.js       # Màn hình đăng tin giọng nói, 4 nút khối lượng & xem trước
+│       ├── impact-view.js     # Màn hình bảng thành tích giảm khí thải môi trường
+│       └── admin-view.js      # Màn hình quản lý tin đăng của cán bộ địa phương
 ├── src/
-│   ├── server/                # Mã nguồn máy chủ Node.js (Backend)
-│   │   ├── index.js           # Điểm khởi động máy chủ (CLI, đọc cổng PORT từ môi trường)
-│   │   ├── app.js             # Xử lý các yêu cầu HTTP API (REST endpoints)
-│   │   ├── router.js          # Bộ định tuyến tĩnh và động với bộ lọc an ninh đường dẫn
-│   │   ├── db.js              # Khởi tạo bảng SQLite, câu lệnh chuẩn bị (Prepared Statements)
-│   │   └── auth.js            # Xác thực mã PIN an toàn, sinh mã nhận tin 4 số bí mật
-│   └── shared/                # Mã dùng chung giữa Trình duyệt và Máy chủ (Isomorphic Domain)
-│       ├── crops.js           # Bảng dữ liệu 10 loại nông sản nhiệt đới đặc thù
-│       ├── pricing.js         # Thuật toán BigInt tính giá theo mức độ tươi và dự báo 3 ngày
-│       ├── geo.js             # Công thức Haversine tính khoảng cách tọa độ Trái Đất (km)
-│       ├── voice-parser.js    # Bộ bóc tách ngôn ngữ tiếng Việt từ câu nói sang 6 trường dữ liệu
-│       └── validation.js      # Kiểm tra tính hợp lệ của mọi dữ liệu đầu vào
-├── tests/                     # Hệ thống 54 ca kiểm thử tự động toàn diện
+│   ├── server/                # Mã nguồn máy chủ (chạy trên máy tính)
+│   │   ├── index.js           # Khởi động máy chủ
+│   │   ├── app.js             # Tiếp nhận yêu cầu đăng tin, lấy danh sách tin, thu gom
+│   │   ├── router.js          # Điều hướng đường dẫn an toàn
+│   │   ├── db.js              # Tạo bảng và lưu trữ thông tin vào tệp SQLite
+│   │   └── auth.js            # Sinh mã nhận tin 4 số bí mật và kiểm tra mã PIN
+│   └── shared/                # Các công thức tính toán dùng chung
+│       ├── crops.js           # Danh mục 10 loại quả nhiệt đới và đặc tính suy giảm
+│       ├── pricing.js         # Công thức tính giá giảm dần theo ngày và cách bảo quản
+│       ├── geo.js             # Công thức tính khoảng cách km giữa hai vị trí
+│       ├── voice-parser.js    # Tách câu nói thành tên quả, số lượng, địa chỉ
+│       └── validation.js      # Kiểm tra dữ liệu hợp lệ (loại xe, độ ẩm, số điện thoại)
+├── tests/                     # 56 bài kiểm tra tự động bảo đảm hệ thống không bị lỗi
 ├── scripts/
-│   └── verify-docs-and-bundle.mjs # Kịch bản kiểm tra dung lượng < 1.5MB và quy tắc 0 comment
-├── PRD.md                     # Tài liệu định nghĩa sản phẩm
-├── ARCHITECTURE.md            # Tài liệu kiến trúc hệ thống
-├── DESIGN.md                  # Hướng dẫn quy chuẩn giao diện
-├── RULES.md                   # Bộ quy tắc lập trình cốt lõi
-├── TASKS.md                   # Danh sách các bước triển khai chi tiết
-├── PROGRESS.md                # Nhật ký tiến độ và các lỗi đã khắc phục
-└── package.json               # Cấu hình dự án Node.js
+│   └── verify-docs-and-bundle.mjs # Kịch bản kiểm tra dung lượng nhẹ < 1.5MB và 0 comment
+├── PRD.md                     # Tài liệu mô tả sản phẩm và đối tượng sử dụng
+├── ARCHITECTURE.md            # Tài liệu kiến trúc và luồng dữ liệu này
+├── DESIGN.md                  # Quy chuẩn màu sắc và giao diện thân thiện với người già
+├── RULES.md                   # Các quy tắc kỹ thuật bắt buộc phải tuân theo
+├── TASKS.md                   # Danh mục từng bước công việc triển khai
+└── PROGRESS.md                # Báo cáo tiến độ và các lỗi thực tế đã khắc phục
 ```
 
 ---
 
-## 3. Các Luồng Dữ Liệu Cốt Lõi (Core Data Flows)
+## 3. Các Luồng Dữ Liệu Chính (Data Flows)
 
+### 3.1. Luồng 1: Định giá độ tươi nông sản (Dùng được cả khi mất mạng)
 ```
-+-----------------------------------------------------------------------------------+
-|                              AGRICIRCLE DATA FLOWS                                |
-+-----------------------------------------------------------------------------------+
-
-[Luồng 1: Định giá độ tươi nông sản (Offline & Online)]
-Nông dân nhập/nói -> calculator-view.js
-      │
-      ├──> src/shared/pricing.js (Thuật toán BigInt - Tính tức thì trong 2ms)
-      │         │
-      │         └──> Hiển thị giá khuyến nghị + Biểu đồ 3 ngày + Lời khuyên
-      │
-      └──> public/js/state.js (Lưu số lượt tính vào LocalStorage queue)
-                │
-                └──> Khi có mạng: app.js POST /api/metrics/calculation -> SQLite DB
-
-[Luồng 2: Đăng tin trao đổi phụ phẩm (Voice / Form)]
-Nông dân nói vào Micro -> Web Speech API (vi-VN)
-      │
-      └──> src/shared/voice-parser.js (Bóc tách tự động: Rơm/Bắp, kg, Giá, Địa chỉ)
-                │
-                └──> Form điền sẵn -> Nông dân bấm "Đăng tin"
-                          │
-                          ├──> src/shared/validation.js (Kiểm tra hợp lệ tại máy)
-                          │
-                          └──> POST /api/listings (HTTP Network Request)
-                                    │
-                                    ├──> src/server/app.js (Rate Limit & Xác thực)
-                                    └──> src/server/db.js (Lưu vào SQLite WAL)
-                                              │
-                                              └──> Trả về mã nhận tin 4 số (shortCode)
-
-[Luồng 3: Tìm kiếm & Thu gom phụ phẩm an toàn (P2P Handshake)]
-Người mua mở Bản đồ (map-view.js) -> Xem ghim Leaflet phụ phẩm quanh vị trí
-      │
-      └──> Nhấn gọi điện / Zalo với Chủ tin thỏa thuận thời gian
-                │
-                └──> Người mua đến tận nơi bốc hàng
-                          │
-                          └──> Chủ tin đọc mã 4 số bí mật (shortCode)
-                                    │
-                                    └──> Người mua nhập xác nhận: POST /api/listings/:id/collect
-                                              │
-                                              └──> Máy chủ kiểm tra khớp mã:
-                                                        - Đổi trạng thái tin: 'collected'
-                                                        - Cộng dồn kg & CO2 vào Bảng Tác Động
+[Bà con chọn loại quả, số ngày hái, nơi để]
+                  │
+                  ▼
+         [calculator-view.js]
+                  │
+                  ▼
+          [src/shared/pricing.js]
+  (Tính toán theo công thức suy giảm sinh học tự nhiên)
+                  │
+                  ▼
+   [Hiện mức giá khuyến nghị + Lời khuyên nông vụ]
+                  │
+                  ▼
+  (Lưu số lượt tính vào máy để khi có mạng sẽ đồng bộ)
 ```
 
+### 3.2. Luồng 2: Đăng tin bằng giọng nói & Nút bấm 1 chạm
+```
+[Bà con bấm nút Micro và nói tiếng Việt]
+                  │
+                  ▼
+       [Web Speech API trên máy]
+                  │
+                  ▼
+       [src/shared/voice-parser.js]
+ (Tách: Rơm/Bắp, Số lượng, Xã Cẩm Đường, Cho/Bán)
+                  │
+                  ▼
+[Điền vào biểu mẫu + Chọn nút khối lượng/loại đường/độ ẩm]
+                  │
+                  ▼
+     [Thẻ xem trước trực quan (Preview Card)]
+ (Bà con kiểm tra lại to rõ, không sợ bấm nhầm)
+                  │
+                  ▼
+ [Bấm nút "Đồng ý Đăng lên Bản đồ ngay 🚀" (54px)]
+                  │
+                  ▼
+[Máy chủ kiểm tra hợp lệ -> Lưu vào tệp SQLite -> Hiện lên Bản đồ]
+```
+
+### 3.3. Luồng 3: Tìm kiếm phụ phẩm & Khóa liên lạc sau khi gom
+```
+[Hộ làm nấm / nuôi bò mở Bản đồ]
+                  │
+                  ▼
+  [Bản đồ tải các điểm có rơm rạ gần nhất]
+  (Thấy rõ: Huy hiệu Xe tải/Ba gác/Ghe và Rơm khô/Ướt)
+                  │
+                  ▼
+[Bấm nút Gọi điện hoặc Nhắn Zalo trực tiếp cho chủ ruộng]
+                  │
+                  ▼
+[Hai bên gặp nhau thu gom phụ phẩm ngoài đồng]
+                  │
+                  ▼
+[Người gom nhập Mã bí mật 4 số do chủ ruộng cung cấp]
+                  │
+                  ▼
+[Hệ thống đóng tin: Ẩn khỏi bản đồ + Khóa nút gọi điện]
+  (Không ai gọi làm phiền bác nông dân nữa!)
+```

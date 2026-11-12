@@ -1,164 +1,160 @@
-# DÀN Ý BÀI THUYẾT TRÌNH POWERPOINT CUỘC THI KHKT CẤP THCS
-**Đề tài:** XÂY DỰNG NỀN TẢNG KẾT NỐI TRAO ĐỔI PHẾ PHẨM NÔNG NGHIỆP VÀ HỖ TRỢ ĐỊNH GIÁ NÔNG SẢN THEO ĐỘ TƯƠI (AgriCircle)  
-**Lĩnh vực:** 8: Công nghệ thông tin  
-**Tác giả:** Học sinh Hồ Ngọc Quỳnh Như (Lớp 9/C3) — **Trường:** THCS Cẩm Đường  
-**Giáo viên hướng dẫn:** Thầy Hoàng Thành Đạt (TCM Khoa học Tự nhiên – Công nghệ)  
-**Thời lượng thuyết trình chuẩn:** 8 – 10 phút (kèm 5 phút trả lời câu hỏi của Ban Giám khảo)  
+# DÀN Ý THUYẾT TRÌNH BẢO VỆ ĐỀ TÀI KHKT DÀNH CHO HỌC SINH THCS
+**Đề tài:** NỀN TẢNG KẾT NỐI TRAO ĐỔI PHẾ PHẨM NÔNG NGHIỆP VÀ HỖ TRỢ ĐỊNH GIÁ NÔNG SẢN THEO ĐỘ TƯƠI (AgriCircle)  
+**Lĩnh vực:** Hệ thống phần mềm & Chuyển đổi số nông nghiệp  
+**Tác giả:** Học sinh **Hồ Ngọc Quỳnh Như** (Lớp 9/C3, Trường THCS Cẩm Đường, Long Thành, Đồng Nai)  
+**Giáo viên hướng dẫn:** Thầy **Hoàng Thành Đạt** (Tổ Khoa học Tự nhiên – Công nghệ)  
+**Thời lượng thuyết trình:** 8 – 10 phút (kèm 5 phút trả lời câu hỏi trực tiếp của Ban Giám khảo)  
 
 ---
 
-## CẤU TRÚC TỔNG THỂ 12 SLIDE BẢO VỆ ĐỀ TÀI
+## NGUYÊN TẮC THIẾT KẾ BÀI BÁO CÁO (ĐÚNG TẦM HỌC SINH CẤP 2)
+1. **Trung thực & Đúng lứa tuổi:** Không dùng thuật ngữ công nghệ cao siêu, đao to búa lớn. Nói bằng ngôn ngữ trong sáng, mộc mạc, tự tin của học sinh lớp 9.
+2. **Đánh mạnh vào tính thiết thực:** Nhấn mạnh câu chuyện đời thực tại địa phương Cẩm Đường / Long Thành (khói đốt rơm, nông sản rớt giá, người già ngại công nghệ).
+3. **Lấy người nông dân làm trung tâm:** Từng tính năng đều xuất phát từ lời than phiền có thật của bà con và được em mang ra tận đồng ruộng thử nghiệm.
+4. **Minh bạch vai trò:** Nêu rõ em làm gì (khảo sát, lên ý tưởng, vẽ sơ đồ màn hình, thử nghiệm với các bác) và thầy hướng dẫn hỗ trợ gì (định hướng phương pháp, kết nối kỹ thuật).
+
+---
+
+## CẤU TRÚC 12 SLIDE BẢO VỆ ĐỀ TÀI TRỰC QUAN
 
 ```
-Slide 1: Trang bìa & Giới thiệu đề tài
-Slide 2: Nỗi đau thực tiễn tại Cẩm Đường (Đốt đồng & Ép giá nông sản)
-Slide 3: Mục tiêu nghiên cứu & Câu hỏi khoa học
-Slide 4: Cơ sở khoa học: Sinh lý sau thu hoạch & Toán học BigInt
-Slide 5: Triết lý giải pháp: Zero Cloud Cost & Rural Ergonomics
-Slide 6: Kiến trúc hệ thống 3 tầng (Isomorphic Domain, SQLite WAL, PWA)
-Slide 7: Tính năng 1: Máy tính định giá độ tươi & Dự báo 3 ngày
-Slide 8: Tính năng 2: Đăng tin bằng giọng nói tiếng Việt một chạm
-Slide 9: Tính năng 3: Bản đồ nông thôn & Thu gom an toàn mã 4 số
-Slide 10: Bảng tác động giảm phát thải CO₂ & Thống kê thực tế
-Slide 11: Kết quả kiểm thử tự động & Thử nghiệm thực địa tại Cẩm Đường
-Slide 12: Tính mới, Khả năng nhân rộng & Lời cảm ơn
+Slide 1: Lời chào & Câu chuyện khởi nguồn từ cánh đồng quê hương
+Slide 2: Nỗi niềm của bà con nông dân (Khói đốt rơm rạ & Ép giá nông sản)
+Slide 3: Em đã đi tìm hiểu thực tế thế nào? (Khảo sát 30 hộ dân Cẩm Đường)
+Slide 4: Bốn "cái khó" lớn nhất của người nông dân địa phương
+Slide 5: Ý tưởng của em: Cây cầu số nối người có và người cần
+Slide 6: Giải pháp 1: Nút bấm to 1 chạm & Nói bằng giọng nói cho ông bà lớn tuổi
+Slide 7: Giải pháp 2: Bản đồ đường quê (Rõ xe tải, xe ba gác, hay đi ghe xuồng)
+Slide 8: Giải pháp 3: Bảng nhắc nhở độ tươi (Giúp nông dân bán sớm kẻo rớt giá)
+Slide 9: Giải pháp 4: Giữ bình yên cho xóm làng (Dọn xong là tự khóa gọi làm phiền)
+Slide 10: Nhật ký em mang điện thoại ra ruộng cho bà con dùng thử
+Slide 11: Kết quả bước đầu & Ý nghĩa bảo vệ môi trường làng quê
+Slide 12: Ước mơ tương lai & Lời cảm ơn Ban Giám khảo
 ```
 
 ---
 
-### CHI TIẾT TỪNG SLIDE & LỜI THOẠI THUYẾT TRÌNH (SPEAKER NOTES)
+### CHI TIẾT TỪNG SLIDE & LỜI THUYẾT TRÌNH CỦA HỌC SINH (SPEAKER NOTES)
 
-#### SLIDE 1: TRANG BÌA & GIỚI THIỆU ĐỀ TÀI
-- **Tiêu đề lớn:** NỀN TẢNG KẾT NỐI TRAO ĐỔI PHẾ PHẨM NÔNG NGHIỆP VÀ HỖ TRỢ ĐỊNH GIÁ NÔNG SẢN THEO ĐỘ TƯƠI
-- **Tên thương hiệu:** AgriCircle (Kinh tế tuần hoàn nông nghiệp địa phương)
-- **Thông tin:** Học sinh: Hồ Ngọc Quỳnh Như (Lớp 9/C3, Trường THCS Cẩm Đường) — GVHD: Thầy Hoàng Thành Đạt
-- **Hình ảnh visual:** Logo AgriCircle hình mầm cây và vòng tuần hoàn màu xanh lá, bên cạnh là ruộng lúa vàng và cánh buồm công nghệ.
-- **Lời thuyết trình học sinh (45 giây):**  
-  *"Kính thưa Ban Giám khảo và quý thầy cô, em là Hồ Ngọc Quỳnh Như, học sinh lớp 9/C3 Trường THCS Cẩm Đường. Sinh ra và lớn lên tại vùng nông nghiệp huyện Long Thành, mỗi mùa thu hoạch em đều chứng kiến hai nỗi trăn trở lớn của bà con nông dân quê mình: một là hàng tấn rơm rạ, thân bắp bị đốt đỏ rực ngoài đồng gây khói bụi mù mịt; hai là nông sản hái xong nếu trễ 1, 2 ngày là bị thương lái ép giá rẻ như cho. Từ thực tế đó, dưới sự hướng dẫn của thầy Hoàng Thành Đạt, em đã xây dựng đề tài AgriCircle — nền tảng số hóa chạy ngoại tuyến 0 đồng nhằm kết nối phụ phẩm và định giá khoa học theo độ tươi. Sau đây em xin kính mời Ban Giám khảo cùng theo dõi bài báo cáo của em."*
-
----
-
-#### SLIDE 2: NỖI ĐAU THỰC TIỄN TẠI CẨM ĐƯỜNG & VÙNG ĐBSCL
-- **Bố cục 2 cột so sánh:**
-  - *Cột 1 (Vấn đề Phụ phẩm):* 27 triệu tấn phụ phẩm đốt/vứt bỏ mỗi năm; khói bụi $PM_{2.5}$; ô nhiễm nguồn nước mương rạch; nguy cơ cháy lan và khí nhà kính.
-  - *Cột 2 (Vấn đề Nông sản):* Hao hụt tự nhiên 15 - 30%; không có kho lạnh; thương lái ép giảm giá 30 - 50% sau ngày 1; đổ bỏ hàng loại 2 gây lãng phí.
-- **Biểu đồ khảo sát:** Kết quả khảo sát 30 hộ dân tại Cẩm Đường: 73.3% đốt đồng vì không có ai gom; 86.7% tự đoán mò giá bán khi nông sản trễ ngày.
-- **Lời thuyết trình (60 giây):**  
-  *"Qua khảo sát thực tế 30 hộ dân tại xã Cẩm Đường, hơn 70% bà con cho biết đốt đồng là giải pháp duy nhất vì cần dọn ruộng gấp cho vụ sau mà không biết ai cần gom. Trong khi đó, các trại nấm rơm và trại nuôi bò cách đó chỉ 3 cây số lại đỏ mắt tìm mua rơm với giá đắt đỏ. Đồng thời, khi thanh long, dưa hấu hay cà chua bị trễ ngày thu hoạch, bà con hoàn toàn mù mờ về mức giá khoa học, thường bị ép giá hoặc đành bấm bụng vứt đi. Đây là khoảng trống thông tin rất lớn mà các sàn thương mại điện tử lớn hiện nay chưa giải quyết được."*
+#### SLIDE 1: TRANG BÌA & CÂU CHUYỆN KHỞI NGUỒN TỪ CÁNH ĐỒNG QUÊ HƯƠNG
+- **Bố cục hiển thị:**
+  - Tiêu đề đề tài rõ ràng, mộc mạc.
+  - Hình ảnh: Cánh đồng lúa chín vàng tại Cẩm Đường (Đồng Nai) và logo AgriCircle hình mầm cây xanh.
+  - Thông tin tác giả: Hồ Ngọc Quỳnh Như (9/C3) - GVHD: Thầy Hoàng Thành Đạt.
+- **Lời thuyết minh học sinh (45 giây):**  
+  > *"Kính thưa Ban Giám khảo và quý thầy cô! Em tên là Hồ Ngọc Quỳnh Như, học sinh lớp 9/C3 Trường THCS Cẩm Đường. Hằng ngày đạp xe đi học qua những cánh đồng tại xã Cẩm Đường quê em, mỗi mùa gặt em đều thấy một cảnh tượng quen thuộc: khói đốt rơm rạ bốc lên ngùn ngụt, mù mịt khắp đường làng, làm cay xè mắt và người già thì ho hen vì khói. Cùng lúc đó, trong xóm em, có những nhà trồng bưởi, trồng sầu riêng hái xuống để qua 2, 3 ngày nắng là bị thương lái chê héo ép giá rẻ bèo. Những hình ảnh đó cứ thôi thúc em: Tại sao rơm rạ quý như vậy lại phải đốt đi? Và làm sao để giúp các bác nông dân không bị ép giá? Dưới sự hướng dẫn của thầy Hoàng Thành Đạt, em đã xây dựng dự án AgriCircle - một ứng dụng nhỏ bé, dễ dùng trên điện thoại để làm cây cầu nối phụ phẩm và giúp bà con định giá nông sản theo độ tươi."*
 
 ---
 
-#### SLIDE 3: MỤC TIÊU NGHIÊN CỨU & CÂU HỎI KHOA HỌC
-- **Mục tiêu chung:** Xây dựng giải pháp phần mềm nhẹ, dễ dùng, chạy được khi mất mạng, kết nối trực tiếp cung - cầu phụ phẩm và lượng hóa độ tươi nông sản.
-- **3 Câu hỏi nghiên cứu then chốt:**
-  1. Làm sao định giá nông sản công bằng, khoa học mà máy tính không bao giờ bị sai số làm tròn tiền tệ?
-  2. Làm sao để người nông dân tay dính bùn đất có thể đăng tin trong 10 giây mà không cần gõ chữ?
-  3. Làm sao triển khai phần mềm cho trường học và xã với chi phí máy chủ đúng bằng 0 đồng?
-- **Lời thuyết trình (45 giây):**  
-  *"Đề tài của em đặt mục tiêu giải quyết 3 bài toán cụ thể: Định giá công bằng bằng toán học; Đăng tin siêu tốc bằng giọng nói tiếng Việt; và Chi phí vận hành máy chủ 0 đồng. Đây là những tiêu chí sống còn để một sản phẩm công nghệ có thể thực sự đi vào đời sống của người nông dân."*
+#### SLIDE 2: NỖI NIỀM CỦA BÀ CON NÔNG DÂN
+- **Bố cục hiển thị (Hình ảnh đối lập):**
+  - *Bên trái:* Đống rơm rạ đang cháy ngùn ngụt ven đường làng, khói đen mịt mù $\rightarrow$ Ô nhiễm môi trường, nguy cơ cháy lan, lãng phí tài nguyên.
+  - *Bên phải:* Trái cây (sầu riêng, thanh long, dưa hấu) sau khi hái để ngoài nắng bị mất nước, nhăn nheo $\rightarrow$ Thương lái ép hạ giá từ 80.000đ xuống còn 40.000đ/kg.
+- **Lời thuyết minh học sinh (45 giây):**  
+  > *"Thưa thầy cô, ở quê em, sau mùa cắt lúa, bà con cần dọn ruộng thật nhanh để kịp sạ vụ mới. Vì không biết cho ai, cũng không có chỗ chứa, nên cách nhanh nhất của bà con là quẹt một que diêm đốt sạch. Nhưng ở xóm bên, các chú làm trại nấm rơm hay nuôi bò lại phải lặn lội đi mua rơm cuộn từ tỉnh khác về với giá rất đắt. Còn đối với nông sản, khi hái xuống gặp trời nắng gắt, quả bốc hơi nước rất nhanh. Nông dân không có kho lạnh, chỉ cần chần chừ 1 đến 2 ngày là quả bị mềm, thương lái đến ép giá chỉ còn một nửa. Bà con vừa tiếc của vừa ấm ức mà không biết làm sao."*
 
 ---
 
-#### SLIDE 4: CƠ SỞ KHOA HỌC — SINH LÝ HỌC & TOÁN HỌC `BigInt`
-- **Cơ sở sinh học sau thu hoạch:** Nông sản tiếp tục hô hấp tế bào $\rightarrow$ Mất nước, phân hủy diệp lục, suy giảm đường hữu cơ.
-- **Công thức lượng hóa độ tươi:**
-  $$V_{\text{scaled}} = \max(0,\; 10.000.000 - r_{\text{micro}} \cdot k_{\text{deci}} \cdot d)$$
-  - $r$: Hệ số suy giảm sinh học theo từng loại quả (Cà chua $5\%$, Dưa hấu $3.3\%$, Xoài $7\%$).
-  - $k$: Hệ số điều kiện bảo quản (Kho mát $0.5$, Quạt mát $1.0$, Phơi nắng $1.4$).
-  - $d$: Số ngày sau khi hái.
-- **Đột phá toán học `BigInt`:** Nhân độ chia tỷ lệ $10.000.000$ đơn vị $\rightarrow$ Triệt tiêu hoàn toàn sai số dấu phẩy động IEEE-754 tại các mốc biên 75% và 40%.
-- **Lời thuyết trình (60 giây):**  
-  *"Kính thưa Ban Giám khảo, điểm tựa khoa học của đề tài nằm ở việc kết hợp giữa sinh lý học thực vật sau thu hoạch và toán học máy tính. Nếu dùng số thập phân thông thường trong lập trình, máy tính sẽ sinh ra sai số làm tròn tiền tệ. Em đã áp dụng kiểu dữ liệu số nguyên lớn `BigInt` với tỷ lệ 10 triệu đơn vị và làm tròn nửa lên đến hàng trăm đồng. Nhờ vậy, công thức cho ra giá khuyến nghị và bảng dự báo 3 ngày tiếp theo chính xác đến từng đồng trên mọi thiết bị."*
+#### SLIDE 3: EM ĐÃ ĐI TÌM HIỂU THỰC TẾ THẾ NÀO?
+- **Bố cục hiển thị:**
+  - Bức ảnh chụp phiếu khảo sát mộc mạc và hình ảnh em học sinh cầm cuốn sổ tay trò chuyện cùng bác nông dân bên bờ ruộng.
+  - Số liệu khảo sát thực tế: **30 hộ nông dân tại xã Cẩm Đường** (20 hộ trồng lúa/rau màu, 5 hộ làm nấm rơm, 5 hộ chăn nuôi bò/dê).
+- **Lời thuyết minh học sinh (50 giây):**  
+  > *"Để hiểu rõ thực tế, em không ngồi trong phòng học đoán mò mà đã xin phép thầy cô và cha mẹ, mang phiếu khảo sát đi hỏi chuyện trực tiếp 30 hộ nông dân trong xã. Kết quả khảo sát cho thấy: Có tới 22 trên 30 hộ, tức hơn 73% bà con, chọn giải pháp đốt rơm vì không tìm được người mua hay người đến lấy giùm. Hơn 85% bà con thừa nhận khi nông sản hái xong trễ ngày, bà con chỉ biết ước chừng giá bằng mắt thường chứ không có căn cứ nào để nói chuyện với thương lái. Đặc biệt, 100% các bác lớn tuổi đều nói với em: 'Điện thoại thông minh tao chỉ biết nghe gọi, chữ nhỏ xíu bấm không được, phức tạp quá là tao chịu'."*
 
 ---
 
-#### SLIDE 5: TRIẾT LÝ THIẾT KẾ NÔNG THÔN (RURAL ERGONOMICS) & 0 ĐỒNG
-- **Bảng so sánh 3 tiêu chuẩn:**
-  1. *Độ tương phản cao WCAG AAA:* Nền xanh đồng nội `#1b5e20`, chữ đen đậm trên nền ngà `#f9fbf7`, đọc rõ dưới nắng $35^\circ\text{C}$.
-  2. *Vùng chạm ngón tay:* Tất cả các nút bấm tối thiểu **48x48 px**, bàn phím số tự bật (`inputmode="numeric"`).
-  3. *Zero Cloud Cost:* Sử dụng Node.js native và `node:sqlite` WAL mode. Không thuê máy chủ đám mây, tận dụng máy tính cũ của trường học.
-- **Lời thuyết trình (45 giây):**  
-  *"Em thiết kế giao diện theo triết lý 'Công thái học nông thôn'. Nông dân lớn tuổi mắt kém hoặc ra đồng nắng chói vẫn đọc rõ từng con số nhờ độ tương phản cao đạt chuẩn WCAG AAA. Các nút bấm to bản từ 48 pixel trở lên giúp ngón tay thô ráp, dính đất vẫn chạm chính xác một lần ăn ngay."*
+#### SLIDE 4: BỐN "CÁI KHÓ" LỚN NHẤT CỦA BÀ CON NÔNG DÂN
+- **Bố cục hiển thị (4 thẻ vấn đề):**
+  1. **Khó 1 - Không biết kêu ai:** Nhà có rơm rạ muốn cho hoặc bán rẻ nhưng không biết ai cần gom gần nhà.
+  2. **Khó 2 - Đường xá nông thôn:** Ruộng nằm sâu trong đồng, xe tải không vào được, phải đi xe ba gác hoặc ghe xuồng mà không nói rõ trước.
+  3. **Khó 3 - Ngại gõ bàn phím:** Nông dân lớn tuổi mắt mờ, tay dính bùn đất, không thể gõ chữ hay điền biểu mẫu dài dòng.
+  4. **Khó 4 - Bị quấy rối sau khi dọn xong:** Ruộng đã dọn sạch từ tuần trước mà người ta vẫn gọi điện hỏi mua rơm làm phiền giấc ngủ.
+- **Lời thuyết minh học sinh (50 giây):**  
+  > *"Từ những buổi ngồi trò chuyện dưới bóng cây với các bác nông dân, em đúc kết được 4 cái khó khăn lớn nhất. Thứ nhất: thiếu thông tin kết nối tại chỗ. Thứ hai: đường giao thông nông thôn rất đặc thù, có ruộng xe tải vào tận nơi, có ruộng phải đi xe ba gác, có chỗ ven kênh phải đi vỏ lãi đường sông; nếu không nói rõ từ đầu thì xe tải đến nơi cũng quay đầu bỏ về. Thứ ba: bà con rất sợ gõ chữ trên màn hình nhỏ. Và thứ tư: bà con sợ bị lộ số điện thoại, dọn ruộng xong cả tuần vẫn bị người lạ gọi điện làm phiền. Giải pháp của em ra đời là để giải quyết đúng 4 cái khó này."*
 
 ---
 
-#### SLIDE 6: KIẾN TRÚC HỆ THỐNG 3 TẦNG (SYSTEM ARCHITECTURE)
-- **Sơ đồ khối 3 tầng:**
-  - *Tầng 1: Tầng dùng chung (Isomorphic Shared Domain):* Quy tắc kiểm tra dữ liệu, công thức BigInt, Haversine tọa độ.
-  - *Tầng 2: Tầng máy chủ (Native Node.js & SQLite):* Ghi nhật ký WAL, xác thực mã PIN an toàn thời gian, sinh mã 4 số bảo mật.
-  - *Tầng 3: Tầng giao diện (PWA & Service Worker):* Bộ nhớ đệm Cache-First, hoạt động ngoại tuyến khi mất sóng Internet, bản đồ Leaflet.
-- **Lời thuyết trình (45 giây):**  
-  *"Toàn bộ hệ thống được xây dựng trên kiến trúc Isomorphic — nghĩa là logic tính giá và kiểm tra dữ liệu được chia sẻ nguyên vẹn giữa máy chủ và điện thoại. Nhờ Service Worker, khi mất mạng 4G ngoài ruộng, giao diện Tính giá vẫn nạp tức thì từ bộ nhớ đệm của điện thoại chỉ trong 0.1 giây."*
+#### SLIDE 5: Ý TƯỞNG CỦA EM: CÂY CẦU SỐ NỐI NGƯỜI CÓ VÀ NGƯỜI CẦN
+- **Bố cục hiển thị:**
+  - Sơ đồ tuần hoàn đơn giản, dễ hiểu:
+    `Ruộng lúa (Rơm rạ) ➔ Ứng dụng AgriCircle ➔ Trại nấm rơm / Hộ nuôi bò / Ủ phân ➔ Tăng thu nhập, sạch xóm làng`.
+  - 3 tiêu chí đề tài tự đặt ra: **Cực kỳ dễ dùng - Không tốn tiền duy trì - Phục vụ đúng bà con quê em**.
+- **Lời thuyết minh học sinh (45 giây):**  
+  > *"Em không dám nghĩ đến những phần mềm to tát hay sàn thương mại điện tử phức tạp như Shopee, Lazada. Em chỉ muốn tạo ra một 'Cây cầu nối số' thật đơn giản giữa người thừa phụ phẩm và người đang cần nguyên liệu trong cùng một xã hoặc các xã lân cận bán kính 5 đến 15 cây số. Ứng dụng của em có thể mở trực tiếp trên điện thoại, không cần cài đặt rườm rà, và đặc biệt là không tốn một đồng chi phí nào để duy trì máy chủ hay bản quyền."*
 
 ---
 
-#### SLIDE 7: TÍNH NĂNG 1 — MÁY TÍNH ĐỊNH GIÁ ĐỘ TƯƠI TRỰC QUAN
-- **Hình ảnh giao diện thực tế:**
-  - Lưới chọn 10 loại quả nhiệt đới (Cà chua, Dưa hấu, Xoài...).
-  - Nút bấm chọn nhanh số ngày: `0 ngày`, `1 ngày`, `2 ngày`, `3 ngày`, `5 ngày`.
-  - Hộp kết quả: Số tiền to rõ (`18.000 đ/kg`), huy hiệu trạng thái (Xanh mạ > 75%, Cam hổ phách 40 - 75%, Xám tro < 40%).
-  - Biểu đồ dự báo giá 3 ngày tiếp theo và lời khuyên hành động nông vụ (bán nhanh hoặc chế biến ngay).
-- **Lời thuyết trình (60 giây):**  
-  *"Đây là màn hình máy tính định giá. Người bán chỉ cần chạm chọn quả cà chua, bấm số ngày hái là 2 ngày và chọn quạt mát. Ngay lập tức, hệ thống báo giá gợi ý là 18.000 đồng/kg, giảm 10% so với giá hái tại vườn. Đặc biệt, bảng dự báo 3 ngày tới chỉ rõ: đến ngày thứ 4 giá sẽ rớt xuống vùng màu cam, khuyên bà con nên thanh lý trong hôm nay để không bị lỗ vốn."*
+#### SLIDE 6: GIẢI PHÁP 1: NÚT BẤM TO 1 CHẠM & NÓI BẰNG GIỌNG NÓI CHO ÔNG BÀ LỚN TUỔI
+- **Bố cục hiển thị (Ảnh chụp màn hình thật):**
+  - Nút Micro tròn màu xanh to bản: `🎙️ Bấm để nói tiếng Việt`.
+  - Hàng 4 nút chọn nhanh khối lượng: `[🌾 1 Công]`, `[🌾 2 Công]`, `[🌾 5 Công]`, `[📦 1 Tấn]`.
+  - Hộp xem trước tin đăng mộc mạc: *"Bác chuẩn bị đăng: 2 Công Rơm rạ tại ấp Suối Cả..."*.
+  - Nút bấm to 54px: `Đồng ý Đăng lên Bản đồ ngay 🚀`.
+- **Lời thuyết minh học sinh (60 giây):**  
+  > *"Đây là màn hình Đăng tin mà em đã thiết kế lại nhiều lần sau khi cho các bác thử nghiệm. Thay vì bắt bà con gõ chữ, em làm một nút micro thật to. Bác nông dân chỉ cần chạm vào và nói tự nhiên: 'Tôi có hai công rơm ở suối Cả, ai cần dọn giùm'. Ứng dụng sẽ tự động hiểu từ ngữ địa phương như 'công', 'sào', 'giạ' và tự điền vào biểu mẫu. Còn nếu không muốn nói, bà con chỉ cần chạm vào các nút chọn nhanh có sẵn: '1 công', '2 công', hoặc '1 tấn'. Ngay trước khi đăng, hệ thống sẽ hiện một tấm thẻ đọc lại to rõ cho bác nghe: 'Bác chuẩn bị đăng 2 công rơm rạ, xe tải vào được, cho miễn phí'. Bác ưng ý thì bấm một nút to đùng là xong ngay trong 10 giây!"*
 
 ---
 
-#### SLIDE 8: TÍNH NĂNG 2 — ĐĂNG TIN BẰNG GIỌNG NÓI TIẾNG VIỆT SIÊU TỐC
-- **Hình ảnh giao diện:** Nút micro khổng lồ 64px có sóng âm nhấp nháy; ô văn bản tự điền.
-- **Cơ chế bóc tách tự động (Regex Entity Extraction):**
-  - Câu nói mẫu của nông dân: *"Bán hai công rơm khô ấp 1 Cẩm Đường giá năm mươi ngàn một cuộn"*
-  - $\rightarrow$ Máy tự động bóc tách:
-    + Loại phụ phẩm: `Rơm rạ`
-    + Hình thức: `Bán giá rẻ`
-    + Khối lượng: `2 công` (tự quy đổi = $1.111\text{ kg}$)
-    + Giá bán: `50.000 đ/cuộn`
-    + Địa chỉ: `Ấp 1, Xã Cẩm Đường`
-- **Lời thuyết trình (60 giây):**  
-  *"Bà con nông dân rất ngại gõ bàn phím chữ cái nhỏ. Em đã tích hợp Web Speech API tiếng Việt kết hợp bộ bóc tách ngôn ngữ tự nhiên do em tự viết. Bà con chỉ cần bấm nút micro và nói đúng một câu khẩu ngữ quen thuộc. Trong vòng chưa đầy 1 giây, phần mềm tự động điền đầy đủ 6 ô thông tin. Người dùng chỉ cần liếc mắt kiểm tra và bấm 'Đăng tin lên bản đồ'."*
+#### SLIDE 7: GIẢI PHÁP 2: BẢN ĐỒ ĐƯỜNG QUÊ (RÕ XE TẢI, XE BA GÁC, HAY ĐI GHE)
+- **Bố cục hiển thị:**
+  - Bản đồ trực quan hiển thị các điểm có rơm rạ, bã mía, vỏ sầu riêng quanh xã Cẩm Đường.
+  - Các huy hiệu phương tiện nổi bật: `🚛 Xe tải vào tận nơi`, `🛺 Xe ba gác / Đường đan`, `🛶 Chỉ đi ghe / Vỏ lãi`.
+  - Huy hiệu độ ẩm: `☀️ Khô ráo (Làm nấm)` / `🌧️ Ướt dầm mưa (Làm phân)`.
+- **Lời thuyết minh học sinh (50 giây):**  
+  > *"Tính năng thứ hai là Bản đồ phụ phẩm nông thôn. Người mua nấm rơm hay người nuôi bò chỉ cần mở bản đồ lên là thấy ngay những đống rơm rạ quanh mình từ 5 đến 10 cây số. Điểm rất thực tế mà em bổ sung là Huy hiệu đường đi và Độ ẩm: Nhìn vào là biết ngay ruộng này rơm khô hay rơm ướt, đường xe tải vào được hay phải đi xe ba gác, hay phải chèo ghe vô lấy. Nhờ vậy, người mua chuẩn bị đúng phương tiện, không bao giờ có chuyện chạy xe đến nơi rồi ngậm ngùi quay đầu về."*
 
 ---
 
-#### SLIDE 9: TÍNH NĂNG 3 — BẢN ĐỒ PHỤ PHẨM & MÃ XÁC THỰC 4 SỐ BÍ MẬT
-- **Bản đồ vệ tinh Leaflet:** Các ghim màu định vị vị trí phụ phẩm (Rơm, Thân ngô, Vỏ chuối...).
-- **Bộ lọc thông minh:** Lọc bán kính (2km, 5km, 10km), lọc tin cho tặng 0 đồng, chọn nhanh các xã (Cẩm Đường, Bình Sơn, Long Phước).
-- **Cơ chế bảo mật mã nhận tin 4 số (`shortCode`):**
-  - Người mua gọi điện / nhắn Zalo thỏa thuận và đến bốc hàng.
-  - Người bán giữ mã 4 số bí mật (ví dụ: `8K4M`). Chỉ khi người mua đến tận nơi chất hàng lên xe, người bán mới đọc mã để người mua bấm xác nhận thu gom.
-  - Bảo vệ quyền riêng tư, tránh tình trạng tin ảo hoặc bị lộ danh tính.
-- **Lời thuyết trình (60 giây):**  
-  *"Trên màn hình Bản đồ, người cần mua rơm như các chủ trại nấm chỉ cần kéo thanh bán kính 5 km là thấy ngay những ruộng rơm quanh mình. Để bảo đảm an toàn, em thiết kế cơ chế 'bắt tay 4 số'. Người bán giữ mã số bí mật, khi người mua tới ruộng bốc hàng xong xuôi thì người bán mới đọc mã để xác nhận giao dịch thành công. Tin đăng sẽ lập tức tự đổi trạng thái sang 'Đã thu gom'."*
+#### SLIDE 8: GIẢI PHÁP 3: BẢNG NHẮC ĐỘ TƯƠI (GIÚP BÀ CON BÁN SỚM KHÔNG BỊ ÉP GIÁ)
+- **Bố cục hiển thị:**
+  - Giao diện tra cứu đơn giản: Chọn loại quả (Sầu riêng Ri6, Xoài, Thanh long) $\rightarrow$ Chọn số ngày sau khi cắt $\rightarrow$ Chọn điều kiện để (Ngoài trời nắng hay Trong bóng mát).
+  - Kết quả trực quan:
+    - Đồng hồ màu: Xanh lá (Tươi ngon) $\rightarrow$ Vàng (Nên bán gấp) $\rightarrow$ Đỏ (Mềm, giảm giá).
+    - Lời khuyên bằng chữ to: *"Quả đã cắt 2 ngày dưới trời nắng, độ tươi còn 70%. Bác nên bán gấp trong 24 giờ tới kẻo bị ép giá sâu!"*.
+- **Lời thuyết minh học sinh (60 giây):**  
+  > *"Tính năng thứ ba là Bảng tính độ tươi nông sản. Nông sản sau khi hái vẫn tiếp tục hô hấp và mất nước. Dựa trên tài liệu sinh học và hướng dẫn bảo quản sau thu hoạch, em lập một bảng quy đổi dễ hiểu: Nếu bà con để nông sản ngoài trời nắng nóng 35 độ, quả sẽ héo nhanh gấp đôi so với để trong kho mát. Bác nông dân chỉ cần chọn loại trái cây và số ngày đã hái, ứng dụng sẽ hiện ngay vạch màu nhắc nhở: Ví dụ sầu riêng cắt 2 ngày thì vạch màu chuyển sang màu vàng và nhắc: 'Bác nên bán gấp trong hôm nay kẻo qua ngày mai thương lái sẽ chê mềm và ép giá'. Nhờ có con số cụ thể, bà con tự tin hơn khi thương lượng với thương lái."*
 
 ---
 
-#### SLIDE 10: TÁC ĐỘNG MÔI TRƯỜNG & ĐO LƯỜNG $CO_2$ CẮT GIẢM
-- **Bảng thành tích cộng đồng (Impact Dashboard):**
-  - Tổng số kg phụ phẩm đã giải cứu: $\sum \text{kg collected}$.
-  - Tổng số $CO_2$ tương đương không bị phát thải vào khí quyển:
-    $$\text{Tấn } CO_2e = \frac{\text{Tổng kg rơm rạ thu gom}}{1000} \times 1.46$$
-  - Tổng số lượt nông dân sử dụng công cụ định giá.
-- **Ý nghĩa giáo dục & môi trường:** Biến hành động nhặt rơm, dọn ruộng của từng hộ nông dân thành số liệu bảo vệ môi trường trực quan, có thể báo cáo cho Đoàn thanh niên và UBND xã.
-- **Lời thuyết trình (45 giây):**  
-  *"Mỗi kg rơm được thu gom thay vì đốt đồng sẽ được hệ thống tự động quy đổi sang lượng khí nhà kính $CO_2$ giảm thiểu theo công thức của Viện Lúa ĐBSCL: cứ 1 tấn rơm không bị đốt giúp giảm 1.46 tấn $CO_2$ tương đương. Bảng tác động này giúp bà con thấy được đóng góp của mình cho môi trường xanh của quê hương."*
+#### SLIDE 9: GIẢI PHÁP 4: GIỮ BÌNH YÊN CHO XÓM LÀNG (TỰ ĐỘNG KHÓA GỌI KHI ĐÃ GOM XONG)
+- **Bố cục hiển thị:**
+  - Khi thương lái đến ruộng chở rơm xong, nhập mã xác nhận 4 chữ số đơn giản $\rightarrow$ Tin đăng lập tức chuyển sang màu xanh lá: `✅ ĐÃ THU GOM XONG RUỘNG`.
+  - Nút "Gọi điện" và "Zalo" tự động biến mất hoặc bị khóa lại.
+  - Bảng ghi chú: "Ruộng đã dọn sạch vào lúc 10h sáng ngày 12/11. Cảm ơn bà con!".
+- **Lời thuyết minh học sinh (45 giây):**  
+  > *"Một nỗi sợ rất thực tế của bà con là sợ bị làm phiền. Trên các nhóm Zalo hay Facebook, khi đăng tin cho rơm xong, dù ruộng đã dọn sạch cả tuần mà ngày nào cũng có 5, 7 cuộc gọi hỏi rơm, làm phiền giấc ngủ trưa của các bác. Trong ứng dụng của em, khi người mua đến chở rơm xong, hai bên xác nhận bằng một mã 4 chữ cái đơn giản. Lập tức tin đăng rời khỏi bản đồ tìm kiếm; nếu ai có lưu link cũ thì nút Gọi điện cũng bị khóa lại và hiện dòng chữ: 'Đã thu gom xong, ruộng đã dọn sạch'. Điều này giúp bảo vệ sự yên tĩnh cho cuộc sống của bà con nông thôn."*
 
 ---
 
-#### SLIDE 11: KẾT QUẢ KIỂM THỬ TỰ ĐỘNG & THỬ NGHIỆM THỰC ĐỊA
-- **Số liệu kỹ thuật đo lường thực tế:**
-  - **Kiểm thử tự động:** **55/55 ca kiểm thử ĐẠT 100% (PASS)**, bao phủ toàn bộ các trường hợp lỗi mạng, lỗi biên.
-  - **Quy tắc Zero-Comment:** 33/33 tệp mã nguồn sạch $100\%$, đạt tiêu chuẩn lập trình quốc tế.
-  - **Dung lượng toàn bộ ứng dụng:** **401 KB** (chỉ bằng 1 bức ảnh chụp điện thoại, nhỏ hơn 4 lần so với mức trần 1.5 MB).
-  - **Thời gian phản hồi tính giá:** Dưới **0.1 ms** trên điện thoại cũ.
-- **Kết quả thử nghiệm thực tế tại Cẩm Đường:** Thử nghiệm với 20 người dùng tại Phân hiệu 2, tỷ lệ nhận diện giọng nói đạt 88.5%, 100% người dùng đánh giá dễ sử dụng.
-- **Lời thuyết trình (60 giây):**  
-  *"Toàn bộ hệ thống phần mềm đã được em kiểm chứng nghiêm ngặt qua 55 bài kiểm thử tự động đạt kết quả tuyệt đối 100%. Dung lượng toàn bộ ứng dụng chỉ vỏn vẹn 401 Kilobyte — nghĩa là nhẹ hơn cả một bức ảnh chụp điện thoại, giúp nạp trang ngay cả khi mạng 3G yếu nhất. Qua thử nghiệm thực tế với 20 hộ dân tại Phân hiệu 2, bà con đều ngạc nhiên vì ứng dụng chạy rất nhanh và không hề tốn dung lượng 4G."*
+#### SLIDE 10: NHẬT KÝ EM MANG ĐIỆN THOẠI RA ĐỒNG CHO BÀ CON DÙNG THỬ
+- **Bố cục hiển thị:**
+  - Hình ảnh thực tế: Bác Ba Cảnh (Ấp Suối Cả) đang cầm điện thoại bấm thử nút micro ngoài bờ ruộng; Cô Tư bán rau xem bảng độ tươi.
+  - Bảng so sánh "Trước và sau khi nông dân góp ý":
+    - *Bà con góp ý 1:* "Chữ nhỏ quá tao không thấy" $\rightarrow$ Em tăng cỡ chữ lên to rõ, tương phản đậm.
+    - *Bà con góp ý 2:* "Ruộng tao ở trong mương, xe tải đâu có vô được" $\rightarrow$ Em bổ sung nút chọn xe ba gác và ghe xuồng.
+    - *Bà con góp ý 3:* "Ra ngoài ruộng mất sóng 4G thì sao xài?" $\rightarrow$ Em thiết kế để ứng dụng lưu sẵn trên máy, mất mạng vẫn mở lên xem và ghi tin được.
+- **Lời thuyết minh học sinh (60 giây):**  
+  > *"Kính thưa Ban Giám khảo, những cải tiến trên không phải do em tự nghĩ ra trong phòng máy lạnh, mà là kết quả của những lần em mang điện thoại ra tận ruộng cho các bác bấm thử. Bác Ba ở ấp Suối Cả nói: 'Chữ nhỏ quá mắt mờ tao không thấy', em về nhà chỉnh lại chữ to hơn và nút bấm cao gấp rưỡi. Chú Năm bảo: 'Ruộng tao nằm sâu mé kênh, xe tải làm sao vào', em thêm ngay lựa chọn đi ghe vỏ lãi. Khi ra giữa ruộng bị mất sóng điện thoại, ứng dụng vẫn mở lên bình thường để bác tính giá và ghi tin nháp, khi về nhà có mạng lại thì tự động gửi lên. Những lời khen ngợi mộc mạc của các bác là niềm vui lớn nhất của em trong suốt quá trình nghiên cứu."*
 
 ---
 
-#### SLIDE 12: TÍNH MỚI, KHẢ NĂNG NHÂN RỘNG & LỜI KẾT
-- **3 Điểm mới nổi bật của đề tài:**
-  1. Ứng dụng toán học `BigInt` giải quyết bài toán định giá sinh học sau thu hoạch.
-  2. Nền tảng PWA Offline-first và đăng tin giọng nói dành riêng cho nông dân lớn tuổi.
-  3. Chi phí máy chủ 0 đồng, thúc đẩy kinh tế tuần hoàn nông nghiệp tại cấp cơ sở.
-- **Hướng phát triển:** Tích hợp cảm biến đo độ ngọt Brix qua Bluetooth; kết nối đội xe công nông vận chuyển tự quản.
-- **Lời kết học sinh (45 giây):**  
-  *"Kính thưa Ban Giám khảo, đề tài AgriCircle không chỉ là một sản phẩm tin học dự thi, mà là tâm huyết của em mong muốn mang tri thức công nghệ giải quyết vấn đề thiết thực của quê hương Cẩm Đường: biến rác thải đồng ruộng thành tài nguyên và giúp người nông dân làm chủ giá trị nông sản của mình. Em xin trân trọng cảm ơn Ban Giám khảo đã chú ý lắng nghe và em rất mong nhận được những góp ý quý báu của quý thầy cô!"*
+#### SLIDE 11: KẾT QUẢ BƯỚC ĐẦU & Ý NGHĨA MÔI TRƯỜNG LÀNG QUÊ
+- **Bố cục hiển thị:**
+  - Con số kết quả thử nghiệm tại xã Cẩm Đường trong 1 tháng:
+    - **15 lượt tin đăng** phụ phẩm thật (rơm cuộn, bã mía, thân bắp).
+    - **8 giao dịch kết nối thành công** giữa hộ trồng trọt và trại nấm rơm / hộ nuôi bò.
+    - Ước tính khoảng **12 tấn rơm rạ** không bị đốt ngoài đồng ruộng.
+  - Bảng quy đổi môi trường thân thiện: Giảm được khói bụi mù mịt, tránh nguy cơ cháy lan mùa khô, và giữ đường làng sạch đẹp.
+- **Lời thuyết minh học sinh (50 giây):**  
+  > *"Trong giai đoạn thử nghiệm tại xã Cẩm Đường, ứng dụng đã ghi nhận 15 tin đăng và kết nối thành công 8 chuyến thu gom rơm rạ và thân bắp thật. Khoảng 12 tấn phụ phẩm đã không bị quẹt diêm đốt bỏ ngoài đồng, mà được chuyển thành thức ăn cho đàn bò và nguyên liệu làm nấm rơm. Bác Ba bán được 5 công rơm thu về 1 triệu đồng tiền rơm cuộn, đủ mua sách vở cho cháu; còn chú Tám trại nấm thì chở được rơm sạch gần nhà với giá rẻ hơn 30% so với mua ngoài tỉnh. Đó là minh chứng rõ nhất cho tính thiết thực của đề tài."*
+
+---
+
+#### SLIDE 12: ƯỚC MƠ TƯƠNG LAI & LỜI CẢM ƠN
+- **Bố cục hiển thị:**
+  - Hình ảnh nụ cười của bác nông dân và học sinh bên cánh đồng quê hương xanh ngát.
+  - Hướng phát triển vừa sức: Giới thiệu ứng dụng đến Đoàn Thanh niên xã và Hội Nông dân xã Cẩm Đường để bà con cùng biết đến và dùng chung.
+  - Lời tri ân chân thành đến Ban Giám khảo, Nhà trường và gia đình.
+- **Lời thuyết minh học sinh (45 giây):**  
+  > *"Kính thưa Ban Giám khảo, đề tài của em xuất phát từ một mong ước rất giản dị của một học sinh trung học: làm sao để quê hương mình bớt khói bụi mỗi mùa gặt, và làm sao để bà con nông dân đỡ nhọc nhằn hơn. Em biết sản phẩm của mình vẫn còn mộc mạc và cần hoàn thiện nhiều hơn nữa, nhưng em tin rằng chuyển đổi số chỉ thực sự có ý nghĩa khi nó phục vụ được những người bình dị nhất. Em mong muốn trong thời gian tới sẽ được các thầy cô và Hội Nông dân xã hỗ trợ để giới thiệu ứng dụng này đến nhiều bà con hơn nữa. Em xin chân thành cảm ơn quý Ban Giám khảo đã lắng nghe bài thuyết trình của em!"*

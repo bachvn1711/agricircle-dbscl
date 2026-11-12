@@ -963,10 +963,15 @@ def build_full_docx():
     
     # Save destinations
     output_workspace = r"D:\Work\CODE\khkt\docs\04-ke-hoach-nghien-cuu-khkt.docx"
+    output_workspace_alt = r"D:\Work\CODE\khkt\docs\04-ke-hoach-nghien-cuu-khkt_capnhat.docx"
     output_downloads = r"C:\Users\XIAOXIN\Downloads\2027 - Phụ lục 0 - Học sinh (Kế hoạch nghiên cứu KHKT AgriCircle).docx"
     
-    doc.save(output_workspace)
-    print(f"Saved workspace file: {output_workspace}")
+    try:
+        doc.save(output_workspace)
+        print(f"Saved workspace file: {output_workspace}")
+    except PermissionError:
+        doc.save(output_workspace_alt)
+        print(f"File {output_workspace} đang mở trong Word, đã lưu bản mới tại: {output_workspace_alt}")
     
     try:
         doc.save(output_downloads)
