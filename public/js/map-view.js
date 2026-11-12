@@ -20,6 +20,26 @@ import {
 
 const PAGE_SIZE = 20;
 
+export function getAccessRoadLabel(road) {
+  if (road === 'tricycle') {
+    return '🛺 Xe ba gác / Đường đan';
+  }
+  if (road === 'boat') {
+    return '🛶 Đi ghe / Vỏ lãi đường sông';
+  }
+  return '🚛 Xe tải vào tận nơi';
+}
+
+export function getMoistureLabel(state) {
+  if (state === 'humid') {
+    return '⛅ Hơi ẩm (Cắt 1-2 ngày)';
+  }
+  if (state === 'wet') {
+    return '🌧️ Ướt dầm mưa (Làm phân)';
+  }
+  return '☀️ Khô ráo (Vừa cắt, sạch)';
+}
+
 export function attachLeafletTileLayers(L, map, onTileOffline) {
   const street = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -152,12 +172,124 @@ export function createMapView({
   let markerLayer = null;
   let originMarker = null;
 
-  const headerBlock = createEl('div', { className: 'screen-header' },
-    createEl('h1', { id: 'heading-map', className: 'screen-title', text: 'Bản đồ phụ phẩm nông nghiệp' }),
-    createEl('p', {
-      className: 'screen-lead',
-      text: 'Quanh tôi đang có phụ phẩm nào cần dọn hoặc bán rẻ, ở đâu và bao nhiêu?'
+  const heroBadge = createEl('div', { className: 'hero-3d-badge' },
+    createEl('span', { className: 'hero-3d-badge-pulse' }),
+    createEl('span', { text: 'Nông nghiệp tuần hoàn ĐBSCL - Kết nối trực tiếp tận ruộng' })
+  );
+
+  const heroTitle = createEl('h1', { id: 'heading-map', className: 'hero-3d-title', text: 'Sàn Phụ Phẩm Nông Nghiệp Tuần Hoàn' });
+  const heroSubtitle = createEl('p', {
+    className: 'hero-3d-lead',
+    text: 'Biến Rơm rạ, Trấu, Bã mía, Thân bắp thành tiền mặt. Không đốt đồng - Tăng thu nhập - Dọn sạch ruộng vườn.'
+  });
+
+  const cardFarmer = createEl('div', { className: 'role-3d-card role-farmer' },
+    createEl('div', { className: 'role-3d-icon-wrap' },
+      createEl('span', { className: 'role-3d-emoji', text: '🌾' })
+    ),
+    createEl('div', { className: 'role-3d-body' },
+      createEl('h2', { className: 'role-3d-title', text: 'Nhà Nông Cần Bán / Cho' }),
+      createEl('p', { className: 'role-3d-desc', text: 'Ruộng vừa gặt xong có rơm rạ, trấu? Đăng bán hoặc cho miễn phí chỉ 10 giây bằng giọng nói.' })
+    ),
+    createEl('button', {
+      type: 'button',
+      className: 'btn-tactile btn-tactile-green',
+      text: 'Đăng tin bằng giọng nói 🎙️',
+      onClick: () => onNavigatePost()
     })
+  );
+
+  const cardCollector = createEl('div', { className: 'role-3d-card role-collector' },
+    createEl('div', { className: 'role-3d-icon-wrap' },
+      createEl('span', { className: 'role-3d-emoji', text: '🚛' })
+    ),
+    createEl('div', { className: 'role-3d-body' },
+      createEl('h2', { className: 'role-3d-title', text: 'Thương Lái & Thu Gom' }),
+      createEl('p', { className: 'role-3d-desc', text: 'Cần nguồn rơm cuộn, trấu đốt lò, mụn dừa? Xem bản đồ bán kính quanh bạn và gọi trực tiếp.' })
+    ),
+    createEl('button', {
+      type: 'button',
+      className: 'btn-tactile btn-tactile-blue',
+      text: 'Xem bản đồ thu gom 🗺️',
+      onClick: () => {
+        const targetEl = document.getElementById('map-canvas');
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    })
+  );
+
+  const cardCalculator = createEl('div', { className: 'role-3d-card role-calculator' },
+    createEl('div', { className: 'role-3d-icon-wrap' },
+      createEl('span', { className: 'role-3d-emoji', text: '🧮' })
+    ),
+    createEl('div', { className: 'role-3d-body' },
+      createEl('h2', { className: 'role-3d-title', text: 'Tra Cứu Giá & Độ Tươi' }),
+      createEl('p', { className: 'role-3d-desc', text: 'Biết ngay rơm rạ sau 1-3 ngày sụt giảm bao nhiêu giá trị theo thời tiết ĐBSCL để bán kịp lúc.' })
+    ),
+    createEl('button', {
+      type: 'button',
+      className: 'btn-tactile btn-tactile-amber',
+      text: 'Tính giá rơm / trấu 🧮',
+      onClick: () => onNavigateCalc()
+    })
+  );
+
+  const roleGrid = createEl('div', { className: 'role-3d-grid' }, cardFarmer, cardCollector, cardCalculator);
+
+  const statsBento = createEl('div', { className: 'stats-3d-bento' },
+    createEl('div', { className: 'stat-3d-item' },
+      createEl('span', { className: 'stat-3d-num', text: '1.250+ kg' }),
+      createEl('span', { className: 'stat-3d-label', text: 'Phụ phẩm sẵn sàng kết nối' })
+    ),
+    createEl('div', { className: 'stat-3d-item' },
+      createEl('span', { className: 'stat-3d-num', text: '18.500.000 đ' }),
+      createEl('span', { className: 'stat-3d-label', text: 'Thu nhập nông dân giữ lại' })
+    ),
+    createEl('div', { className: 'stat-3d-item' },
+      createEl('span', { className: 'stat-3d-num', text: '3,2 Tấn' }),
+      createEl('span', { className: 'stat-3d-label', text: 'CO₂ giảm thải nhờ không đốt đồng' })
+    )
+  );
+
+  const flowDiagram = createEl('div', { className: 'circular-flow-3d' },
+    createEl('div', { className: 'flow-step-3d' },
+      createEl('span', { className: 'flow-step-num', text: '1' }),
+      createEl('span', { className: 'flow-step-icon', text: '🌾' }),
+      createEl('span', { className: 'flow-step-title', text: 'Ruộng Lúa & Vườn' }),
+      createEl('span', { className: 'flow-step-desc', text: 'Tồn dư rơm rạ, trấu' })
+    ),
+    createEl('div', { className: 'flow-arrow-3d', text: '➔' }),
+    createEl('div', { className: 'flow-step-3d' },
+      createEl('span', { className: 'flow-step-num', text: '2' }),
+      createEl('span', { className: 'flow-step-icon', text: '🎙️' }),
+      createEl('span', { className: 'flow-step-title', text: 'Đăng Tin Số Hóa' }),
+      createEl('span', { className: 'flow-step-desc', text: 'Nói 10s, ghim vị trí' })
+    ),
+    createEl('div', { className: 'flow-arrow-3d', text: '➔' }),
+    createEl('div', { className: 'flow-step-3d' },
+      createEl('span', { className: 'flow-step-num', text: '3' }),
+      createEl('span', { className: 'flow-step-icon', text: '🚛' }),
+      createEl('span', { className: 'flow-step-title', text: 'Thu Gom Tận Nơi' }),
+      createEl('span', { className: 'flow-step-desc', text: 'Thương lái điều xe tải' })
+    ),
+    createEl('div', { className: 'flow-arrow-3d', text: '➔' }),
+    createEl('div', { className: 'flow-step-3d' },
+      createEl('span', { className: 'flow-step-num', text: '4' }),
+      createEl('span', { className: 'flow-step-icon', text: '🍄' }),
+      createEl('span', { className: 'flow-step-title', text: 'Tái Sinh Giá Trị' }),
+      createEl('span', { className: 'flow-step-desc', text: 'Nấm, củi trấu, phân bón' })
+    )
+  );
+
+  const headerBlock = createEl('div', { className: 'hero-3d-section' },
+    heroBadge,
+    heroTitle,
+    heroSubtitle,
+    roleGrid,
+    flowDiagram,
+    statsBento
   );
 
   const btnMapMode = createEl('button', {
@@ -270,7 +402,47 @@ export function createMapView({
     filterDetails.open = true;
   }
 
-  const toolbarBlock = createEl('div', { className: 'surface-block' },
+  const byproductCardsRow = createEl('div', { className: 'byproduct-3d-carousel' });
+  const allByproductCard = createEl('button', {
+    type: 'button',
+    className: 'byproduct-3d-card is-active-3d',
+    attrs: { 'data-category-id': 'all' },
+    onClick: () => {
+      selectByproductFilter('all');
+    }
+  },
+    createEl('span', { className: 'byproduct-3d-icon', text: '🌐' }),
+    createEl('span', { className: 'byproduct-3d-name', text: 'Tất cả' })
+  );
+  byproductCardsRow.appendChild(allByproductCard);
+
+  for (const cat of BYPRODUCT_CATEGORIES) {
+    const card = createEl('button', {
+      type: 'button',
+      className: 'byproduct-3d-card',
+      attrs: { 'data-category-id': cat.id },
+      onClick: () => {
+        selectByproductFilter(cat.id);
+      }
+    },
+      createEl('span', { className: 'byproduct-3d-icon', text: cat.icon }),
+      createEl('span', { className: 'byproduct-3d-name', text: cat.name })
+    );
+    byproductCardsRow.appendChild(card);
+  }
+
+  function selectByproductFilter(catId) {
+    filters.category = catId;
+    categorySelect.value = catId;
+    const allCards = byproductCardsRow.querySelectorAll('.byproduct-3d-card');
+    for (const c of allCards) {
+      c.classList.toggle('is-active-3d', c.getAttribute('data-category-id') === catId);
+    }
+    loadListings();
+  }
+
+  const toolbarBlock = createEl('div', { className: 'surface-block toolbar-3d-block' },
+    byproductCardsRow,
     modeToggleRow,
     createEl('div', { className: 'map-toolbar' }, btnLocateMe, btnLayerToggle),
     filterDetails,
@@ -427,6 +599,10 @@ export function createMapView({
         createEl('p', {
           className: 'popup-meta',
           text: `${item.offerType === 'sell' ? 'Bán giá rẻ' : 'Cho miễn phí'} - ${formatDistanceLabel(item.distanceKm)}`
+        }),
+        createEl('p', {
+          className: 'popup-meta',
+          text: `${getAccessRoadLabel(item.accessRoad)} | ${getMoistureLabel(item.moistureState)}`
         })
       );
       if (item.locationNote) {
@@ -627,6 +803,10 @@ export function createMapView({
         className: 'listing-meta-line',
         text: `${formatDistanceLabel(listing.distanceKm)} - ${formatRemainingTime(listing.expiresAt)}`
       }),
+      createEl('div', { className: 'row-inline' },
+        createEl('span', { className: 'pill pill-gray', text: getAccessRoadLabel(listing.accessRoad) }),
+        createEl('span', { className: 'pill pill-gray', text: getMoistureLabel(listing.moistureState) })
+      ),
       createEl('p', {
         className: 'listing-note',
         text: `Người liên hệ: ${listing.contactName}${listing.isProxyPost ? ' (đăng giúp hộ)' : ''}`
@@ -643,33 +823,45 @@ export function createMapView({
     }
 
     const connectActions = createEl('div', { className: 'action-stack' });
-    const telHref = buildTelHref(listing.contactPhone);
-    if (telHref) {
-      connectActions.appendChild(createEl('a', {
-        className: 'btn btn-primary',
-        text: `Gọi điện ngay (${listing.contactPhone})`,
-        attrs: { href: telHref }
+    const isCollected = listing.status === 'collected';
+
+    if (isCollected) {
+      const collectedTimeStr = listing.collectedAt
+        ? new Date(listing.collectedAt).toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' })
+        : 'gần đây';
+      connectActions.appendChild(createEl('div', {
+        className: 'notice-box notice-green',
+        text: `✅ Đã thu gom xong vào lúc ${collectedTimeStr}. Nông dân đã hoàn tất dọn ruộng.`
       }));
-    }
-    const zaloAndDirRow = createEl('div', { className: 'row-inline' });
-    const zaloHref = buildZaloHref(listing.contactPhone);
-    if (zaloHref) {
-      zaloAndDirRow.appendChild(createEl('a', {
-        className: 'btn btn-secondary',
-        text: 'Mở Zalo',
-        attrs: { href: zaloHref, target: '_blank', rel: 'noopener noreferrer' }
-      }));
-    }
-    const dirHref = buildDirectionsHref(listing.lat, listing.lng);
-    if (dirHref) {
-      zaloAndDirRow.appendChild(createEl('a', {
-        className: 'btn btn-secondary',
-        text: 'Chỉ đường',
-        attrs: { href: dirHref, target: '_blank', rel: 'noopener noreferrer' }
-      }));
-    }
-    if (zaloAndDirRow.childNodes.length > 0) {
-      connectActions.appendChild(zaloAndDirRow);
+    } else {
+      const telHref = buildTelHref(listing.contactPhone);
+      if (telHref) {
+        connectActions.appendChild(createEl('a', {
+          className: 'btn btn-primary',
+          text: `Gọi điện ngay (${listing.contactPhone})`,
+          attrs: { href: telHref }
+        }));
+      }
+      const zaloAndDirRow = createEl('div', { className: 'row-inline' });
+      const zaloHref = buildZaloHref(listing.contactPhone);
+      if (zaloHref) {
+        zaloAndDirRow.appendChild(createEl('a', {
+          className: 'btn btn-secondary',
+          text: 'Mở Zalo',
+          attrs: { href: zaloHref, target: '_blank', rel: 'noopener noreferrer' }
+        }));
+      }
+      const dirHref = buildDirectionsHref(listing.lat, listing.lng);
+      if (dirHref) {
+        zaloAndDirRow.appendChild(createEl('a', {
+          className: 'btn btn-secondary',
+          text: 'Chỉ đường',
+          attrs: { href: dirHref, target: '_blank', rel: 'noopener noreferrer' }
+        }));
+      }
+      if (zaloAndDirRow.childNodes.length > 0) {
+        connectActions.appendChild(zaloAndDirRow);
+      }
     }
 
     const sheetNotice = createEl('div', { className: 'notice-box', attrs: { hidden: true, role: 'status' } });
@@ -782,7 +974,11 @@ export function createMapView({
       }
     });
 
-    sheetPanel.append(header, detailsBlock, connectActions, collectForm, reportBtn);
+    if (isCollected) {
+      sheetPanel.append(header, detailsBlock, connectActions);
+    } else {
+      sheetPanel.append(header, detailsBlock, connectActions, collectForm, reportBtn);
+    }
     sheetBackdrop.hidden = false;
     closeBtn.focus();
   }
@@ -880,6 +1076,10 @@ export function createMapView({
 
   categorySelect.addEventListener('change', () => {
     filters.category = categorySelect.value;
+    const allCards = byproductCardsRow.querySelectorAll('.byproduct-3d-card');
+    for (const c of allCards) {
+      c.classList.toggle('is-active-3d', c.getAttribute('data-category-id') === categorySelect.value);
+    }
     loadListings();
   });
   offerSelect.addEventListener('change', () => {

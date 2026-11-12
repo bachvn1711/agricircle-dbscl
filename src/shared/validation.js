@@ -7,6 +7,18 @@ export const CROCKFORD_BASE32_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 export const MAX_ACTIVE_LISTINGS_PER_PHONE = 5;
 export const MAX_CALC_FLUSH_DELTA = 500;
 export const MAX_KG_LIMIT = 100_000;
+export const ACCESS_ROADS = ['truck', 'tricycle', 'boat'];
+export const DEFAULT_ACCESS_ROAD = 'truck';
+export const MOISTURE_STATES = ['dry', 'humid', 'wet'];
+export const DEFAULT_MOISTURE_STATE = 'dry';
+
+export function isValidAccessRoad(value) {
+  return typeof value === 'string' && ACCESS_ROADS.includes(value);
+}
+
+export function isValidMoistureState(value) {
+  return typeof value === 'string' && MOISTURE_STATES.includes(value);
+}
 
 const VN_PHONE_REGEX = /^0\d{9}$/;
 const SHORT_CODE_REGEX = /^[0-9A-HJKMNP-TV-Z]{4}$/;
@@ -19,7 +31,9 @@ const ALLOWED_ADMIN_PATCH_FIELDS = new Set([
   'offerType',
   'priceNote',
   'locationNote',
-  'expiryDays'
+  'expiryDays',
+  'accessRoad',
+  'moistureState'
 ]);
 const ALLOWED_CROP_UPDATE_FIELDS = new Set([
   'dailyDecayRate',
@@ -152,6 +166,22 @@ export function validateCreateListing(input) {
     isProxyPost = input.isProxyPost;
   }
 
+  let accessRoad = DEFAULT_ACCESS_ROAD;
+  if (input.accessRoad !== undefined && input.accessRoad !== null) {
+    if (!isValidAccessRoad(input.accessRoad)) {
+      return fail('Phương tiện tiếp cận không hợp lệ (xe tải, xe ba gác, ghe xuồng)');
+    }
+    accessRoad = input.accessRoad;
+  }
+
+  let moistureState = DEFAULT_MOISTURE_STATE;
+  if (input.moistureState !== undefined && input.moistureState !== null) {
+    if (!isValidMoistureState(input.moistureState)) {
+      return fail('Trạng thái độ ẩm không hợp lệ (khô ráo, hơi ẩm, ướt dầm mưa)');
+    }
+    moistureState = input.moistureState;
+  }
+
   let expiryDays = 3;
   if (input.expiryDays !== undefined) {
     if (!isValidExpiryDays(input.expiryDays)) {
@@ -192,6 +222,8 @@ export function validateCreateListing(input) {
     contactName,
     contactPhone,
     isProxyPost,
+    accessRoad,
+    moistureState,
     expiryDays,
     rawVoiceText,
     clientRequestId
@@ -311,6 +343,20 @@ export function validateAdminPatchListing(input) {
       return fail('Số ngày hết hạn phải là số nguyên từ 1 đến 14');
     }
     value.expiryDays = input.expiryDays;
+  }
+
+  if (Object.hasOwn(input, 'accessRoad')) {
+    if (!isValidAccessRoad(input.accessRoad)) {
+      return fail('Phương tiện tiếp cận không hợp lệ (xe tải, xe ba gác, ghe xuồng)');
+    }
+    value.accessRoad = input.accessRoad;
+  }
+
+  if (Object.hasOwn(input, 'moistureState')) {
+    if (!isValidMoistureState(input.moistureState)) {
+      return fail('Trạng thái độ ẩm không hợp lệ (khô ráo, hơi ẩm, ướt dầm mưa)');
+    }
+    value.moistureState = input.moistureState;
   }
 
   return succeed(value);

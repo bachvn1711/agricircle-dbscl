@@ -50,6 +50,8 @@ export function createPostFormView({
     contactName: existingDraft?.contactName || savedProfile.contactName || '',
     contactPhone: existingDraft?.contactPhone || savedProfile.contactPhone || '',
     isProxyPost: Boolean(existingDraft?.isProxyPost),
+    accessRoad: existingDraft?.accessRoad || 'truck',
+    moistureState: existingDraft?.moistureState || 'dry',
     rawVoiceText: existingDraft?.rawVoiceText || ''
   };
 
@@ -205,6 +207,111 @@ export function createPostFormView({
     expiryRow.appendChild(chip);
   }
 
+  const QUICK_QTY_CHIPS = [
+    { label: '🌾 1 Công (~555 kg)', qty: 1, unit: 'cong_nam_bo' },
+    { label: '🌾 2 Công (~1.111 kg)', qty: 2, unit: 'cong_nam_bo', isDefault: true },
+    { label: '🌾 5 Công (~2.777 kg)', qty: 5, unit: 'cong_nam_bo' },
+    { label: '📦 1 Tấn (1.000 kg)', qty: 1, unit: 'tan' }
+  ];
+  const quickQtyRow = createEl('div', { className: 'quick-qty-grid' });
+  const quickQtyButtons = [];
+  for (const chip of QUICK_QTY_CHIPS) {
+    const btn = createEl('button', {
+      type: 'button',
+      className: `tactile-chip ${chip.isDefault ? 'is-active' : ''}`,
+      text: chip.label,
+      onClick: () => {
+        state.rawQuantityText = String(chip.qty);
+        quantityInput.value = state.rawQuantityText;
+        state.rawUnit = chip.unit;
+        unitSelect.value = chip.unit;
+        unitTouchedByUser = true;
+        quickQtyButtons.forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        updateLiveKg();
+        updatePreviewCard();
+        persistDraft();
+      }
+    });
+    quickQtyButtons.push(btn);
+    quickQtyRow.appendChild(btn);
+  }
+
+  const ACCESS_ROAD_OPTIONS = [
+    { id: 'truck', label: '🚛 Xe tải vào tận nơi' },
+    { id: 'tricycle', label: '🛺 Xe ba gác / Đường đan' },
+    { id: 'boat', label: '🛶 Đi ghe / Vỏ lãi đường sông' }
+  ];
+  const accessRoadRow = createEl('div', { className: 'road-grid' });
+  const accessRoadButtons = new Map();
+  for (const opt of ACCESS_ROAD_OPTIONS) {
+    const btn = createEl('button', {
+      type: 'button',
+      className: `road-btn ${state.accessRoad === opt.id ? 'is-active' : ''}`,
+      text: opt.label,
+      onClick: () => {
+        state.accessRoad = opt.id;
+        for (const [id, b] of accessRoadButtons.entries()) {
+          b.classList.toggle('is-active', id === opt.id);
+        }
+        updatePreviewCard();
+        persistDraft();
+      }
+    });
+    accessRoadButtons.set(opt.id, btn);
+    accessRoadRow.appendChild(btn);
+  }
+
+  const MOISTURE_OPTIONS = [
+    { id: 'dry', label: '☀️ Khô ráo (Vừa cắt, sạch)' },
+    { id: 'humid', label: '⛅ Hơi ẩm (Cắt 1-2 ngày)' },
+    { id: 'wet', label: '🌧️ Ướt dầm mưa (Làm phân)' }
+  ];
+  const moistureRow = createEl('div', { className: 'moisture-grid' });
+  const moistureButtons = new Map();
+  for (const opt of MOISTURE_OPTIONS) {
+    const btn = createEl('button', {
+      type: 'button',
+      className: `moisture-btn ${state.moistureState === opt.id ? 'is-active' : ''}`,
+      text: opt.label,
+      onClick: () => {
+        state.moistureState = opt.id;
+        for (const [id, b] of moistureButtons.entries()) {
+          b.classList.toggle('is-active', id === opt.id);
+        }
+        updatePreviewCard();
+        persistDraft();
+      }
+    });
+    moistureButtons.set(opt.id, btn);
+    moistureRow.appendChild(btn);
+  }
+
+  const previewCard = createEl('div', { className: 'post-preview-card' });
+  const previewTitle = createEl('h3', { className: 'post-preview-title', text: '📋 Xem trước tin đăng thực tế' });
+  const previewText = createEl('p', { className: 'post-preview-text' });
+  previewCard.append(previewTitle, previewText);
+
+  function updatePreviewCard() {
+    const catObj = getByproductCategoryById(state.category);
+    const catName = catObj ? catObj.name : 'Phụ phẩm';
+    const qty = parseStrictNumber(quantityInput.value) || 0;
+    const unitObj = unitSelect.options[unitSelect.selectedIndex]?.text || state.rawUnit;
+    const kg = convertToKg({
+      category: state.category,
+      rawQuantity: qty > 0 ? qty : 1,
+      rawUnit: state.rawUnit
+    });
+    const roadObj = ACCESS_ROAD_OPTIONS.find((r) => r.id === state.accessRoad);
+    const roadText = roadObj ? roadObj.label : 'Xe tải vào tận nơi';
+    const moistObj = MOISTURE_OPTIONS.find((m) => m.id === state.moistureState);
+    const moistText = moistObj ? moistObj.label : 'Khô ráo';
+    const offerText = state.offerType === 'sell' ? 'Bán giá rẻ' : 'Cho miễn phí';
+    const locText = state.locationNote || 'Vị trí đã ghim trên bản đồ';
+
+    previewText.textContent = `Bác chuẩn bị đăng: ${qty} ${unitObj} ${catName} (~${formatViNumber(kg, 0)} kg) tại ${locText} — Hình thức: ${offerText} — Phương tiện: ${roadText} — Độ ẩm: ${moistText}.`;
+  }
+
   const categoryAndQtySection = createEl('div', { className: 'surface-block' },
     createEl('h2', { className: 'section-heading', text: '2. Kiểm tra loại phụ phẩm và số lượng' }),
     createEl('div', { className: 'field-group' },
@@ -221,7 +328,16 @@ export function createPostFormView({
         unitSelect
       )
     ),
+    quickQtyRow,
     liveKgNotice,
+    createEl('div', { className: 'field-group' },
+      createEl('span', { className: 'field-label', text: 'Đường vào / Phương tiện tiếp cận' }),
+      accessRoadRow
+    ),
+    createEl('div', { className: 'field-group' },
+      createEl('span', { className: 'field-label', text: 'Tình trạng độ ẩm phụ phẩm' }),
+      moistureRow
+    ),
     createEl('div', { className: 'field-group' },
       createEl('span', { className: 'field-label', text: 'Hình thức trao đổi' }),
       createEl('div', { className: 'segmented-row' }, btnOfferFree, btnOfferSell)
@@ -348,8 +464,8 @@ export function createPostFormView({
   const submitErrorNotice = createEl('div', { className: 'notice-box notice-red', attrs: { hidden: true, role: 'alert' } });
   const submitBtn = createEl('button', {
     type: 'submit',
-    className: 'btn btn-primary',
-    text: 'Đăng tin lên bản đồ'
+    className: 'btn btn-primary btn-submit-large',
+    text: 'Đồng ý Đăng lên Bản đồ ngay 🚀'
   });
 
   const formEl = createEl('form', {},
@@ -357,6 +473,7 @@ export function createPostFormView({
     categoryAndQtySection,
     locationSection,
     contactSection,
+    previewCard,
     offlineSubmitNotice,
     submitErrorNotice,
     submitBtn
@@ -368,6 +485,7 @@ export function createPostFormView({
   vaultDetails.append(vaultSummary, vaultBody);
 
   container.append(headerBlock, receiptCard, formEl, vaultDetails);
+  updatePreviewCard();
 
   function persistDraft() {
     const parsedQty = parseStrictNumber(quantityInput.value);
@@ -382,6 +500,8 @@ export function createPostFormView({
       contactName: state.contactName,
       contactPhone: state.contactPhone,
       isProxyPost: state.isProxyPost,
+      accessRoad: state.accessRoad,
+      moistureState: state.moistureState,
       rawVoiceText: state.rawVoiceText,
       lat: state.lat,
       lng: state.lng,
@@ -833,6 +953,8 @@ export function createPostFormView({
       contactName: state.contactName,
       contactPhone: state.contactPhone,
       isProxyPost: state.isProxyPost,
+      accessRoad: state.accessRoad,
+      moistureState: state.moistureState,
       expiryDays: state.expiryDays,
       rawVoiceText: state.rawVoiceText,
       clientRequestId: state.clientRequestId

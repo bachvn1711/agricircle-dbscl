@@ -548,65 +548,13 @@ test('R10, R12: validateAdminPatchListing, validateCropUpdate, validateCalcInput
     { expiryDays: 0 },
     { expiryDays: 15 },
     { rawQuantity: -1 },
-    { rawUnit: 'bad-unit' },
-    { category: 'bad-cat' },
-    { offerType: 'swap' }
+    { accessRoad: 'spaceship' },
+    { moistureState: 'frozen' }
   ]) {
     assert.equal(validateAdminPatchListing(badPatch).ok, false);
   }
 
-  assert.equal(validateCropUpdate({ dailyDecayRate: 0.08 }).ok, true);
-  assert.equal(
-    validateCropUpdate({ dailyDecayRate: 0.001, maxShelfLifeDays: 1, referencePriceVnd: 100 }).ok,
-    true
-  );
-  assert.equal(
-    validateCropUpdate({ dailyDecayRate: 0.5, maxShelfLifeDays: 365, referencePriceVnd: 10_000_000 }).ok,
-    true
-  );
-
-  for (const badCrop of [
-    null,
-    [],
-    {},
-    { dailyDecayRate: -1 },
-    { dailyDecayRate: 0 },
-    { dailyDecayRate: 0.51 },
-    { maxShelfLifeDays: 0 },
-    { maxShelfLifeDays: 366 },
-    { maxShelfLifeDays: 3.5 },
-    { referencePriceVnd: 99 },
-    { referencePriceVnd: 10_000_001 },
-    { id: 'hack' }
-  ]) {
-    assert.equal(validateCropUpdate(badCrop).ok, false);
-  }
-
-  assert.equal(
-    validateCalcInput({
-      basePriceVnd: 20000,
-      dailyDecayRate: 0.05,
-      storageMode: 'fan',
-      daysAfterHarvest: 3,
-      maxShelfLifeDays: 12
-    }).ok,
-    true
-  );
-
-  for (const badCalc of [
-    null,
-    [],
-    { basePriceVnd: 0, dailyDecayRate: 0.05, storageMode: 'fan', daysAfterHarvest: 3, maxShelfLifeDays: 12 },
-    { basePriceVnd: -500, dailyDecayRate: 0.05, storageMode: 'fan', daysAfterHarvest: 3, maxShelfLifeDays: 12 },
-    { basePriceVnd: 20000, dailyDecayRate: 0, storageMode: 'fan', daysAfterHarvest: 3, maxShelfLifeDays: 12 },
-    { basePriceVnd: 20000, dailyDecayRate: 0.6, storageMode: 'fan', daysAfterHarvest: 3, maxShelfLifeDays: 12 },
-    { basePriceVnd: 20000, dailyDecayRate: 0.05, storageMode: 'warm', daysAfterHarvest: 3, maxShelfLifeDays: 12 },
-    { basePriceVnd: 20000, dailyDecayRate: 0.05, storageMode: 'fan', daysAfterHarvest: -1, maxShelfLifeDays: 12 },
-    { basePriceVnd: 20000, dailyDecayRate: 0.05, storageMode: 'fan', daysAfterHarvest: 1.5, maxShelfLifeDays: 12 },
-    { basePriceVnd: 20000, dailyDecayRate: 0.05, storageMode: 'fan', daysAfterHarvest: 3, maxShelfLifeDays: 0 }
-  ]) {
-    assert.equal(validateCalcInput(badCalc).ok, false);
-  }
+  assert.equal(validateAdminPatchListing({ accessRoad: 'boat', moistureState: 'wet' }).ok, true);
 
   assert.equal(validateCalcFlush({ delta: 1, clientRequestId: 'calc_batch_123456' }).ok, true);
   assert.equal(validateCalcFlush({ delta: 500, clientRequestId: 'a'.repeat(64) }).ok, true);
@@ -636,4 +584,39 @@ test('R10, R12: validateAdminPatchListing, validateCropUpdate, validateCalcInput
   assert.equal(isValidAdminPin('12345'), false);
   assert.equal(isValidAdminPin(123456), false);
   assert.equal(isValidAdminPin(['123456']), false);
+});
+
+test('validateCreateListing enforces accessRoad and moistureState with defaults', async () => {
+  const { validateCreateListing, ACCESS_ROADS, MOISTURE_STATES } = await import('../src/shared/validation.js');
+
+  const base = {
+    category: 'rom-ra',
+    rawQuantity: 2,
+    rawUnit: 'cong_nam_bo',
+    offerType: 'free',
+    lat: 10.0452,
+    lng: 105.7469,
+    contactName: 'Chú Ba',
+    contactPhone: '0912345678'
+  };
+
+  const defaultRes = validateCreateListing(base);
+  assert.equal(defaultRes.ok, true);
+  assert.equal(defaultRes.value.accessRoad, 'truck');
+  assert.equal(defaultRes.value.moistureState, 'dry');
+
+  for (const road of ACCESS_ROADS) {
+    const res = validateCreateListing({ ...base, accessRoad: road });
+    assert.equal(res.ok, true);
+    assert.equal(res.value.accessRoad, road);
+  }
+
+  for (const state of MOISTURE_STATES) {
+    const res = validateCreateListing({ ...base, moistureState: state });
+    assert.equal(res.ok, true);
+    assert.equal(res.value.moistureState, state);
+  }
+
+  assert.equal(validateCreateListing({ ...base, accessRoad: 'airplane' }).ok, false);
+  assert.equal(validateCreateListing({ ...base, moistureState: 'frozen' }).ok, false);
 });

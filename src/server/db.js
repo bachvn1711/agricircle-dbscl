@@ -16,7 +16,7 @@ import {
 const DAY_MS = 86_400_000;
 const METRIC_RETENTION_MS = 30 * DAY_MS;
 const PUBLIC_LISTING_COLUMNS =
-  'id, category, offer_type, price_note, raw_quantity, raw_unit, estimated_kg, lat, lng, location_note, contact_name, contact_phone, is_proxy_post, raw_voice_text, status, report_count, created_at, expires_at, collected_at, actual_kg_collected';
+  'id, category, offer_type, price_note, raw_quantity, raw_unit, estimated_kg, lat, lng, location_note, contact_name, contact_phone, is_proxy_post, access_road, moisture_state, raw_voice_text, status, report_count, created_at, expires_at, collected_at, actual_kg_collected';
 
 export function serializeListing(row) {
   return {
@@ -33,6 +33,8 @@ export function serializeListing(row) {
     contactName: row.contact_name,
     contactPhone: row.contact_phone,
     isProxyPost: Boolean(row.is_proxy_post),
+    accessRoad: row.access_road || 'truck',
+    moistureState: row.moisture_state || 'dry',
     rawVoiceText: row.raw_voice_text,
     status: row.status,
     reportCount: row.report_count,
@@ -128,6 +130,8 @@ export function openDatabase({ dbPath, now }) {
         contact_name TEXT NOT NULL,
         contact_phone TEXT NOT NULL,
         is_proxy_post INTEGER NOT NULL DEFAULT 0 CHECK (is_proxy_post IN (0, 1)),
+        access_road TEXT NOT NULL DEFAULT 'truck' CHECK (access_road IN ('truck', 'tricycle', 'boat')),
+        moisture_state TEXT NOT NULL DEFAULT 'dry' CHECK (moisture_state IN ('dry', 'humid', 'wet')),
         raw_voice_text TEXT NOT NULL DEFAULT '',
         client_request_id TEXT,
         status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'collected', 'hidden', 'reported')),
@@ -171,6 +175,15 @@ export function openDatabase({ dbPath, now }) {
         value TEXT NOT NULL
       );
     `);
+
+    try {
+      db.exec("ALTER TABLE listings ADD COLUMN access_road TEXT NOT NULL DEFAULT 'truck'");
+    } catch {
+    }
+    try {
+      db.exec("ALTER TABLE listings ADD COLUMN moisture_state TEXT NOT NULL DEFAULT 'dry'");
+    } catch {
+    }
 
     runInTransaction(db, () => {
       const hmacSecret = crypto.randomBytes(32).toString('hex');
@@ -349,9 +362,9 @@ export function createListing(db, data, currentNow) {
       INSERT INTO listings (
         short_code, category, offer_type, price_note, raw_quantity, raw_unit,
         estimated_kg, lat, lng, location_note, contact_name, contact_phone,
-        is_proxy_post, raw_voice_text, client_request_id, status, report_count,
-        created_at, expires_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', 0, ?, ?)
+        is_proxy_post, access_road, moisture_state, raw_voice_text, client_request_id,
+        status, report_count, created_at, expires_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', 0, ?, ?)
     `).run(
       shortCode,
       data.category,
@@ -366,6 +379,8 @@ export function createListing(db, data, currentNow) {
       data.contactName,
       data.contactPhone,
       data.isProxyPost ? 1 : 0,
+      data.accessRoad,
+      data.moistureState,
       data.rawVoiceText,
       data.clientRequestId,
       currentNow,
@@ -675,6 +690,8 @@ export function adminPatchListing(db, { idNum, rawBody, currentNow }) {
       const offerType = Object.hasOwn(patch, 'offerType') ? patch.offerType : row.offer_type;
       const priceNote = Object.hasOwn(patch, 'priceNote') ? patch.priceNote : row.price_note;
       const locationNote = Object.hasOwn(patch, 'locationNote') ? patch.locationNote : row.location_note;
+      const accessRoad = Object.hasOwn(patch, 'accessRoad') ? patch.accessRoad : (row.access_road || 'truck');
+      const moistureState = Object.hasOwn(patch, 'moistureState') ? patch.moistureState : (row.moisture_state || 'dry');
       const expiresAt = Object.hasOwn(patch, 'expiryDays')
         ? currentNow + patch.expiryDays * DAY_MS
         : row.expires_at;
@@ -688,7 +705,8 @@ export function adminPatchListing(db, { idNum, rawBody, currentNow }) {
         .prepare(`
           UPDATE listings
           SET category = ?, raw_quantity = ?, raw_unit = ?, estimated_kg = ?,
-              offer_type = ?, price_note = ?, location_note = ?, expires_at = ?
+              offer_type = ?, price_note = ?, location_note = ?, access_road = ?,
+              moisture_state = ?, expires_at = ?
           WHERE id = ? AND status != 'collected'
         `)
         .run(
@@ -699,6 +717,8 @@ export function adminPatchListing(db, { idNum, rawBody, currentNow }) {
           offerType,
           priceNote,
           locationNote,
+          accessRoad,
+          moistureState,
           expiresAt,
           idNum
         );
