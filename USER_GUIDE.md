@@ -46,3 +46,4 @@ Tài liệu chi tiết đầy đủ 7 phần xem tại: [**`docs/09-huong-dan-su
 1. Mở tab **⚙️ Quản trị** -> Nhập mã PIN (mặc định thử nghiệm: `202600`).
 2. Quản lý danh sách tin đăng, điều chỉnh giá thị trường theo mùa.
 3. Bấm **Xuất báo cáo CSV** để tải file bảng tính thống kê phục vụ báo cáo kinh tế tuần hoàn của xã.
+

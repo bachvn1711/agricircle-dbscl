@@ -41,3 +41,4 @@ echo.
 
 node src/server/index.js
 pause
+

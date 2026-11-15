@@ -169,3 +169,4 @@ Dự án đã có sẵn tệp [`Dockerfile`](file:///d:/Work/CODE/khkt/Dockerfil
 docker build -t agricircle .
 docker run -d -p 3000:3000 -v $(pwd)/data:/app/data --name agricircle-app agricircle
 ```
+

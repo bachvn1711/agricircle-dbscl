@@ -18,3 +18,4 @@ services:
       - key: ADMIN_PIN
         generateValue: false
         value: "2026"
+

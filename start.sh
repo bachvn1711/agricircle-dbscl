@@ -23,3 +23,4 @@ hostname -I 2>/dev/null || ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{p
 
 echo "[3/3] Khoi chay he thong..."
 node src/server/index.js
+
