@@ -151,7 +151,9 @@ export function createMapView({
   let filters = {
     category: 'all',
     offerType: 'all',
-    radiusKm: 'all'
+    radiusKm: 'all',
+    quickDry: false,
+    quickTruck: false
   };
   let originCoords = null;
   let originSource = 'region';
@@ -183,113 +185,43 @@ export function createMapView({
     text: 'Biến Rơm rạ, Trấu, Bã mía, Thân bắp thành tiền mặt. Không đốt đồng - Tăng thu nhập - Dọn sạch ruộng vườn.'
   });
 
-  const cardFarmer = createEl('div', { className: 'role-3d-card role-farmer' },
-    createEl('div', { className: 'role-3d-icon-wrap' },
-      createEl('span', { className: 'role-3d-emoji', text: '🌾' })
-    ),
-    createEl('div', { className: 'role-3d-body' },
-      createEl('h2', { className: 'role-3d-title', text: 'Nhà Nông Cần Bán / Cho' }),
-      createEl('p', { className: 'role-3d-desc', text: 'Ruộng vừa gặt xong có rơm rạ, trấu? Đăng bán hoặc cho miễn phí chỉ 10 giây bằng giọng nói.' })
-    ),
+  const liveSummaryBar = createEl('div', {
+    className: 'live-summary-bar',
+    text: 'Đang tải nguồn phụ phẩm quanh Xã Xuân Đường...'
+  });
+
+  const compactActionsRow = createEl('div', { className: 'compact-hero-actions' },
     createEl('button', {
       type: 'button',
       className: 'btn-tactile btn-tactile-green',
-      text: 'Đăng tin bằng giọng nói 🎙️',
+      text: '🎙️ Đăng tin giọng nói',
       onClick: () => onNavigatePost()
-    })
-  );
-
-  const cardCollector = createEl('div', { className: 'role-3d-card role-collector' },
-    createEl('div', { className: 'role-3d-icon-wrap' },
-      createEl('span', { className: 'role-3d-emoji', text: '🚛' })
-    ),
-    createEl('div', { className: 'role-3d-body' },
-      createEl('h2', { className: 'role-3d-title', text: 'Thương Lái & Thu Gom' }),
-      createEl('p', { className: 'role-3d-desc', text: 'Cần nguồn rơm cuộn, trấu đốt lò, mụn dừa? Xem bản đồ bán kính quanh bạn và gọi trực tiếp.' })
-    ),
+    }),
     createEl('button', {
       type: 'button',
       className: 'btn-tactile btn-tactile-blue',
-      text: 'Xem bản đồ thu gom 🗺️',
+      text: '🗺️ Bản đồ thu gom',
       onClick: () => {
         const targetEl = document.getElementById('map-canvas');
         if (targetEl) {
           targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }
-    })
-  );
-
-  const cardCalculator = createEl('div', { className: 'role-3d-card role-calculator' },
-    createEl('div', { className: 'role-3d-icon-wrap' },
-      createEl('span', { className: 'role-3d-emoji', text: '🧮' })
-    ),
-    createEl('div', { className: 'role-3d-body' },
-      createEl('h2', { className: 'role-3d-title', text: 'Tra Cứu Giá & Độ Tươi' }),
-      createEl('p', { className: 'role-3d-desc', text: 'Biết ngay nông sản & phụ phẩm sau 1-3 ngày sụt giảm bao nhiêu giá trị theo thời tiết để bán kịp lúc.' })
-    ),
+    }),
     createEl('button', {
       type: 'button',
       className: 'btn-tactile btn-tactile-amber',
-      text: 'Tính giá rơm / trấu 🧮',
+      text: '🧮 Tính giá Offline',
       onClick: () => onNavigateCalc()
     })
   );
 
-  const roleGrid = createEl('div', { className: 'role-3d-grid' }, cardFarmer, cardCollector, cardCalculator);
-
-  const statsBento = createEl('div', { className: 'stats-3d-bento' },
-    createEl('div', { className: 'stat-3d-item' },
-      createEl('span', { className: 'stat-3d-num', text: '1.250+ kg' }),
-      createEl('span', { className: 'stat-3d-label', text: 'Phụ phẩm sẵn sàng kết nối' })
-    ),
-    createEl('div', { className: 'stat-3d-item' },
-      createEl('span', { className: 'stat-3d-num', text: '18.500.000 đ' }),
-      createEl('span', { className: 'stat-3d-label', text: 'Thu nhập nông dân giữ lại' })
-    ),
-    createEl('div', { className: 'stat-3d-item' },
-      createEl('span', { className: 'stat-3d-num', text: '3,2 Tấn' }),
-      createEl('span', { className: 'stat-3d-label', text: 'CO₂ giảm thải nhờ không đốt đồng' })
-    )
-  );
-
-  const flowDiagram = createEl('div', { className: 'circular-flow-3d' },
-    createEl('div', { className: 'flow-step-3d' },
-      createEl('span', { className: 'flow-step-num', text: '1' }),
-      createEl('span', { className: 'flow-step-icon', text: '🌾' }),
-      createEl('span', { className: 'flow-step-title', text: 'Ruộng Lúa & Vườn' }),
-      createEl('span', { className: 'flow-step-desc', text: 'Tồn dư rơm rạ, trấu' })
-    ),
-    createEl('div', { className: 'flow-arrow-3d', text: '➔' }),
-    createEl('div', { className: 'flow-step-3d' },
-      createEl('span', { className: 'flow-step-num', text: '2' }),
-      createEl('span', { className: 'flow-step-icon', text: '🎙️' }),
-      createEl('span', { className: 'flow-step-title', text: 'Đăng Tin Số Hóa' }),
-      createEl('span', { className: 'flow-step-desc', text: 'Nói 10s, ghim vị trí' })
-    ),
-    createEl('div', { className: 'flow-arrow-3d', text: '➔' }),
-    createEl('div', { className: 'flow-step-3d' },
-      createEl('span', { className: 'flow-step-num', text: '3' }),
-      createEl('span', { className: 'flow-step-icon', text: '🚛' }),
-      createEl('span', { className: 'flow-step-title', text: 'Thu Gom Tận Nơi' }),
-      createEl('span', { className: 'flow-step-desc', text: 'Thương lái điều xe tải' })
-    ),
-    createEl('div', { className: 'flow-arrow-3d', text: '➔' }),
-    createEl('div', { className: 'flow-step-3d' },
-      createEl('span', { className: 'flow-step-num', text: '4' }),
-      createEl('span', { className: 'flow-step-icon', text: '🍄' }),
-      createEl('span', { className: 'flow-step-title', text: 'Tái Sinh Giá Trị' }),
-      createEl('span', { className: 'flow-step-desc', text: 'Nấm, củi trấu, phân bón' })
-    )
-  );
-
-  const headerBlock = createEl('div', { className: 'hero-3d-section' },
+  const headerBlock = createEl('div', { className: 'hero-3d-section hero-compact' },
     heroBadge,
     heroTitle,
     heroSubtitle,
-    roleGrid,
-    flowDiagram,
-    statsBento
+    compactActionsRow,
+    liveSummaryBar
   );
 
   const btnMapMode = createEl('button', {
@@ -438,11 +370,95 @@ export function createMapView({
     for (const c of allCards) {
       c.classList.toggle('is-active-3d', c.getAttribute('data-category-id') === catId);
     }
+    syncQuickFilterButtons();
     loadListings();
   }
 
+  const quickFreeBtn = createEl('button', {
+    type: 'button',
+    className: 'quick-filter-chip',
+    text: '🆓 Cho miễn phí 0đ',
+    attrs: { 'aria-pressed': 'false' },
+    onClick: () => {
+      filters.offerType = filters.offerType === 'free' ? 'all' : 'free';
+      offerSelect.value = filters.offerType;
+      syncQuickFilterButtons();
+      loadListings();
+    }
+  });
+
+  const quickDryBtn = createEl('button', {
+    type: 'button',
+    className: 'quick-filter-chip',
+    text: '☀️ Khô ráo (Làm nấm)',
+    attrs: { 'aria-pressed': 'false' },
+    onClick: () => {
+      filters.quickDry = !filters.quickDry;
+      syncQuickFilterButtons();
+      loadListings();
+    }
+  });
+
+  const quickTruckBtn = createEl('button', {
+    type: 'button',
+    className: 'quick-filter-chip',
+    text: '🚛 Xe tải vào tận nơi',
+    attrs: { 'aria-pressed': 'false' },
+    onClick: () => {
+      filters.quickTruck = !filters.quickTruck;
+      syncQuickFilterButtons();
+      loadListings();
+    }
+  });
+
+  const quickResetBtn = createEl('button', {
+    type: 'button',
+    className: 'quick-filter-chip quick-filter-reset',
+    text: '↺ Đặt lại',
+    attrs: { hidden: true },
+    onClick: () => resetAllFilters()
+  });
+
+  function syncQuickFilterButtons() {
+    const isFree = filters.offerType === 'free';
+    quickFreeBtn.classList.toggle('is-active', isFree);
+    quickFreeBtn.setAttribute('aria-pressed', String(isFree));
+    quickDryBtn.classList.toggle('is-active', filters.quickDry);
+    quickDryBtn.setAttribute('aria-pressed', String(filters.quickDry));
+    quickTruckBtn.classList.toggle('is-active', filters.quickTruck);
+    quickTruckBtn.setAttribute('aria-pressed', String(filters.quickTruck));
+    const hasAny =
+      filters.category !== 'all' ||
+      filters.offerType !== 'all' ||
+      filters.radiusKm !== 'all' ||
+      filters.quickDry ||
+      filters.quickTruck;
+    quickResetBtn.hidden = !hasAny;
+  }
+
+  function resetAllFilters() {
+    filters = { category: 'all', offerType: 'all', radiusKm: 'all', quickDry: false, quickTruck: false };
+    categorySelect.value = 'all';
+    offerSelect.value = 'all';
+    radiusSelect.value = 'all';
+    const allCards = byproductCardsRow.querySelectorAll('.byproduct-3d-card');
+    for (const c of allCards) {
+      c.classList.toggle('is-active-3d', c.getAttribute('data-category-id') === 'all');
+    }
+    syncQuickFilterButtons();
+    loadListings();
+  }
+
+  const quickFilterRow = createEl('div', { className: 'quick-filter-row' },
+    quickFreeBtn,
+    quickDryBtn,
+    quickTruckBtn,
+    quickResetBtn
+  );
+
   const toolbarBlock = createEl('div', { className: 'surface-block toolbar-3d-block' },
     byproductCardsRow,
+    quickFilterRow,
     modeToggleRow,
     createEl('div', { className: 'map-toolbar' }, btnLocateMe, btnLayerToggle),
     filterDetails,
@@ -452,8 +468,22 @@ export function createMapView({
   const feedbackBox = createEl('div', { className: 'notice-box', attrs: { hidden: true, role: 'status' } });
   const mapStage = createEl('div', { className: 'surface-block' });
   const mapCanvas = createEl('div', { id: 'map-canvas', className: 'map-canvas', attrs: { 'aria-label': 'Bản đồ vị trí phụ phẩm' } });
+  const mapLegend = createEl('div', { className: 'map-legend' },
+    createEl('span', { className: 'legend-item' },
+      createEl('span', { className: 'legend-dot legend-dot-free' }),
+      createEl('span', { text: 'Cho miễn phí 0đ' })
+    ),
+    createEl('span', { className: 'legend-item' },
+      createEl('span', { className: 'legend-dot legend-dot-sell' }),
+      createEl('span', { text: 'Bán giá rẻ' })
+    ),
+    createEl('span', { className: 'legend-item' },
+      createEl('span', { className: 'legend-dot legend-dot-origin' }),
+      createEl('span', { text: 'Vị trí tham chiếu' })
+    )
+  );
   const mapCountEl = createEl('p', { className: 'field-hint' });
-  mapStage.append(tileNoticeEl, mapCanvas, mapCountEl);
+  mapStage.append(tileNoticeEl, mapCanvas, mapLegend, mapCountEl);
 
   const listStage = createEl('div', { attrs: { hidden: true } });
   const stateBox = createEl('div', { className: 'surface-block', attrs: { hidden: true } });
@@ -633,9 +663,13 @@ export function createMapView({
       const cat = getByproductCategoryById(item.category) || getByproductCategoryById('phu-pham-khac');
       const offerPill = createEl('span', {
         className: `pill ${item.offerType === 'sell' ? 'pill-sell' : 'pill-green'}`,
-        text: item.offerType === 'sell' ? 'Bán giá rẻ' : 'Cho miễn phí'
+        text: item.offerType === 'sell' ? 'Bán giá rẻ' : 'Miễn phí 0đ'
       });
-      const row = createEl('div', { className: 'divider-row' },
+      const badgesRow = createEl('div', { className: 'listing-badges-row' },
+        createEl('span', { className: 'pill pill-gray', text: getAccessRoadLabel(item.accessRoad) }),
+        createEl('span', { className: 'pill pill-gray', text: getMoistureLabel(item.moistureState) })
+      );
+      const row = createEl('div', { className: 'divider-row listing-card-3tier' },
         createEl('div', { className: 'listing-top' },
           createEl('span', { className: 'listing-category', text: `${cat.icon} ${cat.name}` }),
           offerPill
@@ -644,7 +678,8 @@ export function createMapView({
         createEl('p', {
           className: 'listing-meta-line',
           text: `${formatDistanceLabel(item.distanceKm)} - ${formatRemainingTime(item.expiresAt)}`
-        })
+        }),
+        badgesRow
       );
       if (item.priceNote) {
         row.appendChild(createEl('p', { className: 'listing-note', text: `Giá gợi ý: ${item.priceNote}` }));
@@ -658,8 +693,16 @@ export function createMapView({
       if (telHref) {
         actions.appendChild(createEl('a', {
           className: 'btn btn-primary',
-          text: 'Gọi điện ngay',
+          text: '📞 Gọi ngay',
           attrs: { href: telHref }
+        }));
+      }
+      const dirHref = buildDirectionsHref(item.lat, item.lng);
+      if (dirHref) {
+        actions.appendChild(createEl('a', {
+          className: 'btn btn-secondary',
+          text: '📍 Chỉ đường',
+          attrs: { href: dirHref, target: '_blank', rel: 'noopener noreferrer' }
         }));
       }
       actions.appendChild(createEl('button', {
@@ -723,7 +766,11 @@ export function createMapView({
     if (listings.length === 0) {
       stateBox.hidden = false;
       const hasFilter =
-        filters.category !== 'all' || filters.offerType !== 'all' || filters.radiusKm !== 'all';
+        filters.category !== 'all' ||
+        filters.offerType !== 'all' ||
+        filters.radiusKm !== 'all' ||
+        filters.quickDry ||
+        filters.quickTruck;
       stateBox.appendChild(createEl('p', {
         text: hasFilter
           ? 'Không có tin phụ phẩm nào khớp bộ lọc hiện tại.'
@@ -735,13 +782,7 @@ export function createMapView({
           type: 'button',
           className: 'btn btn-secondary',
           text: 'Xóa bộ lọc',
-          onClick: () => {
-            filters = { category: 'all', offerType: 'all', radiusKm: 'all' };
-            categorySelect.value = 'all';
-            offerSelect.value = 'all';
-            radiusSelect.value = 'all';
-            loadListings();
-          }
+          onClick: () => resetAllFilters()
         }));
       }
       actions.appendChild(createEl('button', {
@@ -1051,7 +1092,22 @@ export function createMapView({
       if (activeAbort !== controller) {
         return;
       }
-      listings = sortByDistance(items, origin.lat, origin.lng);
+      const sorted = sortByDistance(items, origin.lat, origin.lng);
+      listings = sorted.filter((item) => {
+        if (filters.quickDry && item.moistureState !== 'dry') {
+          return false;
+        }
+        if (filters.quickTruck && item.accessRoad !== 'truck') {
+          return false;
+        }
+        return true;
+      });
+      const totalKg = listings.reduce((sum, item) => sum + (Number(item.estimatedKg) || 0), 0);
+      const freeCount = listings.filter((item) => item.offerType === 'free').length;
+      const regionName = getRegion().shortName;
+      liveSummaryBar.textContent = listings.length > 0
+        ? `🌾 ${listings.length} nguồn phụ phẩm quanh ${regionName} • ~${formatViNumber(totalKg / 1000, 1)} tấn • ${freeCount} điểm miễn phí 0đ`
+        : `Chưa có nguồn phụ phẩm khớp bộ lọc quanh ${regionName}.`;
       visibleCount = PAGE_SIZE;
       loading = false;
       renderStateBox();
@@ -1066,6 +1122,7 @@ export function createMapView({
       }
       loading = false;
       listings = [];
+      liveSummaryBar.textContent = 'Không thể tải dữ liệu trực tuyến — Công cụ Tính giá Offline vẫn sẵn sàng.';
       isOfflineError = Boolean(err?.isOffline || err?.isNetworkError || !globalThis.navigator?.onLine);
       errorMessage = err?.message || 'Không thể tải danh sách phụ phẩm.';
       renderStateBox();
@@ -1080,14 +1137,17 @@ export function createMapView({
     for (const c of allCards) {
       c.classList.toggle('is-active-3d', c.getAttribute('data-category-id') === categorySelect.value);
     }
+    syncQuickFilterButtons();
     loadListings();
   });
   offerSelect.addEventListener('change', () => {
     filters.offerType = offerSelect.value;
+    syncQuickFilterButtons();
     loadListings();
   });
   radiusSelect.addEventListener('change', () => {
     filters.radiusKm = radiusSelect.value;
+    syncQuickFilterButtons();
     loadListings();
   });
   communeSelect.addEventListener('change', () => {

@@ -28,6 +28,7 @@ let flushFailureCount = 0;
 
 const regionSelect = document.getElementById('region-select');
 const statusStrip = document.getElementById('global-status-strip');
+const netPill = document.getElementById('net-pill');
 const brandHomeBtn = document.getElementById('brand-home-btn');
 const headerAdminBtn = document.getElementById('header-admin-btn');
 const navButtons = Array.from(document.querySelectorAll('[data-tab]'));
@@ -58,6 +59,10 @@ function getCrops() {
 
 function renderStatusStrip() {
   const isOffline = globalThis.navigator?.onLine === false;
+  if (netPill) {
+    netPill.className = `net-pill ${isOffline ? 'is-offline' : 'is-online'}`;
+    netPill.textContent = isOffline ? '🟠 Ngoại tuyến' : '🟢 Trực tuyến';
+  }
   const pendingCalc = getPendingCalcCount(storage);
   const host = globalThis.location?.hostname || '';
   const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
