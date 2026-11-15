@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { createApp } from './app.js';
+import { seedDefaultListingsIfEmpty } from './seed-xuan-duong.js';
 
 function parsePort(rawPort) {
   if (rawPort === undefined || rawPort === '') {
@@ -48,6 +49,8 @@ const app = await createApp({
   sharedDir: path.resolve(import.meta.dirname, '../shared'),
   leafletDistDir: path.resolve(import.meta.dirname, '../../node_modules/leaflet/dist')
 });
+
+seedDefaultListingsIfEmpty(app.db);
 
 function shutdown() {
   app.close().finally(() => {
