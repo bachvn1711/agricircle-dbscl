@@ -42,23 +42,18 @@
 
 ---
 
-## Giai Đoạn 5: Hoàn Thiện Bộ 6 Tệp Vibe Coding & Kiểm Định Chất Lượng (Đã Hoàn Thành 100%)
-- [x] **Task 5.1:** Đồng bộ toàn diện bộ 6 file quản trị dự án chuẩn chỉnh:
-  - `PRD.md`: Bạn đang xây dựng gì và dành cho ai.
-  - `ARCHITECTURE.md`: Công nghệ sử dụng, cấu trúc thư mục, luồng dữ liệu.
-  - `DESIGN.md`: Màu sắc, cỡ chữ cho người già, nút bấm 3D và các thành phần giao diện.
-  - `RULES.md`: Quy tắc không viết comment, giới hạn dung lượng < 1.5MB, giữ đúng tầm vóc THCS.
-  - `TASKS.md`: Kế hoạch hành động chi tiết từng bước.
-  - `PROGRESS.md`: Báo cáo tiến độ và các lỗi thực tế đã giải quyết.
-- [x] **Task 5.2:** Kiểm tra dung lượng toàn bộ gói giao diện (đạt 435 KB, nhỏ hơn nhiều so với mức giới hạn 1.5 MB).
-- [x] **Task 5.3:** Kiểm tra 100% không chứa dòng chú thích (comment) thừa trong mã nguồn (`scripts/verify-docs-and-bundle.mjs`).
-- [x] **Task 5.4:** Bảo đảm 56/56 bài kiểm tra tự động chạy xanh lá hoàn hảo trên Node.js.
+## Giai Đoạn 5: Hoàn Thiện Bộ 6 Tệp Vibe Coding & Đóng Gói Triển Khai (Đã Hoàn Thành 100%)
+- [x] **Task 5.1:** Đồng bộ toàn diện bộ 6 file quản trị dự án: `PRD.md`, `ARCHITECTURE.md`, `DESIGN.md`, `RULES.md`, `TASKS.md`, `PROGRESS.md`.
+- [x] **Task 5.2:** Đóng gói ứng dụng: `start.bat` (1-click Windows), `start.sh` (Linux/Mac), `Dockerfile`, `render.yaml`.
+- [x] **Task 5.3:** Đẩy mã nguồn lên kho lưu trữ GitHub chính thức: `https://github.com/bachvn1711/agricircle-dbscl`.
+- [x] **Task 5.4:** Triển khai Live Online và hoàn thành bộ kiểm thử kết nối trực tiếp `17/17 tests pass` qua `scripts/test-live-connections.mjs`.
+- [x] **Task 5.5:** Biên soạn Cẩm nang Hướng dẫn sử dụng chi tiết trong `USER_GUIDE.md` và `docs/09-huong-dan-su-dung.md`.
 
 ---
 
-## Giai Đoạn 6: Chuẩn Bị Hồ Sơ Dự Thi KHKT Cấp Huyện & Tỉnh (Đang Tiến Hành)
+## Giai Đoạn 6: Hoàn Tất Toàn Diện Hồ Sơ Dự Thi KHKT Cấp Huyện & Tỉnh (Đã Hoàn Thành 100%)
 - [x] **Task 6.1:** Soạn thảo Dàn ý 12 Slide thuyết trình PowerPoint thực tế, khiêm tốn, giàu sức thuyết phục trong `docs/06-dan-y-thuyet-trinh-powerpoint.md`.
 - [x] **Task 6.2:** Soạn thảo Bộ 9 câu hỏi phản biện Ban Giám khảo kèm câu trả lời tự tin, chân thực trong `docs/07-bo-cau-hoi-phan-bien-khkt.md`.
 - [x] **Task 6.3:** Dựng video clip demo mô phỏng sử dụng thực tế ngoài đồng ruộng (`assets/video/demo-agricircle.mp4` & dự án CapCut).
-- [ ] **Task 6.4:** Cập nhật Kế hoạch nghiên cứu KHKT chính thức trong `docs/04-ke-hoach-nghien-cuu-khkt.md` và xuất ra file Word `docs/04-ke-hoach-nghien-cuu-khkt.docx`.
-- [ ] **Task 6.5:** In ấn tài liệu, xin chữ ký Ban Giám hiệu trường THCS Cẩm Đường và thiết kế Poster khổ A0 để tham gia vòng thi cấp Huyện.
+- [x] **Task 6.4:** Cập nhật Kế hoạch nghiên cứu KHKT chính thức trong `docs/04-ke-hoach-nghien-cuu-khkt.md` và xuất ra file Word chuẩn Thông tư 84 (`docs/04-ke-hoach-nghien-cuu-khkt.docx`).
+- [x] **Task 6.5:** Thiết kế Poster triển lãm khoa học khổ A0 chuẩn Bộ GD&ĐT trong `docs/10-thiet-ke-poster-a0.md` và trang in trực tiếp `docs/poster-a0.html`.

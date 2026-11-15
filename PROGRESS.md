@@ -9,12 +9,11 @@
 | :--- | :---: | :--- |
 | **Lõi nghiệp vụ & Tính toán** | Đạt 100% | 16/16 tests pass; công thức tính giảm giá độ tươi làm tròn chẵn trăm đồng; bóc tách giọng nói tiếng Việt tự nhiên; chuyển đổi các đơn vị đo lường nông thôn (`công`, `sào`, `tấn`, `kg`). |
 | **Máy chủ Node.js & SQLite** | Đạt 100% | 20/20 tests pass; máy chủ `node:http` nhẹ nhàng; cơ sở dữ liệu `node:sqlite` lưu trong 1 tệp tin duy nhất không tốn phí; sinh mã nhận tin 4 số; tự động khóa tin sau thu gom. |
-| **Giao diện PWA & Bản đồ ngoại tuyến** | Đạt 100% | 20/20 tests pass; dung lượng toàn bộ gói giao diện chỉ **435 KB** (nhẹ hơn nhiều mức trần 1.5 MB); hoạt động offline nhờ Service Worker; giao diện 5 tab mượt mà. |
+| **Giao diện PWA & Bản đồ ngoại tuyến** | Đạt 100% | 20/20 tests pass; dung lượng toàn bộ gói giao diện chỉ **437 KB** (nhẹ hơn nhiều mức trần 1.5 MB); hoạt động offline nhờ Service Worker; giao diện 5 tab mượt mà. |
 | **5 Điểm Tinh Chỉnh Thực Địa Mới Nhất** | Đạt 100% | 1. Thêm phương tiện tiếp cận (xe tải 🚛, ba gác 🛺, ghe thuyền 🛶).<br>2. Thêm độ ẩm rơm rạ (khô ráo ☀️, hơi ẩm ⛅, ướt dầm mưa 🌧️).<br>3. Khóa nút gọi & ẩn số điện thoại sau thu gom (chống quấy rầy).<br>4. 4 chip chọn nhanh khối lượng 1 chạm không cần gõ phím.<br>5. Thẻ xem trước (Preview Card) và nút bấm to 54px chống bấm nhầm. |
-| **Kiểm định chất lượng mã nguồn** | Đạt 100% | **56/56 bài kiểm tra tự động chạy xanh lá**; kịch bản `verify-docs-and-bundle.mjs` quét 33 tệp xác nhận **100% không chứa dòng comment thừa**; bundle < 1.5MB. |
-| **Bộ 6 file quản trị Vibe Coding** | Đạt 100% | `PRD.md`, `ARCHITECTURE.md`, `DESIGN.md`, `RULES.md`, `TASKS.md`, `PROGRESS.md` đồng bộ hoàn toàn, đúng tinh thần và ngôn ngữ của học sinh THCS. |
-| **Hồ sơ thuyết trình & Phản biện KHKT** | Đạt 100% | `docs/06-dan-y-thuyet-trinh-powerpoint.md` (12 slide súc tích, thực tế) & `docs/07-bo-cau-hoi-phan-bien-khkt.md` (9 câu hỏi bảo vệ bản quyền, tính khả thi). |
-| **Video clip Demo hệ thống** | Đạt 100% | Đã kết xuất video demo `assets/video/demo-agricircle.mp4` và tạo sẵn dự án CapCut tại máy cá nhân. |
+| **Đóng gói ứng dụng & Triển khai Online** | Đạt 100% | • Khởi chạy 1 chạm: `start.bat` & `start.sh`.<br>• Dockerfile & Blueprint `render.yaml` sẵn sàng deploy vĩnh viễn trên Render.com.<br>• Mã nguồn chính thức đã đẩy lên GitHub: `https://github.com/bachvn1711/agricircle-dbscl`.<br>• Kiểm thử kết nối trực tuyến `17/17 tests pass` qua `scripts/test-live-connections.mjs`. |
+| **Kiểm định chất lượng mã nguồn** | Đạt 100% | **56/56 bài kiểm tra tự động chạy xanh lá**; kịch bản `verify-docs-and-bundle.mjs` quét 34 tệp xác nhận **100% không chứa dòng comment thừa**; bundle < 1.5MB; `lpk verify: GREEN`. |
+| **Hồ sơ dự thi KHKT đầy đủ** | Đạt 100% | • Kế hoạch nghiên cứu chuẩn Thông tư 84 (`docs/04-ke-hoach-nghien-cuu-khkt.docx`).<br>• Dàn ý 12 Slide thuyết trình (`docs/06-dan-y-thuyet-trinh-powerpoint.md`).<br>• Bộ 9 câu hỏi phản biện Ban Giám khảo (`docs/07-bo-cau-hoi-phan-bien-khkt.md`).<br>• Video demo thực địa (`assets/video/demo-agricircle.mp4`).<br>• Cẩm nang hướng dẫn sử dụng (`USER_GUIDE.md` & `docs/09-huong-dan-su-dung.md`).<br>• **Đặc tả & Trang in Poster khổ A0** (`docs/10-thiet-ke-poster-a0.md` & `docs/poster-a0.html`). |
 
 ---
 
@@ -33,11 +32,6 @@
 
 ---
 
-## 3. Các Bước Tiếp Theo (Next Steps)
+## 3. Sẵn Sàng Tham Gia Hội Thi KHKT Cấp Huyện & Tỉnh
 
-1. **Cập nhật Kế hoạch nghiên cứu KHKT chính thức (`docs/04-ke-hoach-nghien-cuu-khkt.md`):**
-   - Điều chỉnh lại các phần mục tiêu, tính mới theo đúng ngôn ngữ học sinh THCS và chạy lệnh xuất file Word `docs/04-ke-hoach-nghien-cuu-khkt.docx`.
-2. **Triển khai thử nghiệm thực địa & phát phiếu khảo sát:**
-   - Cài đặt ứng dụng PWA lên điện thoại phụ huynh và bà con tại Cẩm Đường để ghi nhận phản hồi vào mẫu phiếu `docs/05-mau-khao-sat-nong-dan.md`.
-3. **Chuẩn bị Poster triển lãm KHKT khổ A0:**
-   - Thiết kế bố cục Poster với các hình ảnh thực tế, biểu đồ khảo sát và mã QR để Ban Giám khảo quét mở ứng dụng trải nghiệm trực tiếp.
+Toàn bộ 6 giai đoạn phát triển và hồ sơ nghiên cứu đã hoàn tất 100%. Em học sinh Hồ Ngọc Quỳnh Như và thầy hướng dẫn Hoàng Thành Đạt đã có trong tay bộ công cụ hoàn chỉnh nhất để tự tin bước vào vòng triển lãm và phản biện trực tiếp trước Ban Giám khảo.

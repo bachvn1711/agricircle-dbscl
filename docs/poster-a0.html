@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poster Triển Lãm KHKT A0 — AgriCircle (Hồ Ngọc Quỳnh Như)</title>
+  <style>
+    @page {
+      size: 841mm 1189mm;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #2b2b2b;
+      color: #1a201c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+    }
+    .no-print-bar {
+      position: fixed;
+      top: 15px;
+      right: 25px;
+      z-index: 9999;
+      display: flex;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 10px 18px;
+      border-radius: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .btn-print {
+      background: #1b5e20;
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-print:hover {
+      background: #2e7d32;
+    }
+    .btn-tip {
+      font-size: 13px;
+      color: #555;
+      display: flex;
+      align-items: center;
+    }
+    .poster-container {
+      width: 841mm;
+      min-height: 1189mm;
+      height: 1189mm;
+      background: #f9fbf7;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    .poster-header {
+      background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #388e3c 100%);
+      color: #ffffff;
+      padding: 28mm 25mm 20mm 25mm;
+      text-align: center;
+      border-bottom: 6mm solid #fbc02d;
+    }
+    .sub-org {
+      font-size: 17pt;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #e8f5e9;
+      margin-bottom: 5mm;
+    }
+    .main-title {
+      font-size: 34pt;
+      font-weight: 900;
+      line-height: 1.25;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 6mm;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+    .meta-bar {
+      display: flex;
+      justify-content: center;
+      gap: 25mm;
+      font-size: 17pt;
+      font-weight: 600;
+      color: #fff9c4;
+      border-top: 1px solid rgba(255,255,255,0.25);
+      padding-top: 5mm;
+    }
+    .meta-item span {
+      color: #ffffff;
+    }
+    .poster-body {
+      flex: 1;
+      padding: 16mm 20mm 12mm 20mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 14mm 16mm;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 8mm;
+      padding: 12mm 14mm;
+      box-shadow: 0 3mm 10mm rgba(0,0,0,0.05);
+      border: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-full {
+      grid-column: 1 / -1;
+    }
+    .card-title {
+      font-size: 21pt;
+      font-weight: 800;
+      color: #1b5e20;
+      display: flex;
+      align-items: center;
+      gap: 4mm;
+      border-bottom: 2mm solid #e8f5e9;
+      padding-bottom: 4mm;
+      margin-bottom: 6mm;
+    }
+    .card-title .badge-num {
+      background: #1b5e20;
+      color: #fff;
+      width: 11mm;
+      height: 11mm;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15pt;
+      font-weight: 900;
+    }
+    .p-text {
+      font-size: 15pt;
+      line-height: 1.5;
+      color: #2c3e50;
+      margin-bottom: 4mm;
+      text-align: justify;
+    }
+    .highlight {
+      color: #c62828;
+      font-weight: 700;
+    }
+    .img-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+      margin-top: 3mm;
+    }
+    .img-card {
+      background: #f4f6f4;
+      border-radius: 5mm;
+      overflow: hidden;
+      border: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+    }
+    .img-card img {
+      width: 100%;
+      height: 52mm;
+      object-fit: cover;
+      display: block;
+    }
+    .img-card .img-caption {
+      font-size: 11.5pt;
+      font-weight: 600;
+      text-align: center;
+      padding: 2.5mm 3mm;
+      color: #333;
+      background: #eef2ed;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6mm;
+      margin-top: 4mm;
+    }
+    .feature-box {
+      background: #f9fbf7;
+      border: 1.5px solid #c8e6c9;
+      border-radius: 6mm;
+      padding: 6mm 5mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .feature-icon {
+      font-size: 32pt;
+      margin-bottom: 3mm;
+    }
+    .feature-title {
+      font-size: 15pt;
+      font-weight: 800;
+      color: #1b5e20;
+      margin-bottom: 2mm;
+    }
+    .feature-desc {
+      font-size: 12.5pt;
+      line-height: 1.4;
+      color: #4a554e;
+    }
+    .chips-row {
+      display: flex;
+      gap: 3mm;
+      justify-content: center;
+      margin-top: 3mm;
+      flex-wrap: wrap;
+    }
+    .chip {
+      background: #e8f5e9;
+      border: 1px solid #81c784;
+      color: #1b5e20;
+      font-size: 11pt;
+      font-weight: 700;
+      padding: 1.5mm 4mm;
+      border-radius: 4mm;
+    }
+    .chip-warn {
+      background: #fff3e0;
+      border-color: #ffb74d;
+      color: #e65100;
+    }
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6mm;
+      margin-top: 4mm;
+    }
+    .stat-box {
+      background: linear-gradient(180deg, #ffffff 0%, #f1f8e9 100%);
+      border: 2px solid #a5d6a7;
+      border-radius: 6mm;
+      padding: 6mm 4mm;
+      text-align: center;
+    }
+    .stat-val {
+      font-size: 32pt;
+      font-weight: 900;
+      color: #1b5e20;
+      line-height: 1;
+      margin-bottom: 2mm;
+    }
+    .stat-lbl {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #388e3c;
+    }
+    .poster-footer {
+      background: #1b5e20;
+      color: #ffffff;
+      padding: 10mm 25mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 4mm solid #fbc02d;
+    }
+    .footer-quote {
+      font-size: 16pt;
+      font-style: italic;
+      line-height: 1.4;
+      max-width: 550mm;
+      color: #e8f5e9;
+    }
+    .footer-quote strong {
+      color: #fff59d;
+    }
+    .footer-qr-card {
+      background: #ffffff;
+      color: #1a201c;
+      padding: 4mm 8mm;
+      border-radius: 5mm;
+      display: flex;
+      align-items: center;
+      gap: 6mm;
+      box-shadow: 0 2mm 6mm rgba(0,0,0,0.2);
+    }
+    .qr-box {
+      width: 26mm;
+      height: 26mm;
+      background: #ffffff;
+      border: 2px solid #1b5e20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3mm;
+    }
+    .qr-info h4 {
+      font-size: 14pt;
+      font-weight: 800;
+      color: #1b5e20;
+      margin-bottom: 1.5mm;
+    }
+    .qr-info p {
+      font-size: 11pt;
+      color: #555;
+    }
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .no-print-bar {
+        display: none !important;
+      }
+      .poster-container {
+        box-shadow: none;
+        width: 841mm;
+        height: 1189mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <button class="btn-print" onclick="window.print()">
+      🖨️ In / Xuất PDF Poster A0
+    </button>
+    <div class="btn-tip">Khuyến nghị: Chọn Destination: Save as PDF, Paper size: A0, Background graphics: On</div>
+  </div>
+
+  <div class="poster-container">
+
+    <header class="poster-header">
+      <div class="sub-org">SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐỒNG NAI — PHÒNG GD&ĐT HUYỆN LONG THÀNH</div>
+      <h1 class="main-title">XÂY DỰNG NỀN TẢNG KẾT NỐI TRAO ĐỔI PHỤ PHẨM NÔNG NGHIỆP<br>& HỖ TRỢ ĐỊNH GIÁ NÔNG SẢN THEO ĐỘ TƯƠI (AGRICIRCLE)</h1>
+      <div class="meta-bar">
+        <div class="meta-item">Lĩnh vực: <span>Hệ thống phần mềm & CNTT</span></div>
+        <div class="meta-item">Tác giả: <span>Hồ Ngọc Quỳnh Như (9/C3, THCS Cẩm Đường)</span></div>
+        <div class="meta-item">GVHD: <span>Hoàng Thành Đạt</span></div>
+      </div>
+    </header>
+
+    <main class="poster-body">
+
+      <section class="card">
+        <h2 class="card-title"><span class="badge-num">1</span> Bối Cảnh Thực Tế & Lý Do Chọn Đề Tài</h2>
+        <p class="p-text">
+          Tại xã Cẩm Đường (Long Thành, Đồng Nai), mỗi mùa thu hoạch lúa thải ra hàng ngàn tấn rơm rạ. Do không có phương tiện thu gom, <span class="highlight">70% nông dân chọn đốt đồng lộ thiên</span> gây khói mù mịt, cay mắt, sinh bụi mịn PM2.5 và khí nhà kính; 23.3% vứt xuống kênh rạch làm tắc nghẽn dòng chảy.
+        </p>
+        <p class="p-text">
+          Đồng thời, trái cây (xoài, chôm chôm, thanh long) sau 1 - 2 ngày thường bị thương lái ép giá vì thiếu kho lạnh. Nhóm nghiên cứu nhận thấy: <span class="highlight">Phụ phẩm ruộng này chính là tài nguyên quý của trại nấm và hộ ủ phân vi sinh</span>.
+        </p>
+        <div class="img-row">
+          <div class="img-card">
+            <img src="images/hinh1_hien_trang_dot_rom.png" alt="Khói đốt rơm rạ">
+            <div class="img-caption">Khói đốt đồng gây ô nhiễm môi trường</div>
+          </div>
+          <div class="img-card">
+            <img src="images/hinh2_phu_pham_cam_duong.png" alt="Rơm rạ và phụ phẩm">
+            <div class="img-caption">Phụ phẩm nông nghiệp bỏ phí ngoài đồng</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title"><span class="badge-num">2</span> Kết Quả Khảo Sát Thực Địa 30 Hộ Dân</h2>
+        <p class="p-text">
+          Học sinh trực tiếp đến 30 hộ nông dân tại Cẩm Đường phỏng vấn và phát hiện <strong>4 khó khăn cốt lõi</strong> khiến các giải pháp TMĐT và Zalo hiện nay thất bại:
+        </p>
+        <div style="margin-top: 2mm; margin-bottom: 3mm;">
+          <ul style="padding-left: 6mm; font-size: 14.5pt; line-height: 1.45; color: #37474f;">
+            <li><strong>Người già ngại dùng điện thoại:</strong> 80% nông dân > 50 tuổi, mắt kém, chữ nhỏ khó đọc, tay dính đất ngại bấm phím.</li>
+            <li><strong>Đường vào ruộng phức tạp:</strong> Có ruộng chỉ đi được xe ba gác hoặc ghe xuồng, xe tải đến nơi phải quay đầu.</li>
+            <li><strong>Chất lượng rơm khác nhau:</strong> Nấm rơm chỉ nhận rơm khô, cơ sở vi sinh nhận cả rơm ướt dầm mưa.</li>
+            <li><strong>Sợ bị làm phiền:</strong> Ruộng đã dọn xong 3 ngày trước nhưng vẫn liên tục bị gọi điện thoại quấy rầy.</li>
+          </ul>
+        </div>
+        <div class="img-card" style="margin-top: auto;">
+          <img src="images/hinh3_bieu_do_khao_sat_30_ho.png" alt="Biểu đồ khảo sát 30 hộ">
+          <div class="img-caption">Biểu đồ hiện trạng xử lý phụ phẩm & 4 rào cản lớn nhất của bà con</div>
+        </div>
+      </section>
+
+      <section class="card card-full">
+        <h2 class="card-title"><span class="badge-num">3</span> Giải Pháp Kỹ Thuật Thiết Thực Phù Hợp Nông Thôn (AgriCircle)</h2>
+        <div class="feature-grid">
+          <div class="feature-box">
+            <div class="feature-icon">🎙️</div>
+            <div class="feature-title">Đăng Tin Bằng Giọng Nói</div>
+            <div class="feature-desc">Nông dân bấm Micro nói tự nhiên 1 câu mộc mạc: <em>"Tôi có 2 công rơm khô xã Cẩm Đường cho miễn phí"</em>, máy tự điền đơn.</div>
+            <div class="chips-row">
+              <span class="chip">Web Speech API</span>
+              <span class="chip">1 chạm cực nhanh</span>
+            </div>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon">🌾</div>
+            <div class="feature-title">4 Nút Chọn Khối Lượng</div>
+            <div class="feature-desc">Loại bỏ hoàn toàn bàn phím số! 4 nút bấm to nổi 3D tiện dụng: 1 công, 2 công, 5 công, 1 tấn cho người lớn tuổi.</div>
+            <div class="chips-row">
+              <span class="chip">1 Công (~555kg)</span>
+              <span class="chip">2 Công (~1.111kg)</span>
+            </div>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon">🚛</div>
+            <div class="feature-title">Đường Xe & Độ Ẩm Rơm</div>
+            <div class="feature-desc">Huy hiệu trực quan nhìn vào biết ngay xe tải vào được không hay phải đi xe ba gác, ghe thuyền; rơm khô hay rơm ướt.</div>
+            <div class="chips-row">
+              <span class="chip">🚛 Xe tải / 🛺 Ba gác</span>
+              <span class="chip-warn">☀️ Khô / 🌧️ Ướt</span>
+            </div>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon">🔕</div>
+            <div class="feature-title">Tự Động Khóa Gọi Sau Gom</div>
+            <div class="feature-desc">Người đến lấy nhập mã 4 số bí mật. Tin tự biến mất khỏi bản đồ và khóa nút gọi điện thoại, bảo vệ sự yên tĩnh cho bà con.</div>
+            <div class="chips-row">
+              <span class="chip">Mã 4 số an toàn</span>
+              <span class="chip">Chống quấy rầy 100%</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 4mm; display: grid; grid-template-columns: 1fr 1fr; gap: 6mm;">
+          <div class="img-card">
+            <img src="images/hinh4_giao_dien_agricircle.png" alt="Giao diện AgriCircle" style="height: 60mm; object-fit: contain; background: #fff;">
+            <div class="img-caption">Giao diện Bản đồ Leaflet & Thẻ xem trước trực quan (Preview Card) nút bấm to 54px</div>
+          </div>
+          <div class="img-card">
+            <img src="images/hinh5_bieu_do_dinh_gia_do_tuoi.png" alt="Định giá độ tươi" style="height: 60mm; object-fit: contain; background: #fff;">
+            <div class="img-caption">Công cụ định giá khoa học theo ngày sau thu hoạch & Dự báo 3 ngày (Chạy Offline 100%)</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title"><span class="badge-num">4</span> Kết Quả Thử Nghiệm Thực Địa Tại Cẩm Đường</h2>
+        <p class="p-text">
+          Học sinh trực tiếp mang ứng dụng cài lên điện thoại của 20 hộ dân thử nghiệm và đạt kết quả ấn tượng:
+        </p>
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="stat-val">32s</div>
+            <div class="stat-lbl">Thời gian đăng tin trung bình (nhanh gấp 4 lần gõ phím)</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">100%</div>
+            <div class="stat-lbl">Bà con lớn tuổi sử dụng thành thạo sau 1 lần</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">85%</div>
+            <div class="stat-lbl">Phụ phẩm được kết nối thu gom trong 48 giờ</div>
+          </div>
+        </div>
+        <div class="img-card" style="margin-top: auto;">
+          <img src="images/hinh6_nhat_ky_thu_nghiem.png" alt="Nhật ký thử nghiệm">
+          <div class="img-caption">Nhật ký học sinh mang máy ra ruộng lúa và vườn cây hướng dẫn bà con thử nghiệm</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title"><span class="badge-num">5</span> Ý Nghĩa Môi Trường & Nhân Rộng Mô Hình</h2>
+        <p class="p-text">
+          <strong>1. Bảo vệ môi trường sinh thái:</strong> Cứ mỗi 1 tấn rơm rạ được thu gom tái sử dụng thay vì đốt bỏ giúp giảm phát thải <span class="highlight">1.46 tấn CO2e tương đương</span>, ngăn ngừa khói độc và bụi mịn PM2.5.
+        </p>
+        <p class="p-text">
+          <strong>2. Kinh tế nông thôn tuần hoàn:</strong> Nâng cao thu nhập cho nhà vườn nhờ bán thanh lý nông sản ngày 2, ngày 3 thay vì vứt bỏ; cung cấp nguồn xơ hữu cơ giá rẻ cho cơ sở làm nấm rơm và trang trại chăn nuôi.
+        </p>
+        <p class="p-text">
+          <strong>3. Không tốn chi phí vận hành:</strong> Ứng dụng PWA mã nguồn mở, chạy không cần thuê máy chủ đắt tiền, chạy mượt mà trên điện thoại cũ của nông dân.
+        </p>
+        <div style="background: #e8f5e9; padding: 4mm 6mm; border-radius: 5mm; border-left: 4mm solid #2e7d32; margin-top: auto;">
+          <p style="font-size: 13pt; font-weight: 700; color: #1b5e20;">
+            Tiềm năng nhân rộng: Dễ dàng áp dụng cho các xã nông nghiệp tại huyện Long Thành và toàn vùng Đồng bằng sông Cửu Long.
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="poster-footer">
+      <div class="footer-quote">
+        <strong>Thông điệp dự án:</strong> "Khoa học kỹ thuật dành cho học sinh THCS không phải là những thuật toán cao siêu xa vời, mà là sự lắng nghe chân thành để mang lại điều tốt đẹp nhất cho quê hương mình."
+      </div>
+      <div class="footer-qr-card">
+        <div class="qr-box">
+          <svg viewBox="0 0 100 100" width="80" height="80">
+            <rect width="100" height="100" fill="#ffffff" />
+            <rect x="10" y="10" width="24" height="24" fill="#1b5e20" />
+            <rect x="14" y="14" width="16" height="16" fill="#ffffff" />
+            <rect x="18" y="18" width="8" height="8" fill="#1b5e20" />
+            <rect x="66" y="10" width="24" height="24" fill="#1b5e20" />
+            <rect x="70" y="14" width="16" height="16" fill="#ffffff" />
+            <rect x="74" y="18" width="8" height="8" fill="#1b5e20" />
+            <rect x="10" y="66" width="24" height="24" fill="#1b5e20" />
+            <rect x="14" y="70" width="16" height="16" fill="#ffffff" />
+            <rect x="18" y="74" width="8" height="8" fill="#1b5e20" />
+            <rect x="42" y="12" width="6" height="14" fill="#1b5e20" />
+            <rect x="52" y="18" width="8" height="8" fill="#1b5e20" />
+            <rect x="40" y="40" width="20" height="20" fill="#1b5e20" />
+            <rect x="45" y="45" width="10" height="10" fill="#ffffff" />
+            <rect x="42" y="68" width="8" height="18" fill="#1b5e20" />
+            <rect x="68" y="44" width="18" height="6" fill="#1b5e20" />
+            <rect x="74" y="56" width="12" height="12" fill="#1b5e20" />
+            <rect x="56" y="74" width="14" height="8" fill="#1b5e20" />
+            <rect x="76" y="74" width="14" height="14" fill="#1b5e20" />
+          </svg>
+        </div>
+        <div class="qr-info">
+          <h4>QUÉT MÃ TRẢI NGHIỆM TRỰC TIẾP</h4>
+          <p>Mở ứng dụng AgriCircle trên điện thoại</p>
+          <p style="font-weight: 700; color: #1b5e20; margin-top: 1mm;">github.com/bachvn1711/agricircle-dbscl</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
