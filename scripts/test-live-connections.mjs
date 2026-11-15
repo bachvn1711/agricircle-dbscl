@@ -2,36 +2,47 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { createApp } from '../src/server/app.js';
 
-const testDbDir = path.resolve(import.meta.dirname, '../data');
-if (!fs.existsSync(testDbDir)) {
-  fs.mkdirSync(testDbDir, { recursive: true });
-}
-const testDbPath = path.resolve(testDbDir, `live-test-${Date.now()}.db`);
+const targetArg = process.argv[2];
+let baseUrl = null;
+let app = null;
+let testDbPath = null;
 
-const app = await createApp({
-  dbPath: testDbPath,
-  adminPin: '202600',
-  staticDir: path.resolve(import.meta.dirname, '../public'),
-  sharedDir: path.resolve(import.meta.dirname, '../src/shared'),
-  leafletDistDir: path.resolve(import.meta.dirname, '../node_modules/leaflet/dist')
-});
+if (targetArg && /^https?:\/\//i.test(targetArg)) {
+  baseUrl = targetArg.replace(/\/+$/, '');
+  console.log(`Running tests against LIVE ONLINE URL: ${baseUrl}`);
+} else {
+  const testDbDir = path.resolve(import.meta.dirname, '../data');
+  if (!fs.existsSync(testDbDir)) {
+    fs.mkdirSync(testDbDir, { recursive: true });
+  }
+  testDbPath = path.resolve(testDbDir, `live-test-${Date.now()}.db`);
 
-await new Promise((resolve) => {
-  app.server.listen(0, '127.0.0.1', () => {
-    resolve();
+  app = await createApp({
+    dbPath: testDbPath,
+    adminPin: '202600',
+    staticDir: path.resolve(import.meta.dirname, '../public'),
+    sharedDir: path.resolve(import.meta.dirname, '../src/shared'),
+    leafletDistDir: path.resolve(import.meta.dirname, '../node_modules/leaflet/dist')
   });
-});
 
-const address = app.server.address();
-const baseUrl = `http://127.0.0.1:${address.port}`;
-console.log(`Live test server running on ${baseUrl}`);
+  await new Promise((resolve) => {
+    app.server.listen(0, '127.0.0.1', () => {
+      resolve();
+    });
+  });
+
+  const address = app.server.address();
+  baseUrl = `http://127.0.0.1:${address.port}`;
+  console.log(`Live test server running on ${baseUrl}`);
+}
 
 let passed = 0;
 let failed = 0;
 
 async function request(urlPath, options = {}) {
   const url = `${baseUrl}${urlPath}`;
-  const response = await fetch(url, options);
+  const headers = { ...options.headers, 'Bypass-Tunnel-Reminder': 'true' };
+  const response = await fetch(url, { ...options, headers });
   const text = await response.text();
   let json = null;
   try {
@@ -90,7 +101,7 @@ try {
     accessRoad: 'truck',
     moistureState: 'dry',
     locationNote: 'Gần cầu Suối Cả, ruộng sau đình',
-    clientRequestId: 'req-live-post-00000000001'
+    clientRequestId: `req-live-post-${Date.now()}`
   };
 
   const rCreate = await request('/api/listings', {
@@ -111,7 +122,7 @@ try {
   const foundInList = rListAfterCreate.json?.listings?.find((item) => item.id === createdListing?.id);
   assert(Boolean(foundInList), 'Newly created listing appears in public GET /api/listings');
 
-  const rCollect = await request(`/api/listings/${createdListing.id}/collect`, {
+  const rCollect = await request(`/api/listings/${createdListing?.id}/collect`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -128,7 +139,7 @@ try {
   const rCalcSync = await request('/api/metrics/calculation', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ delta: 5, clientRequestId: 'req-live-calc-00000000001' })
+    body: JSON.stringify({ delta: 5, clientRequestId: `req-live-calc-${Date.now()}` })
   });
   assert(rCalcSync.status === 200 && rCalcSync.json?.ok === true, 'POST /api/metrics/calculation records offline calculations');
 
@@ -152,15 +163,17 @@ try {
   assert(rTraversal.status === 403 || rTraversal.status === 404, 'Block path traversal URL attempts');
 
   console.log('\n======================================================');
-  console.log(`LIVE CONNECTION TESTS SUMMARY: ${passed} PASSED, ${failed} FAILED`);
+  console.log(`TEST SUMMARY FOR ${baseUrl}: ${passed} PASSED, ${failed} FAILED`);
   console.log('======================================================\n');
 } finally {
-  await app.close();
-  try {
-    fs.unlinkSync(testDbPath);
-    if (fs.existsSync(`${testDbPath}-wal`)) fs.unlinkSync(`${testDbPath}-wal`);
-    if (fs.existsSync(`${testDbPath}-shm`)) fs.unlinkSync(`${testDbPath}-shm`);
-  } catch {
+  if (app) {
+    await app.close();
+    try {
+      fs.unlinkSync(testDbPath);
+      if (fs.existsSync(`${testDbPath}-wal`)) fs.unlinkSync(`${testDbPath}-wal`);
+      if (fs.existsSync(`${testDbPath}-shm`)) fs.unlinkSync(`${testDbPath}-shm`);
+    } catch {
+    }
   }
 }
 
