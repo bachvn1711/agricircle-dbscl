@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: agricircle-dbscl
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install
+    startCommand: node src/server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: HOST
+        value: 0.0.0.0
+      - key: DB_PATH
+        value: ./data/agricircle.db
+      - key: ADMIN_PIN
+        generateValue: false
+        value: "2026"
