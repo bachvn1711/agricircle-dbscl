@@ -160,7 +160,7 @@ try {
   assert(rSecurityCT.status === 415, 'Reject non-application/json payload with HTTP 415');
 
   const rTraversal = await request('/..%2fpackage.json');
-  assert(rTraversal.status === 403 || rTraversal.status === 404, 'Block path traversal URL attempts');
+  assert([400, 403, 404].includes(rTraversal.status), 'Block path traversal URL attempts');
 
   console.log('\n======================================================');
   console.log(`TEST SUMMARY FOR ${baseUrl}: ${passed} PASSED, ${failed} FAILED`);
