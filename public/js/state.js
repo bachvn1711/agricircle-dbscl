@@ -2,7 +2,7 @@ const RECEIPTS_STORAGE_KEY = 'khkt_short_code_receipts';
 const CALC_QUEUE_STORAGE_KEY = 'khkt_offline_calc_queue';
 const PENDING_POST_STORAGE_KEY = 'khkt_pending_post';
 const FARMER_PROFILE_STORAGE_KEY = 'khkt_farmer_profile';
-const REGION_STORAGE_KEY = 'khkt_selected_region';
+const REGION_STORAGE_KEY = 'khkt_selected_region_v2';
 
 const MAX_RECEIPTS = 50;
 const MAX_CALC_BATCH_DELTA = 500;

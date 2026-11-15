@@ -1110,7 +1110,7 @@ export function createMapView({
     }
     const target = getEffectiveOrigin();
     if (mapInstance) {
-      mapInstance.setView([target.lat, target.lng], 12);
+      mapInstance.setView([target.lat, target.lng], getRegion().defaultZoom || 13);
     }
     loadListings();
   });
