@@ -174,7 +174,7 @@ export function createMapView({
 
   const heroBadge = createEl('div', { className: 'hero-3d-badge' },
     createEl('span', { className: 'hero-3d-badge-pulse' }),
-    createEl('span', { text: 'Nông nghiệp tuần hoàn ĐBSCL - Kết nối trực tiếp tận ruộng' })
+    createEl('span', { text: 'Nông nghiệp tuần hoàn Xuân Đường & lân cận - Kết nối trực tiếp tận ruộng' })
   );
 
   const heroTitle = createEl('h1', { id: 'heading-map', className: 'hero-3d-title', text: 'Sàn Phụ Phẩm Nông Nghiệp Tuần Hoàn' });
@@ -226,7 +226,7 @@ export function createMapView({
     ),
     createEl('div', { className: 'role-3d-body' },
       createEl('h2', { className: 'role-3d-title', text: 'Tra Cứu Giá & Độ Tươi' }),
-      createEl('p', { className: 'role-3d-desc', text: 'Biết ngay rơm rạ sau 1-3 ngày sụt giảm bao nhiêu giá trị theo thời tiết ĐBSCL để bán kịp lúc.' })
+      createEl('p', { className: 'role-3d-desc', text: 'Biết ngay nông sản & phụ phẩm sau 1-3 ngày sụt giảm bao nhiêu giá trị theo thời tiết để bán kịp lúc.' })
     ),
     createEl('button', {
       type: 'button',

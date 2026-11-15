@@ -53,12 +53,14 @@ test('R14: src/shared modules import and execute with Buffer and process deleted
   }
 });
 
-test('R3: REGIONS defaults to ĐBSCL Cần Thơ center and getRegionById resolves all 3 regions', async () => {
+test('R3: REGIONS defaults to Xuân Đường center with zoom 13 and getRegionById resolves all regions', async () => {
   const { REGIONS, getRegionById } = await import('../src/shared/regions.js');
   const regionList = Array.isArray(REGIONS) ? REGIONS : Object.values(REGIONS);
 
-  assert.ok(regionList.length >= 3);
-  assert.equal(regionList[0].id, 'dbscl');
+  assert.ok(regionList.length >= 4);
+  assert.equal(regionList[0].id, 'xuan_duong');
+  assert.deepEqual(regionList[0].center, [10.7482, 107.1825]);
+  assert.equal(regionList[0].defaultZoom, 13);
 
   const dbscl = getRegionById('dbscl');
   const mienTrung = getRegionById('mien_trung');
@@ -75,8 +77,8 @@ test('R3: REGIONS defaults to ĐBSCL Cần Thơ center and getRegionById resolve
   assert.doesNotThrow(() => {
     const unknown = getRegionById('unknown-region');
     const empty = getRegionById(null);
-    assert.ok(unknown == null || unknown.id === 'dbscl');
-    assert.ok(empty == null || empty.id === 'dbscl');
+    assert.ok(unknown == null || unknown.id === 'xuan_duong');
+    assert.ok(empty == null || empty.id === 'xuan_duong');
   });
 });
 

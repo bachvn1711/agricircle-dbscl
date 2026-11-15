@@ -378,7 +378,7 @@ export function saveFarmerProfile(storage, profile) {
   return next;
 }
 
-export function readSelectedRegionId(storage, isValidRegion = null, defaultRegionId = 'dbscl') {
+export function readSelectedRegionId(storage, isValidRegion = null, defaultRegionId = 'xuan_duong') {
   const raw = readLocalJsonSafe(storage, REGION_STORAGE_KEY, defaultRegionId);
   if (typeof isValidRegion === 'function') {
     return isValidRegion(raw) ? raw : defaultRegionId;
@@ -386,7 +386,7 @@ export function readSelectedRegionId(storage, isValidRegion = null, defaultRegio
   return typeof raw === 'string' && raw.length > 0 ? raw : defaultRegionId;
 }
 
-export function saveSelectedRegionId(storage, regionId, isValidRegion = null, defaultRegionId = 'dbscl') {
+export function saveSelectedRegionId(storage, regionId, isValidRegion = null, defaultRegionId = 'xuan_duong') {
   if (typeof isValidRegion === 'function' && !isValidRegion(regionId)) {
     return readSelectedRegionId(storage, isValidRegion, defaultRegionId);
   }

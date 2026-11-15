@@ -1,19 +1,33 @@
-export const DEFAULT_REGION_ID = 'dbscl';
+export const DEFAULT_REGION_ID = 'xuan_duong';
 
 const RAW_REGIONS = [
   {
+    id: 'xuan_duong',
+    name: 'Xã Xuân Đường & lân cận (Đồng Nai)',
+    shortName: 'Xuân Đường (Đồng Nai)',
+    center: [10.7482, 107.1825],
+    defaultZoom: 13,
+    defaultUnit: 'cong_nam_bo',
+    areaLabel: 'công Nam Bộ 1.000 m²',
+    communes: [
+      { name: 'Xã Xuân Đường (Phân hiệu 2 THCS Cẩm Đường)', lat: 10.7482, lng: 107.1825 },
+      { name: 'Ấp Xuân Đường, Xã Xuân Đường', lat: 10.7460, lng: 107.1860 },
+      { name: 'Ấp Cẩm Đường, Xã Xuân Đường', lat: 10.7310, lng: 107.1450 },
+      { name: 'Ấp Thừa Đức, Xã Xuân Đường', lat: 10.7680, lng: 107.1710 },
+      { name: 'Xã Cẩm Đường (lân cận)', lat: 10.7285, lng: 107.1250 },
+      { name: 'Xã Cẩm Mỹ (lân cận)', lat: 10.7850, lng: 107.2350 },
+      { name: 'Xã Xuân Phú (lân cận)', lat: 10.8150, lng: 107.3050 }
+    ]
+  },
+  {
     id: 'dbscl',
-    name: 'Đồng bằng sông Cửu Long (ĐBSCL)',
-    shortName: 'ĐBSCL',
+    name: 'Đồng bằng sông Cửu Long (Mở rộng)',
+    shortName: 'ĐBSCL (Mở rộng)',
     center: [10.0452, 105.7469],
     defaultZoom: 11,
     defaultUnit: 'cong_nam_bo',
     areaLabel: 'công Nam Bộ 1.000 m²',
     communes: [
-      { name: 'Xã Xuân Đường, Cẩm Mỹ, Đồng Nai', lat: 10.7482, lng: 107.1825 },
-      { name: 'Xã Cẩm Đường, Long Thành, Đồng Nai', lat: 10.7285, lng: 107.1250 },
-      { name: 'Xã Thừa Đức, Cẩm Mỹ, Đồng Nai', lat: 10.7720, lng: 107.1705 },
-      { name: 'Xã Nhân Nghĩa, Cẩm Mỹ, Đồng Nai', lat: 10.7150, lng: 107.1600 },
       { name: 'Phường An Khánh, Ninh Kiều, Cần Thơ', lat: 10.0309, lng: 105.7568 },
       { name: 'Xã Mỹ Khánh, Phong Điền, Cần Thơ', lat: 10.0018, lng: 105.7104 },
       { name: 'Xã Trường Long, Phong Điền, Cần Thơ', lat: 9.9885, lng: 105.6472 },
@@ -23,7 +37,7 @@ const RAW_REGIONS = [
   },
   {
     id: 'mien_trung',
-    name: 'Miền Trung',
+    name: 'Miền Trung (Mở rộng)',
     shortName: 'Miền Trung',
     center: [16.0544, 108.2022],
     defaultZoom: 11,
@@ -37,7 +51,7 @@ const RAW_REGIONS = [
   },
   {
     id: 'mien_bac',
-    name: 'Miền Bắc',
+    name: 'Miền Bắc (Mở rộng)',
     shortName: 'Miền Bắc',
     center: [21.0285, 105.8542],
     defaultZoom: 11,

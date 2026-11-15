@@ -19,7 +19,7 @@ import {
 test('prototype keys and degenerate inputs never leak Object.prototype members', () => {
   for (const key of ['__proto__', 'constructor', 'toString', 'hasOwnProperty', 'valueOf']) {
     assert.equal(isValidRegionId(key), false);
-    assert.equal(getRegionById(key).id, 'dbscl');
+    assert.equal(getRegionById(key).id, 'xuan_duong');
     assert.equal(getCropById(key), null);
     assert.equal(getByproductCategoryById(key), null);
     assert.equal(getUnitById(key), null);
