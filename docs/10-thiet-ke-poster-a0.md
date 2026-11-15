@@ -116,3 +116,4 @@
    - **Tỷ lệ (Scale):** Chọn **Fit to paper (Vừa trang)**.
    - **Tùy chọn:** Tích chọn **Background graphics (Đồ họa nền)** để giữ nguyên màu sắc.
 4. Mang tệp PDF này ra nhà in quảng cáo in trên chất liệu **bạt Hiflex chất lượng cao** hoặc **Decal PP bồi Formex 5mm** để dựng trước gian hàng thi KHKT.
+

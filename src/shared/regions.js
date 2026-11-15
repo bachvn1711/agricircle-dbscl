@@ -10,6 +10,10 @@ const RAW_REGIONS = [
     defaultUnit: 'cong_nam_bo',
     areaLabel: 'công Nam Bộ 1.000 m²',
     communes: [
+      { name: 'Xã Xuân Đường, Cẩm Mỹ, Đồng Nai', lat: 10.7482, lng: 107.1825 },
+      { name: 'Xã Cẩm Đường, Long Thành, Đồng Nai', lat: 10.7285, lng: 107.1250 },
+      { name: 'Xã Thừa Đức, Cẩm Mỹ, Đồng Nai', lat: 10.7720, lng: 107.1705 },
+      { name: 'Xã Nhân Nghĩa, Cẩm Mỹ, Đồng Nai', lat: 10.7150, lng: 107.1600 },
       { name: 'Phường An Khánh, Ninh Kiều, Cần Thơ', lat: 10.0309, lng: 105.7568 },
       { name: 'Xã Mỹ Khánh, Phong Điền, Cần Thơ', lat: 10.0018, lng: 105.7104 },
       { name: 'Xã Trường Long, Phong Điền, Cần Thơ', lat: 9.9885, lng: 105.6472 },
