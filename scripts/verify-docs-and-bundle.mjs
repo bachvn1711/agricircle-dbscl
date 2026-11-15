@@ -4,12 +4,13 @@ import { pathToFileURL } from 'node:url';
 
 const ROOT_DIR = path.resolve(import.meta.dirname, '..');
 const MAX_BUNDLE_BYTES = 1_572_864;
+const CI_PATH = fs.existsSync(path.resolve(ROOT_DIR, '.github/workflows/ci.yml')) ? '.github/workflows/ci.yml' : '.ci-workflows/workflows/ci.yml';
 const REQUIRED_DOCS = [
   'README.md',
   'docs/01-goals.md',
   'docs/02-requirements.md',
   'docs/03-thcs-technical-guide.md',
-  '.github/workflows/ci.yml'
+  CI_PATH
 ];
 const LEAFLET_DIST_FILES = [
   'leaflet.js',
@@ -647,7 +648,7 @@ function verifyDocsAndWorkflow() {
     readUtf8Required(relPath);
   }
 
-  const ciContent = readUtf8Required('.github/workflows/ci.yml');
+  const ciContent = readUtf8Required(CI_PATH);
   assertCondition(/permissions:\s*\r?\n\s*contents:\s*read\b/.test(ciContent), 'ci.yml must set minimal contents: read permissions');
   assertCondition(/timeout-minutes:\s*\d+/.test(ciContent), 'ci.yml must specify timeout-minutes');
   assertCondition(/node-version:\s*['"]?26['"]?/.test(ciContent), 'ci.yml must use Node 26');
