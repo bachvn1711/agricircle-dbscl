@@ -8,7 +8,7 @@ const RAW_CROPS = [
     maxShelfLifeDays: 12,
     referencePriceVnd: 20000,
     byproductCategory: 'rau-cu-qua',
-    sourceNote: 'Khảo sát 24 hộ trồng rau màu tại ĐBSCL và tài liệu bảo quản sau thu hoạch rau quả nhiệt đới'
+    sourceNote: 'Khảo sát hộ trồng rau màu tại xã Xuân Đường (Cẩm Đường, Đồng Nai) và tài liệu bảo quản rau quả sau thu hoạch'
   },
   {
     id: 'rau-muong',
@@ -19,7 +19,7 @@ const RAW_CROPS = [
     maxShelfLifeDays: 4,
     referencePriceVnd: 10000,
     byproductCategory: 'rau-cu-qua',
-    sourceNote: 'Khảo sát hộ trồng rau ăn lá vùng ven Cần Thơ và tài liệu bảo quản rau xanh tươi'
+    sourceNote: 'Khảo sát hộ trồng rau ăn lá ven Suối Cả (xã Xuân Đường, Đồng Nai) và tài liệu bảo quản rau xanh tươi'
   },
   {
     id: 'xoai-cat',
@@ -30,7 +30,7 @@ const RAW_CROPS = [
     maxShelfLifeDays: 10,
     referencePriceVnd: 35000,
     byproductCategory: 'rau-cu-qua',
-    sourceNote: 'Khảo sát nhà vườn xoài cát Hòa Lộc tại ĐBSCL và khuyến cáo kỹ thuật sau thu hoạch'
+    sourceNote: 'Khảo sát nhà vườn xoài tại xã Xuân Đường - Cẩm Mỹ (Đồng Nai) và khuyến cáo kỹ thuật sau thu hoạch'
   },
   {
     id: 'buoi-da-xanh',
@@ -41,7 +41,7 @@ const RAW_CROPS = [
     maxShelfLifeDays: 20,
     referencePriceVnd: 30000,
     byproductCategory: 'rau-cu-qua',
-    sourceNote: 'Khảo sát nhà vườn cây có múi tại Bến Tre, Cần Thơ và tiêu chuẩn bảo quản quả vỏ dày'
+    sourceNote: 'Khảo sát nhà vườn bưởi da xanh tại xã Xuân Đường (Cẩm Đường, Đồng Nai) và tiêu chuẩn bảo quản quả vỏ dày'
   },
   {
     id: 'sau-rieng',
@@ -52,7 +52,18 @@ const RAW_CROPS = [
     maxShelfLifeDays: 8,
     referencePriceVnd: 75000,
     byproductCategory: 'rau-cu-qua',
-    sourceNote: 'Khảo sát thương lái và nhà vườn Phong Điền về tốc độ chín rụng của sầu riêng thu hoạch'
+    sourceNote: 'Khảo sát nhà vườn sầu riêng tại xã Xuân Đường - Long Thành (Đồng Nai) về tốc độ chín và hao hụt sau thu hoạch'
+  },
+  {
+    id: 'mit-thai',
+    name: 'Mít Thái',
+    category: 'Quả vỏ dày / Củ',
+    icon: '🍍',
+    dailyDecayRate: 0.06,
+    maxShelfLifeDays: 7,
+    referencePriceVnd: 18000,
+    byproductCategory: 'rau-cu-qua',
+    sourceNote: 'Khảo sát nhà vườn mít Thái siêu sớm tại xã Xuân Đường (Cẩm Đường, Thừa Đức, Đồng Nai) và tiểu thương địa phương'
   },
   {
     id: 'cai-xanh',
@@ -63,7 +74,7 @@ const RAW_CROPS = [
     maxShelfLifeDays: 4,
     referencePriceVnd: 15000,
     byproductCategory: 'rau-cu-qua',
-    sourceNote: 'Khảo sát tiểu thương chợ nông sản và hộ trồng rau ăn lá ngắn ngày'
+    sourceNote: 'Khảo sát tiểu thương chợ Xuân Đường và hộ trồng rau ăn lá ngắn ngày tại địa phương'
   },
   {
     id: 'dua-leo',
@@ -74,7 +85,7 @@ const RAW_CROPS = [
     maxShelfLifeDays: 7,
     referencePriceVnd: 18000,
     byproductCategory: 'rau-cu-qua',
-    sourceNote: 'Khảo sát hộ trồng màu tại ĐBSCL về hao hụt độ giòn và độ ẩm dưa leo theo ngày'
+    sourceNote: 'Khảo sát hộ trồng màu tại xã Xuân Đường - Nhân Nghĩa (Đồng Nai) về hao hụt độ giòn và độ ẩm dưa leo theo ngày'
   },
   {
     id: 'khoai-lang',
@@ -85,7 +96,7 @@ const RAW_CROPS = [
     maxShelfLifeDays: 30,
     referencePriceVnd: 16000,
     byproductCategory: 'rau-cu-qua',
-    sourceNote: 'Khảo sát nông hộ trồng khoai lang tím Vĩnh Long và tài liệu bảo quản củ nơi khô ráo'
+    sourceNote: 'Khảo sát nông hộ trồng củ tại xã Xuân Đường (Đồng Nai) và tài liệu bảo quản củ nơi khô ráo'
   },
   {
     id: 'cam-sanh',
@@ -96,7 +107,7 @@ const RAW_CROPS = [
     maxShelfLifeDays: 15,
     referencePriceVnd: 22000,
     byproductCategory: 'rau-cu-qua',
-    sourceNote: 'Khảo sát vườn cam sành Trà Ôn, Vĩnh Long và hướng dẫn phân loại cam sau thu hoạch'
+    sourceNote: 'Khảo sát nhà vườn cây có múi và tiểu thương chợ quê xã Xuân Đường (Đồng Nai) về phân loại cam sau thu hoạch'
   }
 ];
 

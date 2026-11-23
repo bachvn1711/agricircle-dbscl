@@ -9,7 +9,7 @@ Mọi mã nguồn trong dự án AgriCircle phải tuân thủ nghiêm ngặt c�
 
 ### Quy tắc 1: Tuyệt đối không viết chú thích trong code (ZERO CODE COMMENTS)
 - **Cấm:** Không được viết bất kỳ dòng chú thích nào dạng `//`, `/* ... */` trong các tệp JavaScript (`.js`), CSS (`.css`), hoặc `<!-- ... -->` trong HTML (`.html`).
-- **Lý do:** Giữ mã nguồn cực kỳ tinh gọn, tải nhanh trên mạng 3G yếu ở nông thôn và bảo đảm tính thẩm mỹ. Mọi giải thích nghiệp vụ được ghi trong tài liệu Markdown (`docs/`).
+- **Lý do sư phạm & bảo trì:** Tránh việc chú thích cũ trong code bị lệch khi học sinh chỉnh sửa công thức và giao diện qua nhiều vòng thử nghiệm thực địa; đồng thời giữ gói giao diện tải xuống điện thoại nông dân luôn gọn nhẹ. Toàn bộ phần giải thích toán học và thuật toán cho học sinh THCS được tập trung chi tiết trong cuốn sổ tay kỹ thuật `docs/03-thcs-technical-guide.md`.
 
 ### Quy tắc 2: Không cài thêm thư viện rườm rà (Zero Extra Dependencies)
 - Chỉ sử dụng duy nhất gói bản đồ mã nguồn mở `leaflet` v1.9.4 đã khai báo trong `package.json`.

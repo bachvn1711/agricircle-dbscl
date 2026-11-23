@@ -36,7 +36,7 @@ const itemsConfig = [
   { cat: 'rom-ra', qty: 1, unit: 'cong_nam_bo', offer: 'free', road: 'tricycle', moist: 'dry', note: '1 công rơm cuộn sẵn để góc bờ, đường đan xe ba gác vào bốc thoải mái' },
   { cat: 'rom-ra', qty: 5, unit: 'cong_nam_bo', offer: 'free', road: 'truck', moist: 'humid', note: '5 công rơm rạ ruộng nhà mới cắt sáng qua, hơi ẩm, cho không cần dọn nhanh trong 2 ngày' },
   { cat: 'rom-ra', qty: 1, unit: 'tan', offer: 'sell', road: 'truck', moist: 'dry', price: '25.000 đ/cuộn', note: 'Rơm khô cuộn máy 35 cuộn (~1 tấn), rơm sạch đẹp để trại nấm hoặc nuôi bò' },
-  { cat: 'rom-ra', qty: 3, unit: 'cong_nam_bo', offer: 'free', road: 'boat', moist: 'wet', note: '3 công rơm bị mưa dầm tối qua, chỉ thích hợp ủ phân vi sinh, bờ mương chỉ đi ghe xuồng' },
+  { cat: 'rom-ra', qty: 3, unit: 'cong_nam_bo', offer: 'free', road: 'boat', moist: 'wet', note: '3 công rơm bị mưa dầm tối qua, chỉ thích hợp ủ phân vi sinh, đường đất đỏ lầy chỉ máy cày hoặc ghe nhỏ vào được' },
   { cat: 'than-bap', qty: 2, unit: 'cong_nam_bo', offer: 'free', road: 'truck', moist: 'dry', note: '2 công thân cây bắp lai vừa bẻ trái xong, cây còn tươi xanh cho bò ăn rất tốt' },
   { cat: 'than-bap', qty: 1, unit: 'tan', offer: 'free', road: 'tricycle', moist: 'humid', note: 'Cùi bắp và thân bắp khô xay sẵn 1 tấn, hộ nào nuôi bò ghé chở miễn phí' },
   { cat: 'vo-trau-vo-qua', qty: 20, unit: 'bao_tai', offer: 'free', road: 'truck', moist: 'dry', note: '20 bao tải trấu sạch mới xay từ nhà máy xay xát, để làm đệm lót chuồng gà' },
@@ -96,3 +96,4 @@ export function seedDefaultListingsIfEmpty(db, currentNow = Date.now()) {
   }
   return inserted;
 }
+

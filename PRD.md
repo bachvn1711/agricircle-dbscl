@@ -6,9 +6,9 @@
 ## 1. Bạn Đang Xây Dựng Gì & Dành Cho Ai? (Product & Target Users)
 
 ### 1.1. Sản phẩm là gì?
-**AgriCircle** là một ứng dụng web đơn giản (PWA), chạy trực tiếp trên điện thoại di động và máy tính, giúp:
-1. **Kết nối trao đổi phụ phẩm nông nghiệp tại chỗ:** Giúp nông dân có rơm rạ, thân bắp, vỏ trấu, rau củ dập nhẹ... tặng miễn phí hoặc bán rẻ cho các hộ trồng nấm rơm, nuôi bò, ủ phân vi sinh quanh vùng trong bán kính 2 - 20 km.
-2. **Hỗ trợ định giá nông sản theo độ tươi:** Giúp bà con tính toán mức giảm giá hợp lý theo số ngày sau thu hoạch để bán thanh lý nhanh, tránh để nông sản thối hỏng phải đổ bỏ.
+**AgriCircle** là một ứng dụng web đơn giản (PWA), chạy trực tiếp trên điện thoại di động và máy tính theo mô hình **Vòng tròn Nông sản Tuần hoàn 3 Chặng**, giúp:
+1. **Kết nối trao đổi phụ phẩm nông nghiệp tại chỗ:** Giúp nông dân có rơm rạ, thân bắp, vỏ trấu, rau củ dập nhẹ... tặng miễn phí hoặc bán rẻ cho các hộ trồng nấm rơm, nuôi bò, ủ phân vi sinh quanh vùng trong bán kính 3 - 20 km.
+2. **Hỗ trợ định giá nông sản theo độ tươi & Chuyển hóa 1 chạm:** Giúp bà con tính toán mức giảm giá hợp lý theo số ngày sau thu hoạch để bán thanh lý nhanh ở Mức Vàng (thu hồi 55%–68% vốn), và khi chạm Mức Đỏ ($< 40\%$) có thể bấm 1 chạm **"Đẩy sang Sàn Phụ phẩm ngay"** để chuyển cho hộ chăn nuôi/ủ phân thay vì để thối hỏng phải đổ bỏ.
 
 ### 1.2. Dự án dành cho ai? (Đối tượng sử dụng)
 - **Nông dân trồng lúa, trồng bắp, nhà vườn trồng cây ăn trái:** Sau mỗi vụ thu hoạch có nhiều rơm rạ, cành lá, phụ phẩm cần dọn sạch ruộng vườn để kịp gieo sạ vụ mới.
@@ -19,7 +19,7 @@
 
 ## 2. Nỗi Đau Thực Tế Của Bà Con Nông Dân Địa Phương (Pain Points)
 
-Qua khảo sát thực tế 30 hộ nông dân tại xã Cẩm Đường (huyện Long Thành, Đồng Nai), nhóm nghiên cứu học sinh ghi nhận 4 nỗi niềm lớn:
+Qua khảo sát thực tế 30 hộ nông dân tại địa bàn xã Xuân Đường mới (khu vực xã Cẩm Đường, Xuân Đường, Thừa Đức, tỉnh Đồng Nai), nhóm nghiên cứu học sinh ghi nhận 4 nỗi niềm lớn:
 1. **Phụ phẩm bỏ phí hoặc đốt gây ô nhiễm:** Sau khi gặt lúa, rơm rạ chất đống ngoài đồng. Không ai đến gom thì bà con đành phải đốt đồng lộ thiên, khói mù mịt làm cay mắt, ngột ngạt xóm làng và cản trở giao thông; một số vứt xuống mương làm nghẽn dòng nước.
 2. **Người già ngại dùng điện thoại thông minh:** 80% nông dân trực tiếp canh tác đã trên 50 tuổi. Chữ nhỏ trên màn hình nhìn không rõ, tay dính bùn đất khó gõ bàn phím số, các ứng dụng thương mại điện tử hiện nay quá phức tạp và bắt đăng ký tài khoản rườm rà.
 3. **Đặc thù đường sá & chất lượng phụ phẩm nông thôn:**
@@ -45,13 +45,13 @@ Qua khảo sát thực tế 30 hộ nông dân tại xã Cẩm Đường (huyệ
 
 ### 4.1. Bản đồ phụ phẩm nông nghiệp trực quan
 - Hiển thị các điểm có rơm rạ, thân bắp, vỏ trấu quanh vị trí của người dùng bằng bản đồ vệ tinh/đường sá dễ nhìn.
-- Bộ lọc đơn giản: Tìm theo loại phụ phẩm (Rơm rạ, Thân bắp...), tìm tin cho miễn phí (0 đồng), và chọn bán kính gần nhà (2km, 5km, 10km, 20km).
-- Xem thông tin rõ ràng: Khoảng cách bao xa, hình ảnh mô tả, đường xe gì vào được, rơm khô hay ướt, và nút bấm gọi điện thoại/nhắn Zalo trực tiếp.
+- Bộ lọc đơn giản: Tìm theo loại phụ phẩm (Rơm rạ, Thân bắp...), tìm tin cho miễn phí (0 đồng), và chọn bán kính gần nhà (3km, 5km, 10km, 20km).
+- Xem thông tin rõ ràng: Khoảng cách bao xa, đường xe gì vào được, rơm khô hay ướt, và nút bấm gọi điện thoại/nhắn Zalo trực tiếp.
 
-### 4.2. Máy tính định giá nông sản theo độ tươi
-- Dựa trên quan sát thực nghiệm về sự hao hụt tự nhiên của 10 loại rau củ quả nhiệt đới (cà chua, xoài, dưa hấu, chuối...).
-- Nông dân chỉ cần chọn loại quả, số ngày sau khi hái (1 ngày, 2 ngày, 3 ngày...) và nơi để (nắng nóng hay trong bóng mát).
-- Máy tính đưa ra mức giá khuyến nghị đã làm tròn chẵn trăm đồng và lời khuyên dễ hiểu: *"Nên bán thanh lý nhanh trong ngày mai"* hoặc *"Nên mang đi làm mứt/sấy khô"*.
+### 4.2. Máy tính định giá nông sản theo độ tươi & Cầu nối sang Phụ phẩm
+- Dựa trên quan sát thực nghiệm về sự hao hụt tự nhiên của 10 loại rau củ quả nhiệt đới khảo sát mặc định (Cà chua, Rau muống, Xoài cát, Bưởi da xanh, Sầu riêng, Mít Thái, Cải xanh, Dưa leo, Khoai lang, Cam sành) cùng chế độ *"🌱 Nông sản khác"* tự nhập.
+- Nông dân chỉ cần chọn loại quả, số ngày sau khi hái (0, 1, 2, 3, 5 ngày...) và nơi để (Kho lạnh, Quạt mát hay Ngoài trời nắng nóng).
+- Máy tính đưa ra mức giá khuyến nghị đã làm tròn chẵn trăm đồng, thanh đồng hồ độ tươi 3 vùng màu (Xanh - Vàng - Đỏ), biểu đồ dự báo 3 ngày tới và nút **"Đẩy sang Sàn Phụ phẩm ngay"** khi chạm Mức Đỏ.
 
 ### 4.3. Đăng tin cực nhanh bằng giọng nói tiếng Việt & Nút bấm 1 chạm
 - Nông dân chỉ cần bấm nút micro to tròn và nói một câu tự nhiên: *"Tôi có hai công rơm khô xã Cẩm Đường cho miễn phí"*.

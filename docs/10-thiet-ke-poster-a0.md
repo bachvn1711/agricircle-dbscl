@@ -24,22 +24,22 @@
 +---------------------------------------------------------------------------------------+
 |  BANNER ĐẦU TRANG: TÊN ĐỀ TÀI - TÁC GIẢ (HỒ NGỌC QUỲNH NHƯ) - TRƯỜNG THCS CẨM ĐƯỜNG   |
 +---------------------------------------------------------------------------------------+
-|  [KHỐI 1: BỐI CẢNH & VẤN ĐỀ]          |  [KHỐI 2: KHẢO SÁT THỰC ĐẾ 30 HỘ NÔNG DÂN]     |
-|  - Khói đốt rơm mù mịt tại Cẩm Đường  |  - Biểu đồ: 70% đốt rơm, 23% vứt kênh rạch     |
+|  [KHỐI 1: BỐI CẢNH & VẤN ĐỀ]          |  [KHỐI 2: KHẢO SÁT THỰC ĐỊA 30 HỘ NÔNG DÂN]    |
+|  - Khói đốt rơm mù mịt tại Xuân Đường |  - Biểu đồ: 60% đốt rơm, 23,3% vứt kênh rạch   |
 |  - Trái cây rộ mùa bị ép giá đổ bỏ    |  - 4 "cái khó": Người già ngại bấm phím, đường |
 |  - Kênh mương tắc nghẽn ô nhiễm       |    xe vào sâu, rơm ướt rơm khô, sợ bị làm phiền|
 +---------------------------------------+-----------------------------------------------+
-|  [KHỐI 3: GIẢI PHÁP THỰC TẾ AGRICIRCLE]                                               |
+|  [KHỐI 3: GIẢI PHÁP THỰC TẾ AGRICIRCLE — VÒNG TRÒN TUẦN HOÀN 3 CHẶNG]                 |
 |  - 1. Nút bấm to 54px & Đăng tin bằng GIỌNG NÓI tiếng Việt cho người lớn tuổi         |
-|  - 2. Bốn nút chọn nhanh khối lượng 1 chạm (1 công, 2 công, 5 công, 1 tấn)            |
-|  - 3. Phân loại đường xe (Xe tải 🚛, Ba gác 🛺, Ghe 🛶) & Độ ẩm rơm (Khô ☀️, Ướt 🌧️)   |
-|  - 4. Máy tính định giá độ tươi chạy OFFLINE giữa đồng ruộng mất sóng                 |
-|  - 5. Cơ chế KHÓA SỐ ĐIỆN THOẠI sau khi dọn ruộng xong, chống quấy rầy                |
+|  - 2. Bốn nút chọn nhanh khối lượng 1 chạm (1 công ~556kg, 2 công, 5 công, 1 tấn)     |
+|  - 3. Phân loại đường xe (Xe tải 🚛, Ba gác 🛺, Ghe 🚜) & Độ ẩm rơm (Khô ☀️, Ướt 🌧️)   |
+|  - 4. Máy tính định giá độ tươi chạy OFFLINE + Nút đẩy 1 chạm sang Sàn Phụ phẩm       |
+|  - 5. Cơ chế KHÓA SỐ ĐIỆN THOẠI sau khi dọn ruộng xong bằng mã 4 ký tự, chống quấy rầy|
 +---------------------------------------------------------------------------------------+
 |  [KHỐI 4: KẾT QUẢ THỰC NGHIỆM]        |  [KHỐI 5: MÃ QR & TRẢI NGHIỆM TRỰC TIẾP]      |
-|  - Biểu đồ thử nghiệm với 20 hộ dân   |  - Mã QR dẫn link App Web & Video Demo        |
-|  - Giảm thiểu 1.46 tấn CO2e/tấn rơm   |  - Tuyên ngôn: Nông nghiệp tuần hoàn từ xóm   |
-|  - 100% người già dùng được dễ dàng   |  - Lời cảm ơn Ban Giám khảo Hội thi           |
+|  - 20 hộ dùng thử: 15 tin, 12 lô gom  |  - Mã QR dẫn link App Web & Video Demo        |
+|  - Cứu 12 tấn rơm = Giảm 17,52t CO2e  |  - Tuyên ngôn: Nông nghiệp tuần hoàn từ xóm   |
+|  - Thu hồi 55%-68% giá trị nông sản   |  - Lời cảm ơn Ban Giám khảo Hội thi           |
 +---------------------------------------------------------------------------------------+
 ```
 
@@ -57,16 +57,16 @@
 
 ### 3.2. Khối 1: Bối Cảnh Thực Tế & Câu Chuyện Khởi Nguồn (Cột trái trên)
 - **Xuất phát điểm mộc mạc:** Hằng ngày đi học qua cánh đồng xã Cẩm Đường mùa gặt lúa, khói đốt đồng mịt mù gây cay mắt, ngột ngạt và cản trở giao thông. Trong khi đó, các trại nấm rơm và cơ sở ủ phân hữu cơ lại thiếu nguyên liệu.
-- **Trái cây rộ mùa bị ép giá:** Vườn chôm chôm, xoài, thanh long hái xuống qua ngày 2, 3 bị thương lái chê héo ép giá rẻ mạt hoặc phải đổ bỏ vì thiếu kho lạnh.
-- **Mục tiêu nghiên cứu:** Tạo ra cây cầu số kết nối trực tiếp tại xóm làng, hoạt động được ngay cả khi mất sóng mạng ngoài đồng và người già không rành công nghệ vẫn dùng được.
+- **Trái cây rộ mùa bị ép giá:** Vườn xoài cát, sầu riêng, mít Thái, bưởi da xanh (hoặc thanh long, chôm chôm qua mục tự nhập) hái xuống qua ngày 2, 3 bị thương lái chê héo ép giá rẻ mạt hoặc phải đổ bỏ vì thiếu kho lạnh.
+- **Mục tiêu nghiên cứu:** Tạo ra **Vòng tròn Nông sản Tuần hoàn 3 Chặng** kết nối trực tiếp tại xóm làng (Giữ tươi Mức Xanh ➔ Cảnh báo cắt lỗ Mức Vàng ➔ Đẩy 1 chạm sang Sàn Phụ phẩm ở Mức Đỏ), hoạt động được ngay cả khi mất sóng mạng ngoài đồng và người già không rành công nghệ vẫn dùng được.
 
 ---
 
 ### 3.3. Khối 2: Điều Tra Khảo Sát 30 Hộ Dân Cẩm Đường (Cột phải trên)
 - **Số liệu khảo sát thực tế:**
-  - **70%** hộ chọn đốt đồng lộ thiên vì không có người đến thu gom.
-  - **23.3%** vứt phụ phẩm xuống mương máng, làm tắc nghẽn dòng nước.
-  - Chỉ **6.7%** tái sử dụng ủ phân hoặc cho gia súc ăn.
+  - **60,0% (18/30 hộ)** chọn đốt đồng lộ thiên vì không có người đến thu gom.
+  - **23,3% (7/30 hộ)** vứt phụ phẩm xuống mương máng, làm tắc nghẽn dòng nước.
+  - Chỉ **16,7% (5/30 hộ)** bán rẻ hoặc tái sử dụng ủ nấm, cho gia súc ăn.
 - **4 rào cản lớn nhất của bà con:**
   1. *Ngại công nghệ:* 80% người làm ruộng trên 50 tuổi, mắt kém, chữ nhỏ khó nhìn, tay dính đất ngại bấm phím số.
   2. *Đường vào ruộng phức tạp:* Ruộng sâu chỉ có đường đan cho xe ba gác hoặc ghe xuồng, xe tải lớn không vào được.
@@ -88,13 +88,13 @@
 ---
 
 ### 3.5. Khối 4: Kết Quả Thực Nghiệm & Tác Động Môi Trường (Cột trái dưới)
-- **Thử nghiệm thực địa với 20 hộ dân tại Cẩm Đường:**
-  - 100% bà con lớn tuổi hoàn thành đăng tin bằng giọng nói sau 1 lần hướng dẫn.
+- **Thử nghiệm thực địa với 20 hộ dân tại xã Xuân Đường (khu vực Cẩm Đường):**
+  - 100% bà con lớn tuổi hoàn thành đăng tin bằng giọng nói hoặc nút chọn nhanh sau 1 lần hướng dẫn.
   - Thời gian đăng tin trung bình: **32 giây** (nhanh gấp 4 lần so với gõ chữ trên mạng xã hội).
-  - Tỷ lệ tin đăng kết nối thành công: **85%** trong vòng 48 giờ.
-- **Ý nghĩa sinh thái học:**
-  - Cứ mỗi 1 tấn rơm rạ được thu gom tái chế giúp giảm phát thải **1.46 tấn $CO_2$ tương đương**, ngăn chặn khói bụi mịn $PM_{2.5}$ bảo vệ lá phổi xóm làng.
-  - Nâng cao thu nhập cho nhà vườn nhờ bán thanh lý nông sản ngày 2, ngày 3 thay vì phải đổ bỏ.
+  - Tỷ lệ tin đăng kết nối thành công: **80% (12/15 lô phụ phẩm)** được thu gom trong vòng 48 giờ, tỷ lệ hộ tái sử dụng phụ phẩm trong nhóm thử nghiệm tăng từ **16,7% lên 65% (+48,3%)**.
+- **Ý nghĩa sinh thái học & kinh tế:**
+  - Giải cứu **12,0 tấn** rơm rạ và thân bắp khỏi đốt đồng $\times 1,46 = \mathbf{17,52\text{ tấn } CO_2}$ tương đương được cắt giảm, ngăn chặn khói bụi mịn $PM_{2.5}$ bảo vệ lá phổi xóm làng.
+  - Qua 30 lượt định giá độ tươi, giúp nhà vườn và tiểu thương chủ động xả hàng ở Mức Vàng (ngày 2–3), **thu hồi trung bình 55% – 68% giá trị lô nông sản** thay vì phải đổ bỏ.
 
 ---
 
@@ -107,7 +107,7 @@
 
 ## 4. HƯỚNG DẪN IN ẤN VÀ TRƯNG BÀY TẠI HỘI THI
 
-1. Mở trang in ấn tự động tại địa chỉ: [`public/poster-a0.html`](file:///d:/Work/CODE/khkt/public/poster-a0.html).
+1. Mở trang in ấn tự động tại địa chỉ: [`docs/poster-a0.html`](file:///d:/Work/CODE/khkt/docs/poster-a0.html).
 2. Nhấn phím `Ctrl + P` (In).
 3. Trong hộp thoại in của trình duyệt:
    - **Máy in đích (Destination):** Chọn **Save as PDF** (Lưu dưới dạng PDF).

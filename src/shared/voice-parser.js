@@ -91,6 +91,8 @@ const CATEGORY_KEYWORDS = [
       'trái cây dập',
       'trái cây hư',
       'quá lứa',
+      'mít thái',
+      'mít dạt',
       'chuối chín',
       'xoài rụng',
       'rau muống',

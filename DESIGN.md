@@ -49,9 +49,9 @@ Hệ thống AgriCircle được thiết kế dựa trên phản hồi thực t�
 
 ### 4.2. Hàng nút chọn nhanh khối lượng 1 chạm (Quick Quantity Chips)
 - Đặt ngay dưới ô nhập số lượng, gồm 4 nút bấm to nổi 3D:
-  - `[🌾 1 Công (~555 kg)]`
+  - `[🌾 1 Công (~556 kg)]`
   - `[🌾 2 Công (~1.111 kg)]` — Lựa chọn phổ biến nhất ở địa phương
-  - `[🌾 5 Công (~2.777 kg)]`
+  - `[🌾 5 Công (~2.778 kg)]`
   - `[📦 1 Tấn (1.000 kg)]`
 - Bấm vào nút nào, hệ thống tự động điền số lượng và đơn vị tương ứng tức thì.
 
@@ -59,7 +59,7 @@ Hệ thống AgriCircle được thiết kế dựa trên phản hồi thực t�
 - **Phương tiện vào ruộng:**
   - 🚛 `Xe tải`: Đường nhựa, bê tông lớn.
   - 🛺 `Ba gác`: Đường đan, cầu bê tông nhỏ.
-  - 🛶 `Ghe / Thuyền`: Đường mương rạch, sông nước.
+  - 🚜 `Máy cày / Ghe đường nhỏ`: Đường rẫy đất đỏ lầy lội hoặc mương rạch nhỏ.
 - **Độ ẩm phụ phẩm:**
   - ☀️ `Khô ráo`: Rơm vừa cắt, sạch sẽ (dành cho làm nấm rơm).
   - ⛅ `Hơi ẩm`: Cắt 1-2 ngày.

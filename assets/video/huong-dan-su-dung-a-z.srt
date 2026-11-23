@@ -1,0 +1,83 @@
+1
+00:00:00,000 --> 00:00:05,000
+Chào mừng đến với hướng dẫn sử dụng AgriCircle từ A đến Z của học sinh Hồ Ngọc Quỳnh Như (Lớp 9/C3, THCS Cẩm Đường).
+
+2
+00:00:05,000 --> 00:00:10,000
+Bước 1: Bà con mở ứng dụng trực tiếp trên trình duyệt điện thoại hoặc nhấp đúp tệp start.bat trên máy tính mà không cần đăng ký tài khoản.
+
+3
+00:00:10,000 --> 00:00:15,000
+Giao diện được thiết kế chữ to, tương phản cao ngoài trời nắng với 4 nút chuyển màn hình nhanh ở thanh đáy và nút Quản trị ở góc trên.
+
+4
+00:00:15,000 --> 00:00:20,000
+Bước 2: Tại màn hình Bản đồ, hộ trồng nấm hoặc chăn nuôi bò nhìn thấy ngay các điểm có rơm rạ, thân bắp quanh xã Xuân Đường.
+
+5
+00:00:20,000 --> 00:00:25,000
+Bà con có thể bấm lọc nhanh các điểm Cho miễn phí 0 đồng, Rơm khô ráo làm nấm, hoặc lọc theo bán kính gần nhà từ 3km đến 20km.
+
+6
+00:00:25,000 --> 00:00:30,000
+Mỗi thẻ tin đều gắn huy hiệu màu sắc rõ ràng: Đường xe tải hay xe ba gác vào được, rơm khô hay ướt để chuẩn bị đúng xe đi chở.
+
+7
+00:00:30,000 --> 00:00:35,000
+Bước 3: Để đăng tin dọn ruộng, bác nông dân chuyển sang tab Đăng tin và bấm nút Micro lớn để nói câu tiếng Việt mộc mạc.
+
+8
+00:00:35,000 --> 00:00:40,000
+Nếu ngoài đồng ồn gió, bác chỉ cần chạm vào nút câu mẫu hoặc chọn nhanh 4 nút khối lượng: 1 Công, 2 Công, 5 Công, 1 Tấn cùng loại đường xe.
+
+9
+00:00:40,000 --> 00:00:45,000
+Trước khi gửi, màn hình hiện Phiếu xem trước to rõ. Khi bấm Đăng lên bản đồ, máy cấp Mã xác nhận 4 ký tự (bỏ chữ I, L, O, U tránh đọc nhầm).
+
+10
+00:00:45,000 --> 00:00:50,000
+Bước 4: Khi tìm được nguồn phụ phẩm ưng ý, người thu gom bấm nút Gọi ngay, Mở Zalo hoặc Chỉ đường để đánh xe tới ruộng.
+
+11
+00:00:50,000 --> 00:00:55,000
+Sau khi bốc rơm lên xe xong, người gom nhập Mã xác nhận 4 ký tự do chủ ruộng cung cấp hoặc chủ ruộng bấm nút 1 chạm ngay trên máy mình.
+
+12
+00:00:55,000 --> 00:01:00,000
+Hệ thống lập tức chuyển tin sang trạng thái Đã thu gom, ẩn khỏi bản đồ và khóa nút gọi điện thoại, giữ sự yên tĩnh cho bác nông dân.
+
+13
+00:01:00,000 --> 00:01:05,000
+Bước 5: Khi ra đồng mất sóng 4G, bà con vẫn mở được tab Tính giá để kiểm tra độ tươi cho 10 loại nông sản hoặc tự nhập loại quả khác.
+
+14
+00:01:05,000 --> 00:01:10,000
+Chỉ cần chọn số ngày sau khi hái và cách bảo quản, Thanh đồng hồ sinh học 3 vùng màu sẽ chỉ rõ tỷ lệ tươi còn lại và giá bán làm tròn chẵn trăm đồng.
+
+15
+00:01:10,000 --> 00:01:15,000
+Nếu nông sản giảm xuống Mức Đỏ dưới 40% hoặc quá hạn tươi, nút 'Đẩy sang Sàn Phụ phẩm ngay' sẽ hiện ra để chuyển 1 chạm sang tab Đăng tin.
+
+16
+00:01:15,000 --> 00:01:20,000
+Bước 6: Màn hình Tác động cộng đồng tổng hợp trực quan thành quả bảo vệ môi trường của bà con nông dân và học sinh toàn xã.
+
+17
+00:01:20,000 --> 00:01:25,000
+Hệ thống tự động nhân khối lượng phụ phẩm đã thu gom với hệ số 1,46 để tính lượng khí nhà kính CO2 tránh phát thải ra bầu không khí.
+
+18
+00:01:25,000 --> 00:01:30,000
+Lưới Bento Sinh thái quy đổi con số đó thành diện tích công ruộng sạch khói đốt và số cây xanh trưởng thành tương đương trong 1 năm.
+
+19
+00:01:30,000 --> 00:01:35,000
+Bước 7: Dành cho cán bộ Hợp tác xã và nhóm nghiên cứu nhà trường, nút Quản trị cho phép đăng nhập an toàn bằng mã PIN bảo mật.
+
+20
+00:01:35,000 --> 00:01:40,000
+Tại đây, quản trị viên có thể rà soát các tin bị báo cáo, khôi phục tin hợp lệ hoặc điều chỉnh giá tham khảo của 10 loại nông sản theo mùa vụ.
+
+21
+00:01:40,000 --> 00:01:45,000
+Cuối cùng, bấm nút Xuất CSV để tải toàn bộ số liệu thực nghiệm đã che số điện thoại bảo mật, hoàn tất quy trình sử dụng AgriCircle từ A đến Z!

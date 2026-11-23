@@ -42,7 +42,7 @@
 
 ---
 
-## Giai Đoạn 5: Hoàn Thiện Bộ 6 Tệp Vibe Coding & Đóng Gói Triển Khai (Đã Hoàn Thành 100%)
+## Giai Đoạn 5: Hoàn Thiện Bộ 6 Tài Liệu Quản Lý Dự Án & Đóng Gói Triển Khai (Đã Hoàn Thành 100%)
 - [x] **Task 5.1:** Đồng bộ toàn diện bộ 6 file quản trị dự án: `PRD.md`, `ARCHITECTURE.md`, `DESIGN.md`, `RULES.md`, `TASKS.md`, `PROGRESS.md`.
 - [x] **Task 5.2:** Đóng gói ứng dụng: `start.bat` (1-click Windows), `start.sh` (Linux/Mac), `Dockerfile`, `render.yaml`.
 - [x] **Task 5.3:** Đẩy mã nguồn lên kho lưu trữ GitHub chính thức: `https://github.com/bachvn1711/agricircle-dbscl`.

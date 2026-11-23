@@ -53,7 +53,7 @@ export function createAdminView({
     createEl('p', {
       id: 'admin-question-lead',
       className: 'screen-lead',
-      text: 'Nhập mã bảo vệ?'
+      text: 'Khu vực dành cho Ban Quản trị địa phương & Giáo viên hướng dẫn (Yêu cầu mã PIN)'
     })
   );
 
@@ -68,7 +68,7 @@ export function createAdminView({
   }
 
   function renderLockedView() {
-    questionLead.textContent = 'Nhập mã bảo vệ?';
+    questionLead.textContent = 'Khu vực dành cho Ban Quản trị địa phương & Giáo viên hướng dẫn (Yêu cầu mã PIN)';
     bodyHost.replaceChildren();
 
     if (offlineError) {

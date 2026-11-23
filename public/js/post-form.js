@@ -3,7 +3,7 @@ import { isValidCoordinates } from '/shared/geo.js';
 import { UNITS, convertToKg } from '/shared/units.js';
 import { validateCreateListing } from '/shared/validation.js';
 import { VOICE_TEXT_MAX_CODEPOINTS, parseVoiceInput } from '/shared/voice-parser.js';
-import { createListing } from './api.js';
+import { collectListing, createListing } from './api.js';
 import { attachLeafletTileLayers } from './map-view.js';
 import {
   clearPendingPost,
@@ -85,6 +85,20 @@ export function createPostFormView({
     className: 'btn btn-voice',
     text: '🎙️ Bấm để nói tiếng Việt'
   });
+  const voiceWaveBox = createEl('div', {
+    id: 'post-voice-wave',
+    className: 'voice-wave-box',
+    attrs: { hidden: true, 'aria-live': 'polite' }
+  },
+    createEl('span', { className: 'voice-wave-bars', attrs: { 'aria-hidden': 'true' } },
+      createEl('span', { className: 'voice-wave-bar' }),
+      createEl('span', { className: 'voice-wave-bar' }),
+      createEl('span', { className: 'voice-wave-bar' }),
+      createEl('span', { className: 'voice-wave-bar' }),
+      createEl('span', { className: 'voice-wave-bar' })
+    ),
+    createEl('span', { text: 'Máy đang nghe bác nói tiếng Việt...' })
+  );
   const micNotice = createEl('div', { id: 'post-mic-notice', className: 'notice-box notice-amber', attrs: { hidden: true } });
   const voiceTextarea = createEl('textarea', {
     id: 'post-voice-textarea',
@@ -100,19 +114,39 @@ export function createPostFormView({
     className: 'btn btn-secondary',
     text: 'Phân tích câu nói'
   });
+  const SAMPLE_VOICE_PHRASES = [
+    { label: '💬 Mẫu 1: 2 công rơm khô cho không', text: 'Tôi có 2 công rơm khô ở gần chợ Xuân Đường, cho miễn phí, cần dọn trong 2 ngày' },
+    { label: '💬 Mẫu 2: 1 tấn thân bắp nuôi bò', text: 'Tôi có 1 tấn thân bắp ở ấp Suối Sóc cho không cần dọn trong 3 ngày' },
+    { label: '💬 Mẫu 3: 15 bao vỏ bưởi ủ phân', text: 'Tôi có 15 bao tải vỏ bưởi ở xã Cẩm Đường cho miễn phí' }
+  ];
+  const sampleChipsRow = createEl('div', { className: 'quick-filter-row' });
+  for (const sample of SAMPLE_VOICE_PHRASES) {
+    sampleChipsRow.appendChild(createEl('button', {
+      type: 'button',
+      className: 'quick-filter-chip',
+      text: sample.label,
+      onClick: () => {
+        voiceTextarea.value = sample.text;
+        parseNotice.className = 'notice-box notice-green';
+        applyParsedVoice(sample.text);
+      }
+    }));
+  }
   const parseNotice = createEl('div', { id: 'post-parse-notice', className: 'notice-box notice-green', attrs: { hidden: true } });
 
   const voiceSection = createEl('div', { className: 'surface-block' },
     createEl('h2', { className: 'section-heading', text: '1. Nói hoặc gõ mô tả phụ phẩm' }),
     btnVoice,
+    voiceWaveBox,
     createEl('div', { className: 'field-group' },
       createEl('label', {
         className: 'field-label',
-        text: 'Nội dung vừa nghe hoặc gõ để chỉnh sửa',
+        text: 'Nội dung vừa nghe hoặc chạm câu mẫu 1 chạm bên dưới',
         attrs: { for: 'post-voice-textarea' }
       }),
       voiceTextarea
     ),
+    sampleChipsRow,
     micNotice,
     createEl('div', { className: 'row-inline' }, btnParseVoice),
     parseNotice
@@ -208,9 +242,9 @@ export function createPostFormView({
   }
 
   const QUICK_QTY_CHIPS = [
-    { label: '🌾 1 Công (~555 kg)', qty: 1, unit: 'cong_nam_bo' },
+    { label: '🌾 1 Công (~556 kg)', qty: 1, unit: 'cong_nam_bo' },
     { label: '🌾 2 Công (~1.111 kg)', qty: 2, unit: 'cong_nam_bo', isDefault: true },
-    { label: '🌾 5 Công (~2.777 kg)', qty: 5, unit: 'cong_nam_bo' },
+    { label: '🌾 5 Công (~2.778 kg)', qty: 5, unit: 'cong_nam_bo' },
     { label: '📦 1 Tấn (1.000 kg)', qty: 1, unit: 'tan' }
   ];
   const quickQtyRow = createEl('div', { className: 'quick-qty-grid' });
@@ -240,7 +274,7 @@ export function createPostFormView({
   const ACCESS_ROAD_OPTIONS = [
     { id: 'truck', label: '🚛 Xe tải vào tận nơi' },
     { id: 'tricycle', label: '🛺 Xe ba gác / Đường đan' },
-    { id: 'boat', label: '🛶 Đi ghe / Vỏ lãi đường sông' }
+    { id: 'boat', label: '🚜 Máy cày / Ghe đường nhỏ' }
   ];
   const accessRoadRow = createEl('div', { className: 'road-grid' });
   const accessRoadButtons = new Map();
@@ -667,10 +701,24 @@ export function createPostFormView({
     syncOfferButtons();
     syncExpiryButtons();
     updateLiveKg();
+    updatePreviewCard();
     persistDraft();
 
     const catObj = getByproductCategoryById(state.category);
-    parseNotice.textContent = `Đã điền sẵn: ${catObj ? catObj.name : state.category}, ${quantityInput.value || '?'} ${unitSelect.options[unitSelect.selectedIndex]?.text || ''}, ${state.offerType === 'sell' ? 'Bán giá rẻ' : 'Cho miễn phí'}, hạn ${state.expiryDays} ngày. Kiểm tra lại rồi bấm Đăng tin lên bản đồ.`;
+    parseNotice.replaceChildren(
+      createEl('p', {
+        className: 'listing-note',
+        text: `Đã điền sẵn: ${catObj ? catObj.name : state.category}, ${quantityInput.value || '?'} ${unitSelect.options[unitSelect.selectedIndex]?.text || ''}, ${state.offerType === 'sell' ? 'Bán giá rẻ' : 'Cho miễn phí'}, hạn ${state.expiryDays} ngày. Kiểm tra lại rồi bấm Đăng tin lên bản đồ.`
+      }),
+      createEl('button', {
+        type: 'button',
+        className: 'btn btn-inline-primary',
+        text: '⬇️ Cuộn xuống Kiểm tra & Đăng ngay',
+        onClick: () => {
+          previewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      })
+    );
     parseNotice.hidden = false;
   }
 
@@ -694,6 +742,7 @@ export function createPostFormView({
     isListening = false;
     btnVoice.classList.remove('is-listening');
     btnVoice.textContent = '🎙️ Bấm để nói tiếng Việt';
+    voiceWaveBox.hidden = true;
     if (captured) {
       applyParsedVoice(captured);
     }
@@ -723,6 +772,7 @@ export function createPostFormView({
       isListening = true;
       btnVoice.classList.add('is-listening');
       btnVoice.textContent = 'Đang nghe... Bấm để dừng';
+      voiceWaveBox.hidden = false;
 
       let latestTranscript = '';
       let hadFinal = false;
@@ -794,6 +844,33 @@ export function createPostFormView({
     const newestFirst = [...receipts].reverse();
     for (const item of newestFirst) {
       const cat = getByproductCategoryById(item.category);
+      const quickCollectStatus = createEl('p', { className: 'field-hint', attrs: { hidden: true } });
+      const quickCollectBtn = item.id && item.shortCode
+        ? createEl('button', {
+          type: 'button',
+          className: 'btn btn-secondary',
+          text: '✅ Đánh dấu đã dọn xong ruộng (1 chạm)',
+          onClick: async () => {
+            if (quickCollectBtn.disabled) {
+              return;
+            }
+            quickCollectBtn.disabled = true;
+            quickCollectStatus.hidden = true;
+            try {
+              await collectListing(item.id, {
+                shortCode: item.shortCode,
+                actualKgCollected: Number(item.estimatedKg) > 0 ? Number(item.estimatedKg) : 100
+              });
+              quickCollectBtn.textContent = '✅ Đã khóa tin & ngừng nhận cuộc gọi';
+              onListingCreated();
+            } catch (err) {
+              quickCollectStatus.textContent = err?.message || 'Tin này đã thu gom hoặc hết hạn.';
+              quickCollectStatus.hidden = false;
+              quickCollectBtn.disabled = false;
+            }
+          }
+        })
+        : null;
       const row = createEl('div', { className: 'divider-row' },
         createEl('div', { className: 'listing-top' },
           createEl('strong', { text: `Mã: ${item.shortCode}` }),
@@ -802,7 +879,9 @@ export function createPostFormView({
         createEl('p', {
           className: 'listing-meta-line',
           text: item.estimatedKg ? `Ước tính ${formatViNumber(item.estimatedKg, 1)} kg` : 'Đã lưu mã xác nhận'
-        })
+        }),
+        quickCollectBtn,
+        quickCollectStatus
       );
       vaultBody.appendChild(row);
     }

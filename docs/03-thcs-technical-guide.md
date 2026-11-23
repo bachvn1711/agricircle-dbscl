@@ -1,9 +1,23 @@
 # TÀI LIỆU KỸ THUẬT & HƯỚNG DẪN BẢO VỆ DỰ ÁN KHKT CẤP THCS
 
-- **Dự án:** Nông sản Tuần hoàn ĐBSCL — Nền tảng kết nối phụ phẩm nông nghiệp và định giá nông sản theo độ tươi
-- **Mục đích tài liệu:** Giải thích minh bạch toàn bộ cấu trúc mã nguồn, công thức Toán – Sinh – Tin học, cơ chế bảo mật và cách chạy ngoại tuyến để học sinh THCS làm chủ 100% dự án khi thuyết trình và trả lời Ban giám khảo KHKT.
+- **Dự án:** Nông sản Tuần hoàn (AgriCircle) — Nền tảng kết nối phụ phẩm nông nghiệp và định giá nông sản theo độ tươi tại Xã Xuân Đường (Cẩm Đường, Đồng Nai) & mở rộng các vùng nông nghiệp
+- **Mục đích tài liệu:** Giải thích minh bạch toàn bộ cấu trúc mã nguồn, công thức Toán – Sinh – Tin học, phân định rõ phần việc của Học sinh THCS và Giáo viên hướng dẫn, giúp học sinh làm chủ 100% dự án khi thuyết trình và trả lời Ban Giám khảo KHKT.
 
-> **Lưu ý về quy ước `no-comments`:** Toàn bộ mã nguồn trong `src/`, `public/`, `scripts/`, và `tests/` không chứa chú thích nội tuyến (`//`, `/* */`, `<!-- -->`) để tránh chú thích cũ bị sai lệch khi cập nhật code. Mọi phần giải thích chi tiết được tập trung trong tài liệu này và trong 54 ca kiểm thử tự động.
+> **Lưu ý về quy ước `no-comments`:** Toàn bộ mã nguồn trong `src/`, `public/`, `scripts/`, và `tests/` không chứa chú thích nội tuyến (`//`, `/* */`, `<!-- -->`) để tránh chú thích cũ bị sai lệch khi cập nhật code và giữ gói giao diện gửi xuống điện thoại nông dân luôn gọn nhẹ (~440 KB). Mọi phần giải thích chi tiết được tập trung trong tài liệu này và trong 56 ca kiểm thử tự động.
+
+---
+
+## 0. Bản Đồ Phân Định Đóng Góp Khoa Học (Học Sinh THCS & Giáo Viên Hướng Dẫn)
+
+Để đảm bảo tính trung thực khoa học tuyệt đối theo Thông tư 84/2026/TT-BGDĐT, đề tài phân định rõ ràng các phần việc:
+
+1. **Học sinh Hồ Ngọc Quỳnh Như (Lớp 9/C3 - Tác giả chính, làm chủ 100% nghiệp vụ & thuật toán cốt lõi):**
+   - Trực tiếp khảo sát thực địa 30 hộ dân tại xã Xuân Đường (khu vực Cẩm Đường, Thừa Đức), phát hiện 4 rào cản thực tế (khói đốt đồng, đường xe tải/ba gác/máy cày, độ ẩm rơm khô/ẩm/ướt, nỗi sợ lộ SĐT bị gọi làm phiền).
+   - Thiết lập dữ liệu 10 loại nông sản địa phương (`src/shared/crops.js`), 8 đơn vị đo lường nhà nông (`src/shared/units.js` với `convertToKg` và hệ số `1.46` kg $CO_2$/kg rơm), công thức định giá độ tươi (`src/shared/pricing.js`), và bộ từ điển khẩu ngữ tiếng Việt nhà nông (`src/shared/voice-parser.js` với `parseVoiceInput`).
+   - Thiết kế giao diện công thái học nông thôn (`public/index.html`, `public/styles/app.css`, 5 màn hình): nút bấm to $\ge 48\text{px}$, 4 chip chọn nhanh khối lượng, 3 chip câu nói mẫu 1 chạm, thẻ xem trước (`Preview Card`), và nút 1 chạm **"Tôi đã dọn xong ruộng này"**.
+2. **Thầy Hoàng Thành Đạt (Giáo viên hướng dẫn Tổ KHTN – Công nghệ):**
+   - Định hướng phương pháp nghiên cứu liên môn (KHTN 7-8, Toán 6-7, Địa lí 6, Tin học 8) và hướng dẫn kỹ thuật nhân hệ số nguyên lớn (`BigInt`) để máy tính không bị lẻ số thập phân tại mốc ranh giới 40% và 75%.
+   - Hỗ trợ thiết lập khung máy chủ `node:http` + `node:sqlite`, cơ chế bảo mật chống spam (`src/server/auth.js`, `rate-limit.js`, `csv.js`) và bộ kiểm thử tự động để bảo vệ dữ liệu của bà con khi triển khai thực tế.
 
 ---
 
@@ -63,23 +77,23 @@ Nhờ không gọi API riêng của Node.js, cả trình duyệt (khi tắt mạ
    - `Mức Đỏ` (`'red'`): `remainingScaled < 4_000_000n` ($< 40\%$) **hoặc** $d > \text{maxShelfLifeDays}$ (vượt số ngày bảo quản tươi an toàn). Khi rơi vào Mức Đỏ, giao diện bật nút `"Đẩy sang Sàn Phụ phẩm ngay"`.
    - `projectThreeDays(input)` tính trước cho $d + 1, d + 2, d + 3$ (nên `calculator-view.js` giới hạn đầu vào `MAX_CALC_DAYS = 3647` để ngày thứ 3 không vượt `3650`).
 
-4. **9 loại nông sản khảo sát mặc định (`DEFAULT_CROPS` trong `src/shared/crops.js`):**
+4. **10 loại nông sản khảo sát mặc định (`DEFAULT_CROPS` trong `src/shared/crops.js`):**
    - *Rau lá:* `Rau muống` (`0.10`/ngày, tối đa `4` ngày, `10.000 đ/kg`), `Cải xanh` (`0.12`/ngày, `4` ngày, `15.000 đ/kg`).
    - *Quả vỏ mỏng:* `Cà chua` (`0.05`/ngày, `12` ngày, `20.000 đ/kg`), `Xoài cát` (`0.04`/ngày, `10` ngày, `35.000 đ/kg`), `Dưa leo` (`0.05`/ngày, `7` ngày, `18.000 đ/kg`).
-   - *Quả vỏ dày / Củ:* `Bưởi da xanh` (`0.02`/ngày, `20` ngày, `30.000 đ/kg`), `Sầu riêng` (`0.05`/ngày, `8` ngày, `75.000 đ/kg`), `Khoai lang` (`0.015`/ngày, `30` ngày, `16.000 đ/kg`), `Cam sành` (`0.025`/ngày, `15` ngày, `22.000 đ/kg`).
-   - Ngoài 9 loại trên, công cụ hỗ trợ mục `"Nông sản khác"` cho phép bà con tự nhập tỷ lệ hao hụt (`0.1–50%/ngày`) và số ngày giữ tươi tối đa (`1–365`).
+   - *Quả vỏ dày / Củ:* `Bưởi da xanh` (`0.02`/ngày, `20` ngày, `30.000 đ/kg`), `Sầu riêng` (`0.05`/ngày, `8` ngày, `75.000 đ/kg`), `Mít Thái` (`0.06`/ngày, `7` ngày, `18.000 đ/kg`), `Khoai lang` (`0.015`/ngày, `30` ngày, `16.000 đ/kg`), `Cam sành` (`0.025`/ngày, `15` ngày, `22.000 đ/kg`).
+   - Ngoài 10 loại trên, công cụ hỗ trợ mục `"Nông sản khác"` cho phép bà con tự nhập tỷ lệ hao hụt (`0.1–50%/ngày`) và số ngày giữ tươi tối đa (`1–365`).
 
 ### 2.2. Quy đổi Đơn vị Địa phương, Vùng Miền & Công thức Haversine
 
-- **3 vùng địa lý (`src/shared/regions.js`):**
-  - Mặc định `DEFAULT_REGION_ID = 'dbscl'`: tâm bản đồ Cần Thơ `[10.0452, 105.7469]`, đơn vị mặc định `cong_nam_bo` (`công Nam Bộ 1.000 m²`), kèm 5 xã/phường ĐBSCL.
-  - Hai vùng chuyển đổi nhanh: `mien_trung` (`[16.0544, 108.2022]`, mặc định `sao_trung_bo` `500 m²`) và `mien_bac` (`[21.0285, 105.8542]`, mặc định `sao_bac_bo` `360 m²`).
+- **4 vùng địa lý (`src/shared/regions.js`):**
+  - Mặc định `DEFAULT_REGION_ID = 'xuan_duong'`: tâm bản đồ Xã Xuân Đường (Đồng Nai) `[10.7482, 107.1825]`, đơn vị mặc định `cong_nam_bo` (`công Nam Bộ 1.000 m²`), kèm 7 điểm xã/ấp quanh Xuân Đường, Cẩm Đường, Thừa Đức, Cẩm Mỹ, Xuân Phú.
+  - Ba vùng mở rộng chuyển đổi nhanh: `dbscl` (`[10.0452, 105.7469]`), `mien_trung` (`[16.0544, 108.2022]`, mặc định `sao_trung_bo` `500 m²`) và `mien_bac` (`[21.0285, 105.8542]`, mặc định `sao_bac_bo` `360 m²`).
 - **8 đơn vị & Hàm `convertToKg` (`src/shared/units.js`):**
   - Đơn vị khối lượng cố định: `kg` (`1`), `ta` (`100`), `tan` (`1000`), `bao_tai` (`22.5` kg), `xe_ba_gac` (`300` kg).
   - Đơn vị diện tích quy đổi tỷ lệ theo mốc chuẩn `AREA_BASE_KG_PER_360M2 = 200`:
     - `sao_bac_bo` (`360 m²`): $\text{Math.round}(q \times 360 \times 200 / 360) = 200q$ kg
     - `sao_trung_bo` (`500 m²`): $\text{Math.round}(q \times 500 \times 200 / 360) \approx 278$ kg với `1 sào Trung Bộ`
-    - `cong_nam_bo` (`1.000 m²`): $\text{Math.round}(q \times 1000 \times 200 / 360) = 1.111$ kg với `2 công Nam Bộ`
+    - `cong_nam_bo` (`1.000 m²`): $\text{Math.round}(q \times 1000 \times 200 / 360) = 556$ kg với `1 công Nam Bộ` (và `1.111` kg với `2 công Nam Bộ`)
 - **Tính khoảng cách đường chim bay (`src/shared/geo.js`):**
   - Hàm `haversineKm(lat1, lng1, lat2, lng2)` sử dụng bán kính Trái Đất `EARTH_RADIUS_KM = 6371` và `Math.atan2` kèm chặn miền `[0, 1]` cho `a` để tránh lỗi `NaN` ở điểm đối tâm.
   - Hàm `sortByDistance(items, originLat, originLng)` sắp xếp danh sách phụ phẩm từ gần nhất đến xa nhất.
@@ -159,9 +173,9 @@ Chạy trong thư mục gốc dự án (Node.js `>= 26.4`):
 npm test
 node scripts/verify-docs-and-bundle.mjs
 ```
-- `npm test` chạy đủ **54 kiểm thử** trên 6 tệp:
-  - `tests/shared-domain.test.js` (11 kiểm thử) & `tests/shared-domain-extra.test.js` (8 kiểm thử)
-  - `tests/server-api.test.js` (8 kiểm thử) & `tests/server-api-extra.test.js` (8 kiểm thử)
+- `npm test` chạy đủ **56 kiểm thử** trên 6 tệp:
+  - `tests/shared-domain.test.js` (11 kiểm thử) & `tests/shared-domain-extra.test.js` (9 kiểm thử)
+  - `tests/server-api.test.js` (8 kiểm thử) & `tests/server-api-extra.test.js` (9 kiểm thử)
   - `tests/pwa-ui.test.js` (7 kiểm thử) & `tests/pwa-ui-extra.test.js` (12 kiểm thử)
 - `node scripts/verify-docs-and-bundle.mjs` kiểm tra cấu hình, sự tồn tại của tài liệu, quét từ vựng đảm bảo **0 chú thích mã nguồn**, xác minh 31 mục `PRECACHE_URLS` và tổng dung lượng client `< 1.572.864` byte (`1,5 MB`), in ra `VERIFY_OK`.
 

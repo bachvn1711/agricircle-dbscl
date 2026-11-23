@@ -175,6 +175,11 @@ export function createCalculatorView({
     onClick: () => adjustDays(1)
   });
 
+  const STORAGE_FRIENDLY_LABELS = {
+    cold: '❄️ Kho lạnh / Thùng xốp đá (Giữ tươi gấp đôi • k = 0,5)',
+    fan: '🌬️ Thoáng mát, có quạt (Tiêu chuẩn • k = 1,0)',
+    hot: '☀️ Ngoài trời nắng nóng (Nhanh hỏng • k = 1,4)'
+  };
   const storageGrid = createEl('div', { className: 'storage-grid' });
   const storageButtons = new Map();
   for (const mode of STORAGE_MODES) {
@@ -186,7 +191,7 @@ export function createCalculatorView({
         recordAndRender();
       }
     },
-      createEl('span', { text: `${mode.shortLabel} (k = ${formatViNumber(mode.kFactor, 1)})` })
+      createEl('span', { text: STORAGE_FRIENDLY_LABELS[mode.id] || `${mode.shortLabel} (k = ${formatViNumber(mode.kFactor, 1)})` })
     );
     storageButtons.set(mode.id, btn);
     storageGrid.appendChild(btn);
@@ -462,6 +467,20 @@ export function createCalculatorView({
 
     const result = calculateFreshnessPrice(validation.value);
     const forecast = projectThreeDays(validation.value);
+    const clampedPct = Math.max(0, Math.min(100, Number(result.remainingPercent) || 0));
+    const gaugeMarker = createEl('div', {
+      className: 'freshness-gauge-marker',
+      attrs: { 'aria-hidden': 'true' }
+    });
+    gaugeMarker.style.left = `${clampedPct}%`;
+    const gaugeWrap = createEl('div', { className: 'freshness-gauge-wrap' },
+      createEl('div', { className: 'freshness-gauge-track' }, gaugeMarker),
+      createEl('div', { className: 'freshness-gauge-labels' },
+        createEl('span', { text: '🔴 <40% Phụ phẩm' }),
+        createEl('span', { text: '🟡 40–74% Xả hàng' }),
+        createEl('span', { text: '🟢 ≥75% Tươi loại 1' })
+      )
+    );
 
     resultPanel.className = `calc-result-panel ${getZoneClass(result.zone)}`;
     resultPanel.replaceChildren(
@@ -477,6 +496,7 @@ export function createCalculatorView({
         className: 'listing-meta-line',
         text: `Độ tươi còn lại: ${formatViNumber(result.remainingPercent, 1)}%`
       }),
+      gaugeWrap,
       createEl('p', { className: 'listing-note', text: result.adviceText })
     );
 
@@ -515,18 +535,28 @@ export function createCalculatorView({
     );
     forecast.forEach((step, idx) => {
       const dayNum = idx + 1;
+      const stepPct = Math.max(0, Math.min(100, Number(step.remainingPercent) || 0));
+      const barFill = createEl('div', {
+        className: `forecast-bar-fill ${getZoneClass(step.zone)}`
+      });
+      barFill.style.width = `${stepPct}%`;
       const row = createEl('div', { className: 'forecast-row' },
         createEl('span', { text: `Sau ${dayNum} ngày nữa (ngày thứ ${step.daysAfterHarvest})` }),
         createEl('strong', { text: `${formatVnd(step.suggestedPriceVnd)}/kg (${formatViNumber(step.remainingPercent, 1)}%)` }),
-        createEl('span', { className: `pill ${getZonePillClass(step.zone)}`, text: step.zoneLabel })
+        createEl('span', { className: `pill ${getZonePillClass(step.zone)}`, text: step.zoneLabel }),
+        createEl('div', { className: 'forecast-bar-wrap', attrs: { 'aria-hidden': 'true' } }, barFill)
       );
       forecastBlock.appendChild(row);
     });
 
     const effectivePercent = formatViNumber(validation.value.dailyDecayRate * result.kFactor * 100, 2);
     formulaDetails.replaceChildren(
-      createEl('summary', { text: 'Cách tính chi tiết' }),
+      createEl('summary', { text: 'Cách tính chi tiết (Dành cho bà con & Giám khảo)' }),
       createEl('div', { className: 'field-group' },
+        createEl('p', {
+          className: 'listing-note',
+          text: `• Giải thích dễ hiểu: Mỗi ngày nông sản giảm khoảng ${effectivePercent}% độ tươi. Sau ${validation.value.daysAfterHarvest} ngày, độ tươi còn lại ${formatViNumber(result.remainingPercent, 1)}%, nên giá bán hợp lý là ${formatVnd(result.suggestedPriceVnd)}/kg (đã làm tròn chẵn trăm đồng để dễ trả tiền mặt).`
+        }),
         createEl('p', {
           className: 'listing-note',
           text: `1. Tỷ lệ hao hụt thực tế mỗi ngày: r_thực = ${formatViNumber(validation.value.dailyDecayRate * 100, 2)}% x ${formatViNumber(result.kFactor, 1)} = ${effectivePercent}%/ngày.`

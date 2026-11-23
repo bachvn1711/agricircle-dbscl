@@ -14,6 +14,8 @@ import {
   createEl,
   formatRemainingTime,
   formatViNumber,
+  getBrowserStorage,
+  getShortCodeReceipts,
   parseStrictInt,
   parseStrictNumber
 } from './state.js';
@@ -25,9 +27,19 @@ export function getAccessRoadLabel(road) {
     return '🛺 Xe ba gác / Đường đan';
   }
   if (road === 'boat') {
-    return '🛶 Đi ghe / Vỏ lãi đường sông';
+    return '🚜 Máy cày / Ghe đường nhỏ';
   }
   return '🚛 Xe tải vào tận nơi';
+}
+
+export function getAccessRoadPillClass(road) {
+  if (road === 'tricycle') {
+    return 'pill pill-gray pill-road-tricycle';
+  }
+  if (road === 'boat') {
+    return 'pill pill-gray pill-road-boat';
+  }
+  return 'pill pill-gray pill-road-truck';
 }
 
 export function getMoistureLabel(state) {
@@ -38,6 +50,16 @@ export function getMoistureLabel(state) {
     return '🌧️ Ướt dầm mưa (Làm phân)';
   }
   return '☀️ Khô ráo (Vừa cắt, sạch)';
+}
+
+export function getMoisturePillClass(state) {
+  if (state === 'humid') {
+    return 'pill pill-gray pill-moisture-humid';
+  }
+  if (state === 'wet') {
+    return 'pill pill-gray pill-moisture-wet';
+  }
+  return 'pill pill-gray pill-moisture-dry';
 }
 
 export function attachLeafletTileLayers(L, map, onTileOffline) {
@@ -666,8 +688,8 @@ export function createMapView({
         text: item.offerType === 'sell' ? 'Bán giá rẻ' : 'Miễn phí 0đ'
       });
       const badgesRow = createEl('div', { className: 'listing-badges-row' },
-        createEl('span', { className: 'pill pill-gray', text: getAccessRoadLabel(item.accessRoad) }),
-        createEl('span', { className: 'pill pill-gray', text: getMoistureLabel(item.moistureState) })
+        createEl('span', { className: getAccessRoadPillClass(item.accessRoad), text: getAccessRoadLabel(item.accessRoad) }),
+        createEl('span', { className: getMoisturePillClass(item.moistureState), text: getMoistureLabel(item.moistureState) })
       );
       const row = createEl('div', { className: 'divider-row listing-card-3tier' },
         createEl('div', { className: 'listing-top' },
@@ -845,8 +867,8 @@ export function createMapView({
         text: `${formatDistanceLabel(listing.distanceKm)} - ${formatRemainingTime(listing.expiresAt)}`
       }),
       createEl('div', { className: 'row-inline' },
-        createEl('span', { className: 'pill pill-gray', text: getAccessRoadLabel(listing.accessRoad) }),
-        createEl('span', { className: 'pill pill-gray', text: getMoistureLabel(listing.moistureState) })
+        createEl('span', { className: getAccessRoadPillClass(listing.accessRoad), text: getAccessRoadLabel(listing.accessRoad) }),
+        createEl('span', { className: getMoisturePillClass(listing.moistureState), text: getMoistureLabel(listing.moistureState) })
       ),
       createEl('p', {
         className: 'listing-note',
@@ -906,12 +928,18 @@ export function createMapView({
     }
 
     const sheetNotice = createEl('div', { className: 'notice-box', attrs: { hidden: true, role: 'status' } });
+    const savedReceipts = getShortCodeReceipts(getBrowserStorage());
+    const matchedReceipt = savedReceipts.find((r) => Number(r.id) === Number(listing.id));
+
     const codeInput = createEl('input', {
       id: 'collect-short-code',
       className: 'text-input',
       type: 'text',
       attrs: { maxlength: '4', autocomplete: 'off', placeholder: 'Nhập 4 ký tự (VD: 7K4P)' }
     });
+    if (matchedReceipt && matchedReceipt.shortCode) {
+      codeInput.value = matchedReceipt.shortCode;
+    }
     const kgInput = createEl('input', {
       id: 'collect-actual-kg',
       className: 'text-input',
@@ -923,14 +951,16 @@ export function createMapView({
     const collectSubmitBtn = createEl('button', {
       type: 'submit',
       className: 'btn btn-primary',
-      text: 'Xác nhận đã thu gom xong'
+      text: matchedReceipt ? '✅ Tôi đã dọn xong ruộng này (1 chạm)' : 'Xác nhận đã thu gom xong'
     });
 
     const collectForm = createEl('form', { className: 'sheet-section' },
       createEl('h3', { className: 'section-heading', text: 'Đã thu gom xong' }),
       createEl('p', {
         className: 'field-hint',
-        text: 'Nhập mã xác nhận 4 ký tự của chủ tin và khối lượng thực tế (kg).'
+        text: matchedReceipt
+          ? 'Thiết bị này là chủ tin đăng — mã xác nhận 4 ký tự đã được điền sẵn để bác khóa tin 1 chạm.'
+          : 'Nhập mã xác nhận 4 ký tự của chủ tin và khối lượng thực tế (kg).'
       }),
       createEl('div', { className: 'field-group' },
         createEl('label', { className: 'field-label', text: 'Mã xác nhận 4 ký tự', attrs: { for: 'collect-short-code' } }),

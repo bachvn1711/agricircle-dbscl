@@ -17,5 +17,5 @@ services:
         value: ./data/agricircle.db
       - key: ADMIN_PIN
         generateValue: false
-        value: "2026"
+        value: "20262027"
 

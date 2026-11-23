@@ -85,11 +85,11 @@ export function createImpactView({
           }),
           isOffline || !globalThis.navigator?.onLine
             ? createEl('button', {
-                type: 'button',
-                className: 'btn btn-secondary',
-                text: 'Mở Công cụ tính giá',
-                onClick: () => onNavigateCalc()
-              })
+              type: 'button',
+              className: 'btn btn-secondary',
+              text: 'Mở Công cụ tính giá',
+              onClick: () => onNavigateCalc()
+            })
             : null
         )
       );
@@ -135,11 +135,28 @@ export function createImpactView({
     focalBlock.hidden = false;
     statsList.hidden = false;
 
+    const equivCong = Math.max(0, Math.round((Number(metrics.totalKgDiverted) || 0) / 556));
+    const equivTrees = Math.max(0, Math.round((Number(metrics.estimatedCo2SavedKg) || 0) / 22));
+    const bentoGrid = createEl('div', { className: 'eco-bento-grid' },
+      createEl('div', { className: 'eco-bento-card' },
+        createEl('span', { className: 'eco-bento-val', text: `🌾 ~${formatViNumber(equivCong, 0)} công` }),
+        createEl('span', { className: 'eco-bento-lbl', text: 'Diện tích ruộng sạch khói đốt đồng' })
+      ),
+      createEl('div', { className: 'eco-bento-card' },
+        createEl('span', { className: 'eco-bento-val', text: `🌳 ~${formatViNumber(equivTrees, 0)} cây` }),
+        createEl('span', { className: 'eco-bento-lbl', text: 'Cây xanh trưởng thành hấp thụ CO₂/năm' })
+      )
+    );
     focalBlock.replaceChildren(
       createEl('p', { className: 'field-label', text: 'Tổng khối lượng phụ phẩm đã cứu khỏi đốt bỏ' }),
       createEl('p', { className: 'focal-number', text: `${formatViNumber(metrics.totalKgDiverted, 1)} kg` }),
       createEl('p', { className: 'field-label', text: 'Ước tính khí thải CO₂ tránh phát thải (1,46 kg CO₂/kg)' }),
-      createEl('p', { className: 'focal-number', text: `${formatViNumber(metrics.estimatedCo2SavedKg, 2)} kg CO₂` })
+      createEl('p', { className: 'focal-number', text: `${formatViNumber(metrics.estimatedCo2SavedKg, 2)} kg CO₂` }),
+      bentoGrid,
+      createEl('p', {
+        className: 'listing-note',
+        text: `🌱 Ý nghĩa thực tế: Tương đương dọn sạch khoảng ${formatViNumber(equivCong, 0)} công ruộng rơm rạ và lượng CO₂ hấp thụ của ~${formatViNumber(equivTrees, 0)} cây xanh trưởng thành trong 1 năm.`
+      })
     );
 
     statsList.replaceChildren(

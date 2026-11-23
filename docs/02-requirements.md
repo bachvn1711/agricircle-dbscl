@@ -1,6 +1,6 @@
 # ĐẶC TẢ YÊU CẦU PHẦN MỀM (SOFTWARE REQUIREMENTS SPECIFICATION)
 
-- **Dự án:** Nền tảng kết nối trao đổi phế phẩm nông nghiệp và hỗ trợ định giá nông sản theo độ tươi (Nông sản Tuần hoàn ĐBSCL)
+- **Dự án:** Nền tảng kết nối trao đổi phế phẩm nông nghiệp và hỗ trợ định giá nông sản theo độ tươi (AgriCircle — Xã Xuân Đường / Cẩm Đường & Mở rộng ĐBSCL)
 - **Phiên bản:** v1.1 (Bản hoàn thiện MVP phục vụ thử nghiệm thực địa & thi KHKT cấp THCS)
 - **Tham chiếu mục tiêu:** [01-goals.md](./01-goals.md) · **Tài liệu kỹ thuật THCS:** [03-thcs-technical-guide.md](./03-thcs-technical-guide.md)
 
@@ -95,7 +95,7 @@
 
 ### FR-4: Công cụ Định giá Nông sản theo Độ tươi (Freshness Pricing Calculator)
 - **FR-4.1 (Danh mục nông sản khảo sát & Khả năng mở rộng):**
-  - Cấu hình sẵn **9 loại nông sản** trong `src/shared/crops.js` chia 3 nhóm sinh học (`Rau lá`: Rau muống, Cải xanh; `Quả vỏ mỏng`: Cà chua, Xoài cát, Dưa leo; `Quả vỏ dày / Củ`: Bưởi da xanh, Sầu riêng, Khoai lang, Cam sành), kèm `icon`, `referencePriceVnd` và `sourceNote` khảo sát.
+  - Cấu hình sẵn **10 loại nông sản** trong `src/shared/crops.js` chia 3 nhóm sinh học (`Rau lá`: Rau muống, Cải xanh; `Quả vỏ mỏng`: Cà chua, Xoài cát, Dưa leo; `Quả vỏ dày / Củ`: Bưởi da xanh, Sầu riêng, Mít Thái, Khoai lang, Cam sành), kèm `icon`, `referencePriceVnd` và `sourceNote` khảo sát.
   - Cho phép chọn **"Nông sản khác"** để tự nhập tên, tỷ lệ hao hụt (`0,1 – 50%/ngày`) và số ngày giữ tươi tối đa (`1 – 365 ngày`).
 - **FR-4.2 (Đầu vào đơn giản):**
   1. Chọn loại nông sản (nút bấm có biểu tượng minh họa).
@@ -137,7 +137,7 @@
 | **NFR-2** | **Chạy mượt trên mạng yếu & Hỗ trợ Offline** | - Tổng dung lượng tải ban đầu của gói PWA (`public/**/*` + `src/shared/*.js` + 7 tệp `leaflet@1.9.4`) **< 1,5 MB (`1.572.864` byte)**.<br>- Service Worker (`public/sw.js` nạp kiểu `{ type: 'module' }`, cache `khkt-pwa-v2`) lưu đệm toàn bộ ứng dụng, 7 tệp Leaflet và `/api/crops`, không bao giờ cache `/api/admin/*`, `/api/listings`, `/api/impact`.<br>- Hàng đợi lượt tính giá lưu bất biến trong `localStorage` và tự đồng bộ khi có mạng lại (`'online'`). |
 | **NFR-3** | **Tương thích thiết bị & Chi phí 0 đồng** | - Mobile-first màn hình `360px` không tràn ngang, tự co giãn hợp lý trên máy tính bảng/Laptop (`>= 768px`).<br>- Chạy trên Node.js `>= 26.4` + SQLite tích hợp (`node:sqlite`), duy nhất 1 thư viện ngoài cố định phiên bản `leaflet@1.9.4`, chi phí vận hành `0 VNĐ`. |
 | **NFR-4** | **Tính toàn vẹn dữ liệu & Chống tin rác** | - Kiểm tra hợp lệ: SĐT VN (`^0\d{9}$`), giới hạn `<= 5` tin đang mở còn hạn trên 1 SĐT, idempotency theo `(contact_phone, client_request_id)`, giao dịch SQLite `BEGIN IMMEDIATE` + `PRAGMA busy_timeout = 5000`.<br>- Chuẩn hóa đường dẫn chặn ký tự điều khiển (`\u0000-\u001f`, `\u007f`), giới hạn thân JSON `32 KB` (`413`), giới hạn tần suất theo IP và `(ip, id)` (`MAX_RATE_KEYS = 4096`). |
-| **NFR-5** | **Tính sư phạm & Bảo trì (`no-comments` — Cập nhật quyết định kiến trúc)** | - Tách biệt rạch ròi 3 lớp: `src/shared/` (thuần ESM, không dùng biến toàn cục Node), `src/server/`, và `public/`.<br>- **Quyết định `no-comments`:** Toàn bộ mã nguồn trong `src/`, `public/`, `scripts/`, `tests/` duy trì **0 chú thích nội tuyến** (`//`, `/* */`, `<!-- -->`) để tránh chú thích trôi lệch khỏi code khi chỉnh sửa. Mọi giải thích toán học, luồng xử lý và hướng dẫn thuyết trình cho học sinh THCS được tập trung có cấu trúc trong [03-thcs-technical-guide.md](./03-thcs-technical-guide.md) và được kiểm chứng tự động bằng bộ 54 kiểm thử + `scripts/verify-docs-and-bundle.mjs`. |
+| **NFR-5** | **Tính sư phạm & Bảo trì (`no-comments` — Cập nhật quyết định kiến trúc)** | - Tách biệt rạch ròi 3 lớp: `src/shared/` (thuần ESM, không dùng biến toàn cục Node), `src/server/`, và `public/`.<br>- **Quyết định `no-comments`:** Toàn bộ mã nguồn trong `src/`, `public/`, `scripts/`, `tests/` duy trì **0 chú thích nội tuyến** (`//`, `/* */`, `<!-- -->`) để tránh chú thích trôi lệch khỏi code khi chỉnh sửa. Mọi giải thích toán học, luồng xử lý và hướng dẫn thuyết trình cho học sinh THCS được tập trung có cấu trúc trong [03-thcs-technical-guide.md](./03-thcs-technical-guide.md) và được kiểm chứng tự động bằng bộ 56 kiểm thử + `scripts/verify-docs-and-bundle.mjs`. |
 
 ---
 
@@ -164,7 +164,7 @@
 - [x] Bản đồ `leaflet@1.9.4` hỗ trợ chuyển lớp đường/vệ tinh, 6 ghim biểu tượng riêng, GPS có khóa chống ghi đè `pinTouchedByUser`, kéo ghim, chọn xã fallback, lọc bán kính và sắp xếp Haversine.
 - [x] Nút `Gọi điện ngay` (`tel:`), `Mở Zalo`, `Chỉ đường`, xác nhận `"Đã thu gom xong"` bằng `shortCode` 4 ký tự và cộng dồn `totalKgDiverted` + `estimatedCo2SavedKg`.
 - [x] Công thức định giá `BigInt` đạt chính xác các biên `0` ngày, `3` ngày quạt mát, `40%`, `75%`, quá hạn (`0 đ` ở mức Đỏ) và chuyển 1 chạm sang form Đăng tin.
-- [x] Chạy ngoại tuyến với Service Worker `{ type: 'module' }` + `localStorage` hàng đợi lượt tính giá và tự đồng bộ khi có mạng lại; kiểm chứng qua `54` kiểm thử tự động và `scripts/verify-docs-and-bundle.mjs`.
+- [x] Chạy ngoại tuyến với Service Worker `{ type: 'module' }` + `localStorage` hàng đợi lượt tính giá và tự đồng bộ khi có mạng lại; kiểm chứng qua `56` kiểm thử tự động và `scripts/verify-docs-and-bundle.mjs`.
 
 ---
 
@@ -174,12 +174,12 @@
 | :--- | :--- | :--- | :--- |
 | **R1** | Máy chủ 0 đồng, CI Node 26, PWA `< 1,5 MB`, HTTP LAN `getRandomValues` | `src/server/index.js`, `public/sw.js`, `.github/workflows/ci.yml`, `scripts/verify-docs-and-bundle.mjs` | `tests/pwa-ui*.test.js`, `verify-docs-and-bundle.mjs` |
 | **R2** | Truy cập mở, hồ sơ & `<= 50` biên nhận `localStorage`, đăng hộ | `public/js/state.js`, `public/js/post-form.js` | `tests/pwa-ui.test.js`, `tests/server-api.test.js` |
-| **R3** | Mặc định ĐBSCL (`công Nam Bộ`), 3 vùng địa lý | `src/shared/regions.js`, `public/js/app.js` | `tests/shared-domain.test.js` |
+| **R3** | Mặc định Xuân Đường & ĐBSCL (`công Nam Bộ`), 4 vùng địa lý | `src/shared/regions.js`, `public/js/app.js` | `tests/shared-domain.test.js` |
 | **R4** | Bản đồ Leaflet, 6 ghim `L.divIcon`, GPS `pinTouchedByUser`, chọn xã | `public/js/map-view.js`, `public/js/post-form.js` | `tests/pwa-ui-extra.test.js` |
 | **R5** | Quy đổi 8 đơn vị (tỷ lệ diện tích), Haversine, lọc Map/List | `src/shared/units.js`, `src/shared/geo.js`, `src/server/app.js` | `tests/shared-domain*.test.js`, `tests/server-api-extra.test.js` |
 | **R6** | `tel:`/Zalo/chỉ đường, TTL `1–14` ngày, `shortCode`-only, báo cáo ẩn ở `3` | `src/server/db.js`, `src/server/auth.js`, `src/shared/validation.js` | `tests/server-api*.test.js`, `tests/pwa-ui-extra.test.js` |
 | **R7** | Voice `vi-VN`, `<textarea>` + `"Phân tích câu nói"`, lưới 6 ô | `src/shared/voice-parser.js`, `public/js/post-form.js` | `tests/shared-domain*.test.js`, `tests/pwa-ui-extra.test.js` |
-| **R8** | 9 nông sản + tự nhập, `BigInt` (`10_000_000n`), dự báo 3 ngày, TTS | `src/shared/crops.js`, `src/shared/pricing.js`, `public/js/calculator-view.js` | `tests/shared-domain*.test.js`, `tests/pwa-ui-extra.test.js` |
+| **R8** | 10 nông sản + tự nhập, `BigInt` (`10_000_000n`), dự báo 3 ngày, TTS | `src/shared/crops.js`, `src/shared/pricing.js`, `public/js/calculator-view.js` | `tests/shared-domain*.test.js`, `tests/pwa-ui-extra.test.js` |
 | **R9** | Cảnh báo Xanh/Vàng/Đỏ và cầu nối 1 chạm sang Đăng tin | `src/shared/pricing.js`, `public/js/calculator-view.js`, `public/js/post-form.js` | `tests/shared-domain.test.js` |
 | **R10** | `node:sqlite` `BEGIN IMMEDIATE`, `<= 5` tin/SĐT, idempotency, rate limit | `src/server/db.js`, `src/server/rate-limit.js`, `src/server/app.js` | `tests/server-api*.test.js` |
 | **R11** | Thống kê cộng đồng, `1,46 kg CO₂/kg`, hàng đợi tính giá `<= 500`/lô | `src/server/db.js`, `public/js/state.js`, `public/js/impact-view.js` | `tests/server-api*.test.js`, `tests/pwa-ui.test.js` |

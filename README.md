@@ -1,12 +1,12 @@
-# Nông sản Tuần hoàn ĐBSCL (AgriCircle MVP)
+# Nông sản Tuần hoàn — AgriCircle (THCS Cẩm Đường / Xuân Đường & ĐBSCL)
 
 Nền tảng Web PWA 0 đồng kết nối trao đổi phụ phẩm nông nghiệp trên bản đồ số và hỗ trợ nông dân định giá nông sản theo độ tươi (phục vụ thử nghiệm thực địa & thi Khoa học Kỹ thuật cấp THCS).
 
 ## Tính năng chính
 
-- **Sàn Phụ phẩm Nông nghiệp trên Bản đồ số:** Mặc định khu vực ĐBSCL (hỗ trợ chuyển sang Miền Trung và Miền Bắc), dùng OpenStreetMap / ảnh vệ tinh qua `leaflet@1.9.4`, 6 nhóm phụ phẩm với ghim phân biệt `Cho miễn phí` / `Bán giá rẻ`, quy đổi 8 đơn vị địa phương (`kg`, `tạ`, `tấn`, `bao tải`, `xe ba gác`, `sào Bắc Bộ`, `sào Trung Bộ`, `công Nam Bộ`), lọc bán kính `3–20 km` và sắp xếp Haversine.
+- **Sàn Phụ phẩm Nông nghiệp trên Bản đồ số:** Mặc định khu vực Xã Xuân Đường / Cẩm Đường (Đồng Nai) và hỗ trợ chuyển nhanh sang ĐBSCL, Miền Trung, Miền Bắc; dùng OpenStreetMap / ảnh vệ tinh qua `leaflet@1.9.4`, 6 nhóm phụ phẩm với ghim phân biệt `Cho miễn phí` / `Bán giá rẻ`, quy đổi 8 đơn vị địa phương (`kg`, `tạ`, `tấn`, `bao tải`, `xe ba gác`, `sào Bắc Bộ`, `sào Trung Bộ`, `công Nam Bộ`), lọc bán kính `3–20 km` và sắp xếp Haversine.
 - **Nhập liệu Giọng nói & Chọn nhanh 6 ô:** Hỗ trợ nhận diện giọng nói tiếng Việt (`vi-VN`), bộ phân tích câu nói theo quy tắc (`src/shared/voice-parser.js`) có ô `<textarea>` chỉnh sửa và lưới chọn nhanh 6 nhóm phụ phẩm khi không dùng được micro.
-- **Công cụ Tính giá Độ tươi (Chạy Offline 100%):** Tính toán bằng `BigInt` (`SCALE = 10_000_000n`) cho 9 loại nông sản khảo sát mặc định cùng chế độ `"Nông sản khác"`, dự báo 3 ngày tới, đọc kết quả tiếng Việt (TTS), 3 mức cảnh báo (Xanh / Vàng / Đỏ) và nút chuyển 1 chạm sang Sàn Phụ phẩm ở Mức Đỏ.
+- **Công cụ Tính giá Độ tươi (Chạy Offline 100%):** Tính toán bằng `BigInt` (`SCALE = 10_000_000n`) cho 10 loại nông sản khảo sát mặc định cùng chế độ `"Nông sản khác"`, thanh đồng hồ sinh học 3 vùng màu (Xanh / Vàng / Đỏ), biểu đồ dự báo 3 ngày tới, đọc kết quả tiếng Việt (TTS) và nút chuyển 1 chạm sang Sàn Phụ phẩm ở Mức Đỏ.
 - **Thống kê Tác động & Quản trị:** Quy đổi khối lượng cứu được sang lượng $CO_2$ tránh phát thải (`1,46 kg CO₂/kg`), đồng bộ lượt tính giá ngoại tuyến qua `localStorage`, trang Quản trị bảo vệ bằng `ADMIN_PIN` (`>= 6` ký tự) và xuất CSV đã che số điện thoại kèm chống CSV Injection.
 
 ## Yêu cầu hệ thống
@@ -49,7 +49,7 @@ Mở trình duyệt tại `http://localhost:3000` (hoặc địa chỉ IP mạng
 
 ## Kiểm thử & Xác minh
 
-Chạy toàn bộ **54 kiểm thử** (`node:test`, 6 tệp kiểm thử):
+Chạy toàn bộ **56 kiểm thử** (`node:test`, 6 tệp kiểm thử):
 
 ```bash
 npm test

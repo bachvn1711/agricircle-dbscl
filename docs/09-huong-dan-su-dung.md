@@ -65,9 +65,9 @@ Dành cho bà con có rơm rạ sau vụ gặt, thân bắp tỉa cành, vỏ tr
    - Máy sẽ tự động phân tích và điền vào các ô tương ứng.
 2. **Chọn nhanh khối lượng 1 chạm (Quick Chips):**
    - Bấm trực tiếp vào 1 trong 4 nút to nổi 3D:
-     - `[🌾 1 Công (~555 kg)]`
+     - `[🌾 1 Công (~556 kg)]`
      - `[🌾 2 Công (~1.111 kg)]` — Lựa chọn phổ biến nhất
-     - `[🌾 5 Công (~2.777 kg)]`
+     - `[🌾 5 Công (~2.778 kg)]`
      - `[📦 1 Tấn (1.000 kg)]`
 3. **Chọn phương tiện vào ruộng & Độ ẩm rơm:**
    - **Đường xe vào:** Bấm chọn 🚛 `Xe tải` (nếu đường lớn) / 🛺 `Ba gác` (đường đan xóm) / 🛶 `Ghe thuyền` (mương rạch).
@@ -89,8 +89,8 @@ Dành cho các cơ sở ủ nấm rơm, trang trại bò dê, cơ sở phân bó
 ### Chi tiết thao tác:
 1. **Xem vị trí nguồn phụ phẩm:** Mở tab 🗺️ **Bản đồ**. Bản đồ sẽ hiển thị các chấm tròn màu xanh lá hoặc màu cam quanh vị trí của bạn.
 2. **Lọc theo nhu cầu:**
-   - Chọn loại phụ phẩm: `Rơm rạ`, `Thân cây bắp`, `Vỏ trấu`, `Lá chuối`...
-   - Chọn bán kính: `2 km`, `5 km`, `10 km` hoặc `20 km`.
+   - Chọn loại phụ phẩm: `Rơm rạ`, `Thân / Lõi bắp`, `Vỏ trấu / Vỏ bưởi / Mùn cưa`, `Bã mía / Bã sắn`, `Rau củ quả dập / Quá lứa`...
+   - Chọn bán kính: `3 km`, `5 km`, `10 km` hoặc `20 km`.
    - Chọn `Cho miễn phí 0đ` nếu muốn xin rơm dọn ruộng hộ bà con.
 3. **Nhận diện nhanh loại đường và chất lượng rơm qua huy hiệu:**
    - Trên mỗi thẻ tin hiển thị rõ:
@@ -110,7 +110,7 @@ Dành cho nhà vườn muốn biết mức giá thanh lý hợp lý để không
 
 ### Chi tiết thao tác:
 1. Mở tab 🧮 **Tính giá** (Hoạt động offline 100% không cần mạng).
-2. **Chọn loại nông sản:** Bấm chọn ô hình ảnh nông sản (Cà chua 🍅, Xoài cát 🥭, Dưa hấu 🍉, Thanh long, Cam sành, Chuối...).
+2. **Chọn loại nông sản:** Bấm chọn 1 trong 10 ô nông sản khảo sát có sẵn (Cà chua 🍅, Rau muống 🥬, Xoài cát 🥭, Bưởi da xanh 🍈, Sầu riêng 榴, Mít Thái 🍈, Cải xanh 🥬, Dưa leo 🥒, Khoai lang 🍠, Cam sành 🍊) hoặc bấm `🌱 Nông sản khác` để tự nhập (như Thanh long, Dưa hấu...).
 3. **Chọn số ngày sau thu hoạch:** Bấm các nút chọn nhanh `[0 ngày]`, `[1 ngày]`, `[2 ngày]`, `[3 ngày]`, `[5 ngày]`.
 4. **Chọn điều kiện bảo quản:**
    - ❄️ *Kho mát / Thùng xốp đá* (Hao hụt rất chậm).

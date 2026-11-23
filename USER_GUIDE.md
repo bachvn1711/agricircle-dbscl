@@ -26,7 +26,7 @@ Tài liệu chi tiết đầy đủ 7 phần xem tại: [**`docs/09-huong-dan-su
 
 ## 3. Dành Cho Trại Nấm & Hộ Chăn Nuôi Cần Thu Gom Phụ Phẩm
 1. Mở tab **🗺️ Bản đồ**.
-2. Chọn bán kính tìm kiếm (2km, 5km, 10km, 20km) hoặc lọc loại phụ phẩm.
+2. Chọn bán kính tìm kiếm (3km, 5km, 10km, 20km) hoặc lọc loại phụ phẩm.
 3. Nhìn huy hiệu trên thẻ tin để biết đường xe vào được không (xe tải hay ba gác) và rơm khô hay rơm ướt.
 4. Bấm nút **Gọi điện** hoặc **Mở Zalo** để liên hệ chủ ruộng.
 5. Sau khi bốc hàng xong ngoài ruộng, xin chủ ruộng mã 4 số và bấm **Xác nhận thu gom** để hoàn tất.
@@ -35,7 +35,7 @@ Tài liệu chi tiết đầy đủ 7 phần xem tại: [**`docs/09-huong-dan-su
 
 ## 4. Dành Cho Tiểu Thương & Người Mua (Định Giá Độ Tươi Nông Sản)
 1. Mở tab **🧮 Tính giá** (Mở được ngay cả khi mất sóng 3G ngoài đồng ruộng).
-2. Chọn loại quả (Cà chua, Xoài cát, Dưa hấu, Cam sành, Chuối...).
+2. Chọn 1 trong 10 loại nông sản có sẵn (Cà chua, Rau muống, Xoài cát, Bưởi da xanh, Sầu riêng, Mít Thái, Cải xanh, Dưa leo, Khoai lang, Cam sành) hoặc bấm *🌱 Nông sản khác* để tự nhập.
 3. Chọn số ngày sau thu hoạch (`0 ngày`, `1 ngày`, `2 ngày`, `3 ngày`...).
 4. Chọn điều kiện bảo quản (Trong kho mát, Quạt gió, hay Ngoài trời nắng).
 5. Nhận mức giá khuyến nghị đã làm tròn chẵn trăm đồng và biểu đồ dự báo 3 ngày tới để quyết định bán thanh lý kịp thời.
